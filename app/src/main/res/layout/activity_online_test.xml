@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout tools:context=".Activity.OnlineTestActivity"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/bg_color"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <io.supercharge.shimmerlayout.ShimmerLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:shimmer_animation_duration="1200"
+        android:id="@+id/shimmerLayout">
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+    <include layout="@layout/item_place_holder_layout"/>
+
+</LinearLayout>
+
+</io.supercharge.shimmerlayout.ShimmerLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/recycle_test"
+        android:layout_above="@+id/footer"
+        android:padding="8dp"
+        android:layout_alignParentTop="true"/>
+
+
+    <RelativeLayout
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:id="@+id/footer"
+        android:background="@drawable/bottom_layout"
+        android:layout_alignParentBottom="true">
+
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/layout_home"
+        android:layout_marginStart="25dp">
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/image_home"
+        android:src="@drawable/ic_home_black_24dp"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/text_home"
+        android:textColor="#111"
+        android:layout_below="@id/image_home"
+        android:layout_marginTop="5dp"
+        android:text="Home"/>
+
+</RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/layout_history"
+        android:layout_marginStart="80dp"
+        android:layout_toRightOf="@id/layout_home">
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/image_history"
+        android:src="@drawable/ic_history_black_24dp"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/text_history"
+        android:textColor="#111"
+        android:layout_below="@id/image_history"
+        android:layout_marginTop="5dp"
+        android:text="History"/>
+
+</RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/layout_logout"
+        android:layout_marginStart="80dp"
+        android:layout_toRightOf="@id/layout_history">
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/image_logout"
+        android:src="@drawable/ic_logout"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/text_logout"
+        android:textColor="#111"
+        android:layout_below="@id/image_logout"
+        android:layout_marginTop="5dp"
+        android:text="Logout"/>
+
+</RelativeLayout>
+
+</RelativeLayout>
+
+</RelativeLayout>

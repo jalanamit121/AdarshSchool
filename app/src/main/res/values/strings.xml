@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Adarsh Sardarshahar</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_profile">My Profile</string>
+    <string name="menu_video">MyVideo</string>
+    <string name="menu_online_test">Online Test</string>
+    <string name="menu_about">About Us</string>
+    <string name="menu_rate">Rate Us</string>
+    <string name="menu_invite">Logout</string>
+    <string name="new_account">New Account</string>
+    <string name="signup_desc">Start by entering your name and categorie below.</string>
+    <string name="login_desc">Enter your login details to access your account</string>
+    <string name="log_in">Log In</string>
+    <string name="message">This App will send you an SMS message for verification and standard rates apply.. Kindly enter your phone Number</string>
+
+    <string name="phone">Phone</string>
+
+    <string name="menu_share">Share</string>
+
+    <string name="title_activity_bodhayan">ADARSH</string>
+
+    <string name="went_wrong">Something Went Wrong</string>
+
+
+    -
+    <string-array name="language">
+
+        <item>English</item>
+
+    </string-array>
+
+</resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.winbee.adarshsardarshahar">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.DriveVideoPlayerActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.VideoWebActivity"></activity>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AdsNotificationActivity" />
+        <activity
+            android:name="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Adarsh"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.IntroSliderActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.LoginActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.RegisterActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.OtpVerficationActivity"
+            android:label="Verification"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.ForgetPasswordActivity"
+            android:label="Forget Password"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.ResetPassWordActivity"
+            android:label="Reset Password"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AllLiveClassActivity"
+            android:label="Live Classes"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AdsYouTubeLiveActivity"
+            android:label="YouTube Live"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.MyCourseSubjectActivity"
+            android:label="Subject"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.WebActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AdsYouTubeActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AdsSemesterTopicActivity"
+            android:label="Topic"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AskedNewQuestionActivity"
+            android:label="Question"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AskedQuestionActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AskedSolutionActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AssignmentToSubmitActivity"
+            android:label="Assignment"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.SubmittedAssignmentActivity"
+            android:label="Submitted Assignment"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.SubmitAssignmentActivity"
+            android:label="Submit Assignment"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.AssignmentWebActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.SubjectActivity"
+            android:label="Test"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.OnlineQuestionActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.OnlineTestActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.InstructionsActivity"
+            android:label="Instructions"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.SubjectActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.WhatsAppActivity"
+            android:label="Upddate WhatsApp"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.SubmittedWebActivity" />
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.Aboutus"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.MyProfile"
+            android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+        <activity android:name="com.winbee.adarshsardarshahar.Activity.ViewResultActivity"/>
+        <activity
+            android:name="com.winbee.adarshsardarshahar.Activity.SplashPageActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

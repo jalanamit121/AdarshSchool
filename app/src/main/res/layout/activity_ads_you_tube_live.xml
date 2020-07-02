@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_color"
+    tools:context=".Activity.AdsYouTubeLiveActivity">
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"></com.google.android.youtube.player.YouTubePlayerView>
+    <TextView
+        android:id="@+id/video_topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/youtube_player"
+        android:text=""
+        android:textColor="#111"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/video_info1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/video_topic"
+        android:text="Info : "
+        android:textColor="#111"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/video_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/video_topic"
+        android:layout_toRightOf="@id/video_info1"
+        android:text=""
+        android:textColor="#111"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"/>
+
+    <TextView
+        android:id="@+id/video_coaching"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/video_info"
+        android:text="Starting At : "
+        android:textColor="#111"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/video_started"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/video_info"
+        android:layout_toRightOf="@id/video_coaching"
+        android:text=""
+        android:textColor="#111"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="14dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/video_started"
+        android:background="@drawable/circularbluebordersolid"
+        android:fontFamily="@font/proximanovaregular"
+        android:padding="16dp"
+        android:text="View Next Class"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_layout">
+        <RelativeLayout
+            android:id="@+id/layout_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp">
+            <ImageView
+                android:id="@+id/image_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_home_black_24dp"
+                />
+            <TextView
+                android:id="@+id/text_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/image_home"
+                android:textColor="#111"/>
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_toRightOf="@id/layout_home">
+            <ImageView
+                android:id="@+id/image_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_language_black_24dp"
+                />
+            <TextView
+                android:id="@+id/text_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Website"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/image_history"
+                android:textColor="#111"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_toRightOf="@id/layout_history">
+            <ImageView
+                android:id="@+id/image_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_logout"
+                />
+            <TextView
+                android:id="@+id/text_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/image_logout"
+                android:textColor="#111"/>
+
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.OnlineQuestionActivity"
+    android:id="@+id/drawer_layout_question"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:id="@+id/toolBar"
+        tools:ignore="UseCompoundDrawables"
+        android:background="@color/white"
+        android:elevation="100dp">
+        <ImageView
+            android:id="@+id/pauseBtn"
+            android:src="@drawable/ic_pause_circle_outline_black_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:layout_centerVertical="true"/>
+        <LinearLayout
+            android:layout_toRightOf="@id/pauseBtn"
+            android:layout_marginStart="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
+            <TextView
+                android:id="@+id/tv_testName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test Name"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="@color/colorRed"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/listBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_black_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <View android:layout_width="match_parent"
+        android:layout_height="@dimen/view_width_small"
+        android:background="@color/grey_light" />
+    <io.supercharge.shimmerlayout.ShimmerLayout
+        android:id="@+id/shimmerLayout"
+        app:shimmer_animation_duration="1200"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_place_holder_layout"/>
+        </LinearLayout>
+    </io.supercharge.shimmerlayout.ShimmerLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/layout_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+            <TextView
+                android:id="@+id/tv_question_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle_gray_trans"
+                android:text="1"
+                android:gravity="center"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/text_view_marks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="+2,-0.66"
+                android:textColor="@android:color/black"
+                android:layout_toRightOf="@id/tv_question_num"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tv_review_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="Review"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:drawableEnd="@drawable/ic_star_border_black_24dp"
+                android:layout_alignParentEnd="true"
+                android:drawablePadding="5dp"/>
+
+            <TextView
+                android:layout_below="@+id/tv_question_num"
+                android:id="@+id/textview_Question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/proximanovaregular"
+                android:textColor="@android:color/black"
+                android:text="What is your name ?"
+                android:textSize="14sp" />
+            <LinearLayout
+                android:id="@+id/layout_option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview_Question"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="10dp"
+                android:elevation="4dp"
+                android:weightSum="6"
+                android:padding="18dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_looks_one_black_24dp"/>
+
+                <TextView
+                    android:id="@+id/textview_option1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_weight="5"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/proximanovaregular"
+                    android:textColor="@android:color/black"
+                    android:text="My name is khan"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                android:layout_height="@dimen/view_width_small"
+                android:background="@color/grey_light"
+                android:layout_below="@id/layout_option1" />
+            <LinearLayout
+                android:id="@+id/layout_option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:elevation="4dp"
+                android:weightSum="6"
+                android:layout_below="@id/layout_option1"
+                android:padding="18dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_looks_two_black_24dp"/>
+
+                <TextView
+                    android:id="@+id/textview_option2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_weight="5"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/proximanovaregular"
+                    android:textColor="@android:color/black"
+                    android:text="My name is ........"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                android:layout_height="@dimen/view_width_small"
+                android:background="@color/grey_light"
+                android:layout_below="@id/layout_option2"
+                />
+
+            <LinearLayout
+                android:id="@+id/layout_option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:elevation="4dp"
+                android:weightSum="6"
+                android:layout_below="@id/layout_option2"
+                android:padding="18dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_looks_3_black_24dp"/>
+
+                <TextView
+                    android:id="@+id/textview_option3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_weight="5"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/proximanovaregular"
+                    android:textColor="@android:color/black"
+                    android:text="My name is Rahul....name to suna hoga"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                android:layout_height="@dimen/view_width_small"
+                android:background="@color/grey_light"
+                android:layout_below="@id/layout_option3"
+                />
+            <LinearLayout
+                android:id="@+id/layout_option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:elevation="4dp"
+                android:weightSum="6"
+                android:layout_below="@id/layout_option3"
+                android:padding="18dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_looks_4_black_24dp"/>
+
+                <TextView
+                    android:id="@+id/textview_option4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_weight="5"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/proximanovaregular"
+                    android:textColor="@android:color/black"
+                    android:text="My name is AJ"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_width_small"
+                android:background="@color/grey_light"
+                android:layout_below="@id/layout_option4"
+                android:id="@+id/view_question"/>
+            <LinearLayout
+                android:id="@+id/ll_button"
+                android:layout_marginTop="24dp"
+                android:layout_below="@+id/view_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/buttonSaveNext"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/onlinesubmitbtm"
+                    android:fontFamily="@font/proximanovaregular"
+                    android:padding="16dp"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="Save And Next"
+                    android:textColor="@color/white" />
+                <Button
+                    android:id="@+id/buttonNext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/onlinesubmitbtm"
+                    android:fontFamily="@font/proximanovaregular"
+                    android:padding="16dp"
+                    android:text="Next"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_button2"
+                android:layout_marginTop="24dp"
+                android:layout_below="@+id/ll_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/buttonReview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/onlinenextbtm"
+                    android:fontFamily="@font/proximanovaregular"
+                    android:padding="16dp"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="Review"
+                    android:layout_marginHorizontal="10dp"
+                    android:textColor="@color/white" />
+                <Button
+                    android:id="@+id/buttonSubmitAndReview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/onlinenextbtm"
+                    android:fontFamily="@font/proximanovaregular"
+                    android:padding="16dp"
+                    android:text="Save and Review"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+                <!--1-submitand next,2-next,3-review,4-submitand review-->
+            </LinearLayout>
+            <Button
+                android:layout_below="@+id/ll_button2"
+                android:id="@+id/buttonSubmit"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/onlinesubmitbtm"
+                android:fontFamily="@font/proximanovaregular"
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:text="Submit Test"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="20dp"/>
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

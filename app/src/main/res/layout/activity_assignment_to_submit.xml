@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_color"
+    tools:context=".Activity.AssignmentToSubmitActivity">
+    <RelativeLayout
+        android:id="@+id/layout_submitAssignment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/footer">
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_submitted"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Submited Assignment"-->
+<!--            android:background="@color/colorPrimary"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:padding="8dp"-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:layout_alignParentEnd="true"/>-->
+<!--        -->
+
+        <Button
+            android:id="@+id/btn_submitted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/sriracharegular"
+            android:text="Submitted Assignment "
+            android:textColor="@color/white" />
+
+<!--        okay boss ab theek lag raha thoda  assignment data nhi araha nhai
+            apn nesirf layout change ki he code thodi change kiya
+-->
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/today_classes"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:layout_below="@+id/layout_submitAssignment">
+        <TextView
+            android:id="@+id/noclasses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Assignment"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/proximanovaregular"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/gradientViolet" />
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/assignment_review"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="115dp"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_layout">
+        <RelativeLayout
+            android:id="@+id/layout_home"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="25dp">
+            <ImageView
+                android:id="@+id/image_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_home_black_24dp"
+                />
+            <TextView
+                android:id="@+id/text_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/image_home"
+                android:textColor="@color/edit_text"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_centerInParent="true">
+            <ImageView
+                android:id="@+id/image_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_language_black_24dp"
+                />
+            <TextView
+                android:id="@+id/text_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Website"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/image_history"
+                android:textColor="#111"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_centerVertical="true"
+           android:layout_alignParentEnd="true">
+            <ImageView
+                android:id="@+id/image_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_logout"
+                />
+            <TextView
+                android:id="@+id/text_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/image_logout"
+                android:textColor="#111"/>
+
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
