@@ -7,9 +7,15 @@ android {
         applicationId "com.winbee.adarshschool"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 7
-        versionName "1.6"
+        versionCode 13
+        versionName "1.11.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
@@ -45,4 +51,10 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.10.2'
     implementation files('libs//YouTubeAndroidPlayerApi.jar')
     implementation 'io.supercharge:shimmerlayout:2.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'com.ct7ct7ct7.androidvimeoplayer:library:1.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'com.android.volley:volley:1.1.1'
+
 }
