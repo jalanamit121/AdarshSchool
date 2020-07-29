@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
 import com.winbee.adarshsardarshahar.Activity.AdsSemesterTopicActivity;
 import com.winbee.adarshsardarshahar.Models.SemesterName;
 import com.winbee.adarshsardarshahar.R;
@@ -39,9 +41,10 @@ public class AdsSemesterAdapter extends RecyclerView.Adapter<AdsSemesterAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //setting data toAd apter List
         holder.branchname.setText(list.get(position).getBucket_Name());
-        holder.total_video.setText(list.get(position).getTotal_Video());
+        holder.total_video.setText(String.valueOf(list.get(position).getTotal_Video()));
         holder.total_document.setText(String.valueOf(list.get(position).getTotal_Document()));
-        if (String.valueOf(list.get(position).getTotal_Document()).equalsIgnoreCase("0")&& list.get(position).getTotal_Video().equalsIgnoreCase("0")) {
+        Picasso.get().load(list.get(position).getBucket_Image()).into(holder.live_image);
+        if (String.valueOf(list.get(position).getTotal_Document()).equalsIgnoreCase("0")&& String.valueOf(list.get(position).getTotal_Video()).equalsIgnoreCase("0")) {
             holder.branch_sem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -77,12 +80,14 @@ public class AdsSemesterAdapter extends RecyclerView.Adapter<AdsSemesterAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView branchname,total_video,total_document;
         private RelativeLayout branch_sem;
+        private ImageView live_image;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             branchname = itemView.findViewById(R.id.gec_branchname);
             total_video = itemView.findViewById(R.id.total_video);
             total_document = itemView.findViewById(R.id.total_document);
             branch_sem = itemView.findViewById(R.id.branch_sem);
+            live_image = itemView.findViewById(R.id.live_image);
         }
     }
 }

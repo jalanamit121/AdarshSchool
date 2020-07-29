@@ -5,8 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AskedSolutionActivity extends AppCompatActivity {
-    RelativeLayout home,histroy,logout;
+    LinearLayout home,histroy,logout;
     private ProgressBarUtil progressBarUtil;
     private AdsAskedSolutionAdapter adapter;
     private ArrayList<UrlSolution> list;
@@ -48,6 +50,8 @@ public class AskedSolutionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asked_solution);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         askedSolution = findViewById(R.id.gec_asked_solution_recycle);
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);

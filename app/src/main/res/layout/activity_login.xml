@@ -9,19 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="24dp"
-            android:paddingTop="66dp"
+            android:paddingTop="24dp"
             android:paddingRight="24dp">
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/logo"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -49,7 +52,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/circularbordersolidtop"
+                android:background="@drawable/circularbordersolid"
                 android:gravity="center"
                 android:padding="18dp">
 
@@ -70,8 +73,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/circularbordersolidbottom"
+                android:background="@drawable/circularbordersolid"
                 android:orientation="horizontal"
+                android:layout_marginTop="20dp"
                 android:padding="18dp">
 
                 <EditText
@@ -167,7 +171,7 @@
                     android:gravity="center"
                     android:text=" Create One"
                     android:onClick="registeractivity"
-                    android:textColor="#8e9cfe"
+                    android:textColor="#112DEC"
                     android:textSize="16dip" />
 
             </LinearLayout>

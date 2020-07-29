@@ -49,7 +49,7 @@ public class AdsHomeLiveAdapter extends RecyclerView.Adapter<AdsHomeLiveAdapter.
         holder.branch_live.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (list.get(position).getCS_type_code().equals(1)) {
+                    if (list.get(position).getCS_type_code().equals(1)||list.get(position).getCS_type_code().equals(2)) {
                     Bundle bundle = new Bundle();
                     Intent intent = new Intent(context, AdsYouTubeLiveActivity.class);
                     bundle.putSerializable("ContentLink",list.get(position));
@@ -57,8 +57,6 @@ public class AdsHomeLiveAdapter extends RecyclerView.Adapter<AdsHomeLiveAdapter.
                     context.startActivity(intent);
                     } else if (list.get(position).getCS_type_code().equals(0)) {
                         Toast.makeText(context, "Class Not Started yet", Toast.LENGTH_SHORT).show();
-                    } else if (list.get(position).getCS_type_code().equals(2)) {
-                        Toast.makeText(context, "Live Class Ended", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Error Occur,Contact Support", Toast.LENGTH_SHORT).show();
                     }

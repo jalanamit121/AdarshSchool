@@ -5,6 +5,7 @@ import com.winbee.adarshsardarshahar.Models.AttendenceModel;
 import com.winbee.adarshsardarshahar.Models.BannerModel;
 import com.winbee.adarshsardarshahar.Models.ForgetMobile;
 import com.winbee.adarshsardarshahar.Models.LiveClass;
+import com.winbee.adarshsardarshahar.Models.NotificationModel;
 import com.winbee.adarshsardarshahar.Models.OtpVerify;
 import com.winbee.adarshsardarshahar.Models.PurchasedMainModel;
 import com.winbee.adarshsardarshahar.Models.RefCode;
@@ -56,7 +57,10 @@ public interface ClientApi {
             @Query("email") String email,
             @Query("mobile") String mobile,
             @Query("refcode") String refcode,
-            @Query("password") String password);
+            @Query("state") String state,
+            @Query("district") String district,
+            @Query("password") String password
+    );
     @POST("send-otp.php")
     Call<ForgetMobile> getForgetMobile(
             @Query("SubURL") int SubURL,
@@ -235,6 +239,14 @@ public interface ClientApi {
     @POST("fetch-cover-banner.php")
     Call<ArrayList<BannerModel>> getBanner(
             @Query("org_id") String org_id
+    );
+
+
+    @POST("fetch-user-notification.php")
+    Call<ArrayList<NotificationModel>> getNotification(
+            @Query("SubURL") int SubURL,
+            @Query("ORG_ID") String ORG_ID,
+            @Query("USER_ID") String USER_ID
     );
 
 

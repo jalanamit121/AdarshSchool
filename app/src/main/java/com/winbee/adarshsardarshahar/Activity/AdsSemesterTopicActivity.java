@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -37,7 +39,7 @@ public class AdsSemesterTopicActivity extends AppCompatActivity {
     private List<UrlName> list;
     private RecyclerView video_list_recycler;
     private AdsSemesterTopicAdapter adapter;
-    RelativeLayout home,histroy,logout;
+    LinearLayout home,histroy,logout;
     private ProgressBarUtil progressBarUtil;
 
 
@@ -46,6 +48,8 @@ public class AdsSemesterTopicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads_semester_topic);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         video_list_recycler = findViewById(R.id.gec_semester_topic_recycle);
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);

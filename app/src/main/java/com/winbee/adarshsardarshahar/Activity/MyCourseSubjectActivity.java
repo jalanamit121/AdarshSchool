@@ -3,12 +3,16 @@ package com.winbee.adarshsardarshahar.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.winbee.adarshsardarshahar.Adapter.AdsSemesterAdapter;
 import com.winbee.adarshsardarshahar.Models.CourseDatum;
@@ -31,17 +35,40 @@ public class MyCourseSubjectActivity extends AppCompatActivity {
     private ArrayList<SemesterName> list;
     private RecyclerView video_list_recycler;
     private AdsSemesterAdapter adapter;
-    RelativeLayout home,histroy,logout;
+    LinearLayout home,histroy,logout;
     private ProgressBarUtil progressBarUtil;
+    SwipeRefreshLayout ads_course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_course_subject);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         video_list_recycler = findViewById(R.id.gec_semester_recycle);
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);
+        ads_course=findViewById(R.id.ads_course);
+        ads_course.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                Bundle bundle = getIntent().getExtras();
+                if(bundle!=null){
+                    courseDatum = (CourseDatum) bundle.getSerializable("my_course");
+                    callCourseSubjectApiService();
+
+                }
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ads_course.setRefreshing(false);
+                    }
+                },4000);
+            }
+        });
         progressBarUtil   =  new ProgressBarUtil(this);
 
 

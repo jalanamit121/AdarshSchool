@@ -3,6 +3,7 @@ package com.winbee.adarshsardarshahar.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,8 @@ public class ViewResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_result);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         tv_paper_name=findViewById(R.id.tv_paper_name);
         tv_section_name=findViewById(R.id.tv_section_name);
         tv_total_question=findViewById(R.id.tv_total_question);

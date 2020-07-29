@@ -27,6 +27,10 @@ public class AssignmentData {
 
 
     public static String DocumentId="";
+    public static int VideoUrl;
+
+
+    public static String Banner="";
 
 
 }

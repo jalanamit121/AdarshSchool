@@ -28,10 +28,12 @@ public class UrlName implements Serializable {
     @SerializedName("Additional_info")
     @Expose
     private String additional_info;
-
     @SerializedName("DocumentId")
     @Expose
     private String documentId;
+    @SerializedName("Thumbnail")
+    @Expose
+    private String thumbnail;
     @SerializedName("Type")
     @Expose
     private String type;
@@ -98,6 +100,14 @@ public class UrlName implements Serializable {
 
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public String getType() {

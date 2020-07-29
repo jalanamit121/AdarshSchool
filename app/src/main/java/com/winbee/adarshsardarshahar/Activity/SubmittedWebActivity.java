@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -31,7 +33,7 @@ public class SubmittedWebActivity extends AppCompatActivity {
     private WebView webView;
     private SubmittedDatum assignmentDatum;
     private ProgressBarUtil progressBarUtil;
-    RelativeLayout home,histroy,logout;
+    LinearLayout home,histroy,logout;
     Button btm_asked_question;
     String googleDocs = "https://docs.google.com/viewer?url=";
     ImageView image_view;
@@ -41,6 +43,8 @@ public class SubmittedWebActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.submitted_web);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         webView =findViewById(R.id.myWebView);
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);

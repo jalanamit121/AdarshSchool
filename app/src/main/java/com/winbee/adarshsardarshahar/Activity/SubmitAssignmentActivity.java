@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -74,6 +75,7 @@ public class SubmitAssignmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_assignment);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         description = findViewById(R.id.description);
         addImageButton = findViewById(R.id.addImageButton);
@@ -82,8 +84,8 @@ public class SubmitAssignmentActivity extends AppCompatActivity {
         layout_description = findViewById(R.id.layout_description);
         progressBarUtil = new ProgressBarUtil(this);
         UserId= SharedPrefManager.getInstance(this).refCode().getUserId();
-       final String AssignmentId=getIntent().getStringExtra("assignmentId");
-       final String  CourseId=getIntent().getStringExtra("courseId");
+        final String AssignmentId=getIntent().getStringExtra("assignmentId");
+        final String  CourseId=getIntent().getStringExtra("courseId");
 
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +110,8 @@ public class SubmitAssignmentActivity extends AppCompatActivity {
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void fileValidation() {
-         String Description = description.getText().toString();
-         String Image =imageToString();
+        String Description = description.getText().toString();
+        String Image =imageToString();
 
 
         //validating inputs
@@ -119,14 +121,14 @@ public class SubmitAssignmentActivity extends AppCompatActivity {
             return;
         }
 
-        callSubmitAssignment(Description);
+        callSubmitAssignment(Description,Image);
     }
-    private void callSubmitAssignment(String Description){
-       // File pdfFile = new File(String.valueOf(filePath));
+    private void callSubmitAssignment(String Description,String Image){
+        // File pdfFile = new File(String.valueOf(filePath));
 
         progressBarUtil.showProgress();
         ClientApi mService = ApiClient.getClient().create(ClientApi.class);
-        Call<SubmitAssignment> call = mService.getSubmitAssignment("WB_005",UserId, AssignmentData.BucketId,AssignmentData.AssignmentId,"null",Description);
+        Call<SubmitAssignment> call = mService.getSubmitAssignment("WB_005",UserId, AssignmentData.BucketId,AssignmentData.AssignmentId,Image,Description);
         call.enqueue(new Callback<SubmitAssignment>() {
             @Override
             public void onResponse(Call<SubmitAssignment> call, Response<SubmitAssignment> response) {
@@ -158,60 +160,60 @@ public class SubmitAssignmentActivity extends AppCompatActivity {
     }
 
     private void selectImage(){
-        /*Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,IMG_REQUEST);*/
-        Intent intent = new Intent();
-        intent.setType("application/pdf");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Pdf"), PICK_PDF_REQUEST);
+        startActivityForResult(intent,IMG_REQUEST);
+//        Intent intent = new Intent();
+//        intent.setType("application/pdf");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(Intent.createChooser(intent, "Select Pdf"), PICK_PDF_REQUEST);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 //
-//        if (requestCode == IMG_REQUEST && resultCode == RESULT_OK && data!=null) {
-//            Uri selectedImage = data.getData();
-//            try {
-//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
-//
-//                image_view.setImageBitmap(bitmap);
-//
-//                Toast.makeText(this, "File Selected", Toast.LENGTH_SHORT).show();
-//    addImageButton.setVisibility(View.GONE);
-//    uploadButton.setVisibility(View.VISIBLE);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
+        if (requestCode == IMG_REQUEST && resultCode == RESULT_OK && data!=null) {
+            Uri selectedImage = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
 
-            addImageButton.setVisibility(View.GONE);
-            uploadButton.setVisibility(View.VISIBLE);
+                image_view.setImageBitmap(bitmap);
+
+                Toast.makeText(this, "File Selected", Toast.LENGTH_SHORT).show();
+                addImageButton.setVisibility(View.GONE);
+                uploadButton.setVisibility(View.VISIBLE);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+//        if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+//            filePath = data.getData();
+//
+//            addImageButton.setVisibility(View.GONE);
+//            uploadButton.setVisibility(View.VISIBLE);
+//        }
     }
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    //    @RequiresApi(api = Build.VERSION_CODES.O)
     private String imageToString()
     {
 
-//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//        // In case you want to compress your image, here it's at 40%
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
-//        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        File pdfFile = new File(String.valueOf(filePath));
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        // In case you want to compress your image, here it's at 40%
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+//        File pdfFile = new File(String.valueOf(filePath));
+//
+//        byte[] encoded = new byte[0];
+//        try {
+//            encoded = Files.readAllBytes(Paths.get(pdfFile.getAbsolutePath()));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        byte[] encoded = new byte[0];
-        try {
-            encoded = Files.readAllBytes(Paths.get(pdfFile.getAbsolutePath()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-
-        return Base64.encodeToString(encoded, Base64.DEFAULT);
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
 

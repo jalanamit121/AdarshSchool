@@ -31,7 +31,7 @@ public class MyProfile extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(" My Profile");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF5252")));
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6fabf1")));
         textViewName=findViewById(R.id.profile_username);
         textViewEmail=findViewById(R.id.profile_useremail);
         profile_whatapp=findViewById(R.id.profile_whatapp);

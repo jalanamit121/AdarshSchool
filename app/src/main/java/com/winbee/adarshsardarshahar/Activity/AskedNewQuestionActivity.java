@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -31,12 +34,14 @@ public class AskedNewQuestionActivity extends AppCompatActivity {
     private String CurrentUserName;
     private ProgressBarUtil progressBarUtil;
     Button submit;
-    RelativeLayout home,histroy,logout;
+    LinearLayout home,histroy,logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asked_new_question);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         editTextQuestionTitle=findViewById(R.id.editTextQuestionTitle);
         editTextQuestionDescription=findViewById(R.id.editTextQuestionDescription);
         editTextUserid=findViewById(R.id.editTextUserid);
@@ -121,6 +126,7 @@ public class AskedNewQuestionActivity extends AppCompatActivity {
        // final UrlNewQuestion urlNewQuestion = new UrlNewQuestion(title,description,documentid,userid);
         ClientApi apiCall = ApiClient.getClient().create(ClientApi.class);
         Call<UrlNewQuestion> call =apiCall.getNewQuestion(urlNewQuestion.getTitle(),urlNewQuestion.getQuestion(),urlNewQuestion.getUserId(),urlNewQuestion.getDocumentId());
+        Log.d("TAG", "callNewAskedQuestionApiService: "+urlNewQuestion.getTitle()+""+urlNewQuestion.getQuestion()+""+urlNewQuestion.getUserId()+""+urlNewQuestion.getDocumentId());
         call.enqueue(new Callback<UrlNewQuestion>() {
             @Override
             public void onResponse(Call<UrlNewQuestion> call, Response<UrlNewQuestion> response) {

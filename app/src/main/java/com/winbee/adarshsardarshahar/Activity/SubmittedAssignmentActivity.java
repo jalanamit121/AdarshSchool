@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -32,18 +34,21 @@ import retrofit2.Response;
 
 public class SubmittedAssignmentActivity extends AppCompatActivity {
     private List<SubmittedDatum> list;
-    RelativeLayout home,histroy,logout,today_classes;
+    RelativeLayout today_classes;
     private ProgressBarUtil progressBarUtil;
     ScrollView scrollView;
     private SubmittedAdapter submittedAdapter;
     private RecyclerView assignmentView;
     String Userid;
     private Button btn_submitted;
+    LinearLayout home,histroy,logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submitted_assignment);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);

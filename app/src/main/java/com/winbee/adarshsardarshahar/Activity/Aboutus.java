@@ -20,7 +20,7 @@ public class Aboutus extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(" About Us");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF5252")));
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6fabf1")));
 
 
 

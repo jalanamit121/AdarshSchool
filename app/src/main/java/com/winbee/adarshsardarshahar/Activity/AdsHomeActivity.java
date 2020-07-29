@@ -10,16 +10,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -49,6 +52,7 @@ import com.winbee.adarshsardarshahar.WebApi.ClientApi;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,24 +65,27 @@ import retrofit2.Response;
 public class AdsHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private List<CourseDatum> list;
-    private ArrayList<BranchName> list1;
+    private ArrayList<BannerModel> bannerModel;
     private ArrayList<LiveClass> liveList;
     private RecyclerView video_list_recycler,video_list_recycler1;
     private AdsHomeAdapter adapter;
     private AdsHomeLiveAdapter liveAdapter;
     ScrollView scrollView;
-    RelativeLayout home,histroy,logout,layout_noCourse,layout_welcome,layout_myClass,layout_online_test,layout_assignment,layout_attendence;
+    RelativeLayout layout_noCourse,layout_welcome,layout_myClass,layout_online_test,layout_assignment,layout_attendence;
     private ArrayList<RefCode> refCodeData;
     private ProgressBarUtil progressBarUtil;
     boolean doubleBackToExitPressedOnce = false;
     TextView viewAll,nocourse,noclasses;
     String sCurrentVersion,sLastestVersion,Userid;
+    SwipeRefreshLayout ads_home;
+    ImageSlider imageSlider;
+    LinearLayout home,histroy,logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads_home);
-       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
         new GetLastesVersion().execute();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -118,6 +125,22 @@ public class AdsHomeActivity extends AppCompatActivity
         layout_noCourse=findViewById(R.id.layout_noCourse);
         layout_welcome=findViewById(R.id.layout_welcome);
         layout_myClass=findViewById(R.id.layout_myClass);
+        ads_home=findViewById(R.id.ads_home);
+        ads_home.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callApiService(Userid);
+                callLiveApiService();
+                callBannerService();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ads_home.setRefreshing(false);
+                    }
+                },4000);
+            }
+        });
         layout_attendence=findViewById(R.id.layout_attendence);
         layout_assignment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,17 +153,9 @@ public class AdsHomeActivity extends AppCompatActivity
         layout_attendence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               //api call
                 callAttendenceService();
             }
         });
-//        layout_myClass.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(GecHomeActivity.this,MyClassActivity.class);
-//                startActivity(intent);
-//            }
-//        });
         viewAll=findViewById(R.id.text_viewAll);
         viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,18 +193,18 @@ public class AdsHomeActivity extends AppCompatActivity
             }
         });
 
-        ImageSlider imageSlider =(ImageSlider)findViewById(R.id.slider);
+        imageSlider =findViewById(R.id.slider);
 
-        List<SlideModel> slideModels=new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.banner1));
-        slideModels.add(new SlideModel(R.drawable.banner2));
-        slideModels.add(new SlideModel(R.drawable.banner3));
-        slideModels.add(new SlideModel(R.drawable.banner4));
-        slideModels.add(new SlideModel(R.drawable.banner5));
-        imageSlider.setImageList(slideModels,true);
-        //callBannerService();
+//        List<SlideModel> slideModels=new ArrayList<>();
+//        slideModels.add(new SlideModel(R.drawable.banner1));
+//        slideModels.add(new SlideModel(R.drawable.banner2));
+//        slideModels.add(new SlideModel(R.drawable.banner3));
+//        slideModels.add(new SlideModel(R.drawable.banner4));
+//        slideModels.add(new SlideModel(R.drawable.banner5));
+      //  imageSlider.setImageList(slideModels,true);
         callApiService(Userid);
         callLiveApiService();
+        callBannerService();
 
 
 
@@ -306,38 +321,46 @@ public class AdsHomeActivity extends AppCompatActivity
 
 
     // for banner display
-//    private void callBannerService() {
-//        progressBarUtil.showProgress();
-//        ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-//        Call<ArrayList<BannerModel>> call = apiCAll.getBanner("WB_004");
-//        call.enqueue(new Callback<ArrayList<BannerModel>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<BannerModel>> call, Response<ArrayList<BannerModel>> response) {
-//                int statusCode = response.code();
-//              //  bannerModels = new ArrayList();
-//                if(statusCode==200 && response.body().size()!=0){
-//                    System.out.println("Suree body: "+response.body().get(0));
-//
-//                    List<SlideModel> bannerModels=new ArrayList<>();
-//                    bannerModels.add(new SlideModel(response.body().indexOf(0)));
-//                   // bannerModels.add(new SlideModel("https://s3.amazonaws.com/influencive.com/wp-content/uploads/2020/01/30131217/pexels-photo-2312369-e1580418773326.jpeg"));
-//                    //imageSlider.setImageList(bannerModels,true);
-//                    progressBarUtil.hideProgress();
-//                }
-//                else{
-//                    System.out.println("Suree: response code"+response.message());
-//                    Toast.makeText(getApplicationContext(),"NetWork Issue,Please Check Network Connection" ,Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<BannerModel>> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(),"Failed" + t.getMessage(),Toast.LENGTH_SHORT).show();
-//
-//                System.out.println("Suree: Error "+t.getMessage());
-//            }
-//        });
-//    }
+    private void callBannerService() {
+        progressBarUtil.showProgress();
+        ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
+        Call<ArrayList<BannerModel>> call = apiCAll.getBanner("WB_005");
+        call.enqueue(new Callback<ArrayList<BannerModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<BannerModel>> call, Response<ArrayList<BannerModel>> response) {
+                int statusCode = response.code();
+              //  bannerModels = new ArrayList();
+                if(statusCode==200 ){
+                    System.out.println("Suree body: "+response.body());
+                    ArrayList<BannerModel> bannerModel  =response.body();
+                    List<SlideModel> bannerModels=new ArrayList<>();
+                  //  bannerModels.add(new SlideModel(String.valueOf(Arrays.asList(bannerModel.getFile()))));
+                    for (int i=0;i<bannerModel.size();i++){
+                        bannerModels.add(new SlideModel(bannerModel.get(i).getFile()));
+                    }
+//                    bannerModels.add(new SlideModel(bannerModel.get(0).getFile()));
+//                    bannerModels.add(new SlideModel(bannerModel.get(1).getFile()));
+//                    bannerModels.add(new SlideModel(bannerModel.get(2).getFile()));
+//                    bannerModels.add(new SlideModel(bannerModel.get(3).getFile()));
+//                    bannerModels.add(new SlideModel(bannerModel.get(4).getFile()));
+                   // bannerModels.add(new SlideModel("https://s3.amazonaws.com/influencive.com/wp-content/uploads/2020/01/30131217/pexels-photo-2312369-e1580418773326.jpeg"));
+                    imageSlider.setImageList(bannerModels,false);
+                    progressBarUtil.hideProgress();
+                }
+                else{
+                    System.out.println("Suree: response code"+response.message());
+                    Toast.makeText(getApplicationContext(),"NetWork Issue,Please Check Network Connection" ,Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<BannerModel>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"Failed" + t.getMessage(),Toast.LENGTH_SHORT).show();
+
+                System.out.println("Suree: Error "+t.getMessage());
+            }
+        });
+    }
 
     @Override
     public void onBackPressed(){
@@ -379,10 +402,6 @@ public class AdsHomeActivity extends AppCompatActivity
         }else if (id == R.id.nav_profile) {
             Intent intent = new Intent(AdsHomeActivity.this, MyProfile.class);
             startActivity(intent);
-
-//        }else if (id == R.id.nav_online_test) {
-//        Intent intent = new Intent(GecHomeActivity.this,SubjectActivity.class);
-//        startActivity(intent);
         } else if (id == R.id.nav_about) {
             Intent d=  new Intent(AdsHomeActivity.this, Aboutus.class);
             startActivity(d);

@@ -19,12 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.winbee.adarshsardarshahar.Activity.AdsYouTubeActivity;
 import com.winbee.adarshsardarshahar.Activity.DriveVideoPlayerActivity;
 import com.winbee.adarshsardarshahar.Activity.VideoWebActivity;
+import com.winbee.adarshsardarshahar.Activity.VimeoActivity;
 import com.winbee.adarshsardarshahar.Activity.WebActivity;
 import com.winbee.adarshsardarshahar.Models.UrlName;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.Utils.AssignmentData;
 
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 
 public class AdsSemesterTopicAdapter extends RecyclerView.Adapter<AdsSemesterTopicAdapter.ViewHolder> {
@@ -73,11 +76,26 @@ public class AdsSemesterTopicAdapter extends RecyclerView.Adapter<AdsSemesterTop
                 @Override
                 public void onClick(View view) {
                     AssignmentData.DocumentId=list.get(position).getDocumentId();
+                    Log.d(TAG,"document"+AssignmentData.DocumentId);
                     Intent intent= new Intent(context, DriveVideoPlayerActivity.class);
                     intent.putExtra("dURL",list.get(position).getURL());
                     context.startActivity(intent);
                     Log.i("ïnfo","Launching new activity");
                         }
+
+
+            });
+
+        } else if(list.get(position).getType().equalsIgnoreCase("Vimeo")){
+            holder.document_type.setImageResource(R.drawable.ic_clapperboard);
+            holder.branch_sem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AssignmentData.VideoUrl=Integer.parseInt(list.get(position).getURL());
+                    Intent intent= new Intent(context, VimeoActivity.class);
+                    context.startActivity(intent);
+                    Log.i("ïnfo","Launching new activity");
+                }
 
 
             });

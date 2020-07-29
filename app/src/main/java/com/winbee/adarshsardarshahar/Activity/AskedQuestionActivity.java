@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -28,12 +30,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AskedQuestionActivity extends AppCompatActivity {
-    RelativeLayout home,histroy,logout;
+    LinearLayout home,histroy,logout;
     private ProgressBarUtil progressBarUtil;
     private AdsAskedQuestionAdapter adapter;
     private ArrayList<UrlQuestion> list;
     private RecyclerView askedQuestion;
     private UrlName urlName;
+    private RelativeLayout today_classes;
 
     ImageView btmNewQuestion;
 
@@ -42,12 +45,15 @@ public class AskedQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asked_question);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         askedQuestion = findViewById(R.id.gec_asked_question_recycle);
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);
         progressBarUtil   =  new ProgressBarUtil(this);
         btmNewQuestion=findViewById(R.id.btmNewQuestion);
+        today_classes=findViewById(R.id.today_classes);
 
         histroy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +119,8 @@ public class AskedQuestionActivity extends AppCompatActivity {
             public void onFailure(Call<ArrayList<UrlQuestion>> call, Throwable t) {
                 System.out.println("Suree: "+t.getMessage());
                 progressBarUtil.hideProgress();
-                Toast.makeText(getApplicationContext(),"Failed"+t.getMessage() ,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(),"Failed"+t.getMessage() ,Toast.LENGTH_SHORT).show();
+                today_classes.setVisibility(View.VISIBLE);
 
             }
         });

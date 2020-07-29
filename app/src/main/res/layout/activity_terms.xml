@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.winbee.adarshsardarshahar.Activity.TermsActivity">
+    <TextView
+        android:id="@+id/aboutus_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="2dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:textColor="#111"
+        android:gravity="center"
+        android:text="TERMS AND CONDITIONS"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        />
+
+
+    <TextView
+        android:id="@+id/aboutus_textview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="2dp"
+        android:paddingRight="10dp"
+        android:layout_below="@id/aboutus_textview"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:textColor="#111"
+        android:text="1. No one can complain about videos and syllabus which are uploaded on adarsh sardarshahar app."
+        android:textSize="18sp"
+        />
+    <TextView
+        android:id="@+id/aboutus_textview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="2dp"
+        android:paddingRight="10dp"
+        android:layout_below="@id/aboutus_textview1"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:textColor="#111"
+        android:text="2. No one can claim about the text or audio used in app videos."
+        android:textSize="18sp"
+        />
+    <TextView
+        android:id="@+id/aboutus_textview3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="2dp"
+        android:paddingRight="10dp"
+        android:layout_below="@id/aboutus_textview2"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:textColor="#111"
+        android:text="3. Any disturbance in live classes is not acceptable and if any misbehaviour is found then the student id will be deleted by the institute"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/aboutus_textview4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="2dp"
+        android:paddingRight="10dp"
+        android:layout_below="@id/aboutus_textview3"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:textColor="#111"
+        android:text="4. Our technical team will do whatever for any specific ID if misbehaviour is found."
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/aboutus_textview5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="2dp"
+        android:paddingRight="10dp"
+        android:layout_below="@id/aboutus_textview4"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:textColor="#111"
+        android:text="5. All rights are reserved by Adarsh Institute."
+        android:textSize="18sp"
+        />
+</RelativeLayout>

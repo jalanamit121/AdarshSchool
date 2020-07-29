@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.winbee.adarshsardarshahar.Models.UrlName;
@@ -24,7 +26,7 @@ public class VideoWebActivity extends AppCompatActivity {
     private WebView webView;
     private UrlName urlName;
     private ProgressBarUtil progressBarUtil;
-    RelativeLayout home,histroy,logout;
+    LinearLayout home,histroy,logout;
     Button btm_asked_question;
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -32,6 +34,8 @@ public class VideoWebActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_web);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         webView =findViewById(R.id.myWebView);
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);

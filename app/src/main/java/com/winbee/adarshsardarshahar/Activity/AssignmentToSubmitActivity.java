@@ -9,8 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
@@ -41,7 +43,7 @@ import retrofit2.Response;
 
 public class AssignmentToSubmitActivity extends AppCompatActivity {
     private List<AssignmentDatum> list;
-    RelativeLayout home,histroy,logout,today_classes;
+    RelativeLayout today_classes;
     private ProgressBarUtil progressBarUtil;
     ScrollView scrollView;
     private AssignmentToSubmitAdapter assignmentToSubmitAdapter;
@@ -49,12 +51,15 @@ public class AssignmentToSubmitActivity extends AppCompatActivity {
     String Userid;
     private Button btn_submitted;
     private int mYear, mMonth, mDay;
+    LinearLayout home,histroy,logout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment_to_submit);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);

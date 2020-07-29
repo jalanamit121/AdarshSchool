@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -39,18 +41,21 @@ import retrofit2.Response;
 
 public class DriveVideoPlayerActivity extends AppCompatActivity {
     private VideoEnabledWebView andExoPlayerView;
-    RelativeLayout home,histroy,logout;
+    LinearLayout home,histroy,logout;
     private ProgressBarUtil progressBarUtil;
     private AdsAskedQuestionAdapter adapter;
     private ArrayList<UrlQuestion> list;
     private UrlName urlName;
     private RecyclerView askedQuestion;
     private Button btm_asked_question;
+    private RelativeLayout today_classes;
     private String TEST_URL_HLS = "https://drive.google.com/file/d/1AOroyeM5P8ZwZ15EGqR4SvRDW7lHoqeZ/preview";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drive_videoplayer_layout);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         Log.i("ïnfo","Launched new activity");
         Intent intent = getIntent();
         String url = intent.getStringExtra("dURL");
@@ -62,6 +67,7 @@ public class DriveVideoPlayerActivity extends AppCompatActivity {
         askedQuestion = findViewById(R.id.gec_asked_question_recycle);
         progressBarUtil   =  new ProgressBarUtil(this);
         btm_asked_question=findViewById(R.id.btm_asked_question);
+        today_classes=findViewById(R.id.today_classes);
         btm_asked_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,7 +167,8 @@ public class DriveVideoPlayerActivity extends AppCompatActivity {
             public void onFailure(Call<ArrayList<UrlQuestion>> call, Throwable t) {
                 System.out.println("Suree: "+t.getMessage());
                 progressBarUtil.hideProgress();
-                Toast.makeText(getApplicationContext(),"Failed"+t.getMessage() ,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(),"Failed"+t.getMessage() ,Toast.LENGTH_SHORT).show();
+                today_classes.setVisibility(View.VISIBLE);
 
             }
         });

@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,13 +28,15 @@ public class AdsYouTubeLiveActivity extends YouTubeBaseActivity implements YouTu
     public static final String VIDEO_ID = "j36wPW4bGIs";
 
     private LiveClass liveClass;
-    RelativeLayout home,histroy,logout;
+    LinearLayout home,histroy,logout;
     TextView video_topic,video_info,video_started;
     Button buttonNext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads_you_tube_live);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);

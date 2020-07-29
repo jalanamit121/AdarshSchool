@@ -24,22 +24,25 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"/>
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:weightSum="3"
         android:background="@drawable/bottom_layout">
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/layout_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
             <ImageView
                 android:id="@+id/image_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
                 android:src="@drawable/ic_home_black_24dp"
                 />
             <TextView
@@ -47,22 +50,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
+                android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:textSize="12sp"
                 android:layout_below="@id/image_home"
-                android:textColor="@color/edit_text"/>
+                android:textColor="#111"/>
 
-        </RelativeLayout>
-        <RelativeLayout
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/layout_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_toRightOf="@id/layout_home">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
             <ImageView
                 android:id="@+id/image_history"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
                 android:src="@drawable/ic_language_black_24dp"
                 />
             <TextView
@@ -70,38 +76,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Website"
+                android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:textSize="12sp"
                 android:layout_below="@id/image_history"
                 android:textColor="#111"/>
 
-        </RelativeLayout>
-        <RelativeLayout
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/layout_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_toRightOf="@id/layout_history">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
             <ImageView
                 android:id="@+id/image_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
                 android:src="@drawable/ic_logout"
                 />
             <TextView
-                android:id="@+id/text_logout"
+                android:id="@+id/text_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Logout"
+                android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:textSize="12sp"
                 android:layout_below="@id/image_logout"
                 android:textColor="#111"/>
 
-        </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 
-
-
-
-    </RelativeLayout>
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.winbee.adarshsardarshahar.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ public class InstructionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_instructions);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
         iniIDs();
          setData();
 
@@ -44,6 +47,7 @@ public class InstructionsActivity extends AppCompatActivity {
     }
     private void iniIDs() {
         tv_subject_name=findViewById(R.id.tv_subject_name);
+
         layout_start_test=findViewById(R.id.layout_start_test);
         UserId = SharedPrefManager.getInstance(this).refCode().getUserId();
         progressBarUtil   =  new ProgressBarUtil(this);

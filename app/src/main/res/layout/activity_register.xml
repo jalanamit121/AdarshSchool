@@ -125,6 +125,48 @@
                         android:inputType="textEmailAddress"
                         android:textSize="14sp" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circularbordersolid"
+                    android:gravity="center"
+                    android:padding="16dp">
+
+                    <AutoCompleteTextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:hint="Enter State"
+                        android:background="@null"
+                        android:textColorHint="@color/edit_text"
+                        android:textSize="14sp"
+                        android:id="@+id/actState"
+                        android:maxLines="1"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circularbordersolid"
+                    android:gravity="center"
+                    android:padding="16dp">
+
+                    <AutoCompleteTextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:id="@+id/actCity"
+                        android:hint="Enter City"
+                        android:background="@null"
+                        android:textColorHint="@color/edit_text"
+                        android:textSize="14sp"
+                        android:maxLines="1"/>
+
+
+                </LinearLayout>
+
 
 <!--                <LinearLayout-->
 <!--                    android:id="@+id/org_code"-->
@@ -288,6 +330,34 @@
 
 
 <!--                </LinearLayout>-->
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="match_parent">
+                    <CheckBox
+                        android:id="@+id/chk1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="I have read and agree to the Terms and Conditions"
+                        android:onClick="onCheckBoxClick"/>
+                </LinearLayout>
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/txt_terms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Terms and Conditions"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="#fff"/>
+                </LinearLayout>
 
 
                 <TextView
