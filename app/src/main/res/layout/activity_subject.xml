@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
         <io.supercharge.shimmerlayout.ShimmerLayout
             android:id="@+id/shimmerLayout"
             app:shimmer_animation_duration="1200"
@@ -21,4 +20,116 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </androidx.recyclerview.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:weightSum="4"
+        android:background="@drawable/bottom_layout">
+        <LinearLayout
+            android:id="@+id/layout_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/image_home"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_home_black_24dp"
+                />
+            <TextView
+                android:id="@+id/text_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:layout_below="@id/image_home"
+                android:textColor="#111"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/image_history"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_language_black_24dp"
+                />
+            <TextView
+                android:id="@+id/text_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Website"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:layout_below="@id/image_history"
+                android:textColor="#111"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/image_logout"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_logout"
+                />
+            <TextView
+                android:id="@+id/text_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:layout_below="@id/image_logout"
+                android:textColor="#111"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_doubt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/image_doubt"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_local_library_24"
+                />
+            <TextView
+                android:id="@+id/text_doubt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ask Doubt"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:layout_below="@id/image_logout"
+                android:textColor="#111"/>
+
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

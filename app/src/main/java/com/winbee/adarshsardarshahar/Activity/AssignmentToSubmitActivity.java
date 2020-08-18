@@ -51,7 +51,7 @@ public class AssignmentToSubmitActivity extends AppCompatActivity {
     String Userid;
     private Button btn_submitted;
     private int mYear, mMonth, mDay;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
 
 
     @Override
@@ -76,7 +76,14 @@ public class AssignmentToSubmitActivity extends AppCompatActivity {
 
             }
         });
-
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AssignmentToSubmitActivity.this,DiscussionActivity.class);
+                startActivity(intent);
+            }
+        });
         histroy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,8 +1,12 @@
 package com.winbee.adarshsardarshahar.Activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,7 +20,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.winbee.adarshsardarshahar.Models.RefUser;
 import com.winbee.adarshsardarshahar.R;
@@ -43,10 +49,12 @@ public class RegisterActivity extends AppCompatActivity  {
     EditText editTextname, editTextEmail, editTextPassword,editTextPhone,editTextRePassword;
     TextView editTextReferalCode,txt_terms;
     Button register;
+
     private ProgressBarUtil progressBarUtil;
     ArrayList<String> listState=new ArrayList<String>();
     ArrayList<String> listCity=new ArrayList<String>();
     AutoCompleteTextView act1,act2;
+
 
 
 
@@ -198,6 +206,7 @@ public class RegisterActivity extends AppCompatActivity  {
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextRePassword  = findViewById(R.id.editTextre_Password);
         editTextReferalCode  = findViewById(R.id.editTextreferal_code);
+
         txt_terms  = findViewById(R.id.txt_terms);
         txt_terms.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,7 +260,6 @@ public class RegisterActivity extends AppCompatActivity  {
         final String phone = editTextPhone.getText().toString().trim();
         final String state = act2.getText().toString().trim();
         final String city = act1.getText().toString().trim();
-
         if (TextUtils.isEmpty(username)) {
             editTextname.setError("Please enter username");
             editTextname.requestFocus();

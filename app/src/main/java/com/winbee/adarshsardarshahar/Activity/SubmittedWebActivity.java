@@ -33,7 +33,7 @@ public class SubmittedWebActivity extends AppCompatActivity {
     private WebView webView;
     private SubmittedDatum assignmentDatum;
     private ProgressBarUtil progressBarUtil;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     Button btm_asked_question;
     String googleDocs = "https://docs.google.com/viewer?url=";
     ImageView image_view;
@@ -54,6 +54,14 @@ public class SubmittedWebActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://adarshsardarshahar.com/"));
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SubmittedWebActivity.this,DiscussionActivity.class);
                 startActivity(intent);
             }
         });

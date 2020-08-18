@@ -28,7 +28,7 @@ public class AdsYouTubeLiveActivity extends YouTubeBaseActivity implements YouTu
     public static final String VIDEO_ID = "j36wPW4bGIs";
 
     private LiveClass liveClass;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     TextView video_topic,video_info,video_started;
     Button buttonNext;
     @Override
@@ -68,6 +68,14 @@ public class AdsYouTubeLiveActivity extends YouTubeBaseActivity implements YouTu
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdsYouTubeLiveActivity.this, AdsHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdsYouTubeLiveActivity.this,DiscussionActivity.class);
                 startActivity(intent);
             }
         });

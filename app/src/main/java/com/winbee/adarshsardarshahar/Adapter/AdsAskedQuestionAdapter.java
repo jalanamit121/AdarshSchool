@@ -37,7 +37,7 @@ public class AdsAskedQuestionAdapter extends RecyclerView.Adapter<AdsAskedQuesti
     @Override
     public void onBindViewHolder(@NonNull AdsAskedQuestionAdapter.ViewHolder holder, final int position) {
         //setting data toAd apter List
-        holder.text_question.setText(list.get(position).getFile_name_to_show());
+      //  holder.text_question.setText(list.get(position).getFile_name_to_show());
 
 
             holder.branch_live.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +65,7 @@ public class AdsAskedQuestionAdapter extends RecyclerView.Adapter<AdsAskedQuesti
         private RelativeLayout branch_live;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            text_question = itemView.findViewById(R.id.text_question);
+       //     text_question = itemView.findViewById(R.id.text_question);
             branch_live = itemView.findViewById(R.id.branch_live);
         }
     }

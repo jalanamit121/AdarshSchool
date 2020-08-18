@@ -36,19 +36,19 @@ public class AdsAskedSolutionAdapter extends RecyclerView.Adapter<AdsAskedSoluti
     public void onBindViewHolder(@NonNull AdsAskedSolutionAdapter.ViewHolder holder, final int position) {
         //setting data toAd apter List
 
-        if (list.get(position).getType().equalsIgnoreCase("Asked")) {
-            holder.text_question.setText(list.get(position).getQuestion());
-            holder.text_date.setText(list.get(position).getDATE());
-            holder.text_user.setText(list.get(position).getUser());
-
-        }else if(list.get(position).getType().equalsIgnoreCase("Solution")){
-            holder.text_solution.setText(list.get(position).getQuestion());
-            holder.text_date_solution.setText(list.get(position).getDATE());
-            holder.text_user_solution.setText(list.get(position).getUser());
-
-        }
-
-
+//        if (list.get(position).getType().equalsIgnoreCase("Asked")) {
+//            holder.text_question.setText(list.get(position).getQuestion());
+//            holder.text_date.setText(list.get(position).getDATE());
+//            holder.text_user.setText(list.get(position).getUser());
+//
+//        }else if(list.get(position).getType().equalsIgnoreCase("Solution")){
+//            holder.text_solution.setText(list.get(position).getQuestion());
+//            holder.text_date_solution.setText(list.get(position).getDATE());
+//            holder.text_user_solution.setText(list.get(position).getUser());
+//
+//        }
+//
+//
 
     }
 
@@ -65,13 +65,13 @@ public class AdsAskedSolutionAdapter extends RecyclerView.Adapter<AdsAskedSoluti
         private RelativeLayout branch_live;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            text_question = itemView.findViewById(R.id.text_question);
-            text_user = itemView.findViewById(R.id.text_user);
-            text_date = itemView.findViewById(R.id.text_date);
-            text_solution = itemView.findViewById(R.id.text_solution);
-            text_user_solution = itemView.findViewById(R.id.text_user_solution);
-            text_date_solution = itemView.findViewById(R.id.text_date_solution);
-            branch_live = itemView.findViewById(R.id.branch_live);
+//            text_question = itemView.findViewById(R.id.text_question);
+//            text_user = itemView.findViewById(R.id.text_user);
+//            text_date = itemView.findViewById(R.id.text_date);
+//            text_solution = itemView.findViewById(R.id.text_solution);
+//            text_user_solution = itemView.findViewById(R.id.text_user_solution);
+//            text_date_solution = itemView.findViewById(R.id.text_date_solution);
+//            branch_live = itemView.findViewById(R.id.branch_live);
         }
     }
 }

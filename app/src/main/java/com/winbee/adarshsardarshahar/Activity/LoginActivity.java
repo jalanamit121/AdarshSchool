@@ -1,15 +1,22 @@
 package com.winbee.adarshsardarshahar.Activity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.winbee.adarshsardarshahar.Models.RefCode;
 import com.winbee.adarshsardarshahar.R;
@@ -33,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     private long backPressedTime;
     private ProgressBarUtil progressBarUtil;
     LinearLayout forgetPassword;
+    private static final int REQUEST_CODE = 101;
+    String IMEINumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +60,12 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         referalCode = (TextView) findViewById(R.id.link_referal_code);
         forgetPassword=(LinearLayout) findViewById(R.id.link_forget_password);
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CODE);
+            return;
+        }
+        IMEINumber = telephonyManager.getDeviceId();
 
 
         forgetPassword.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +94,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //Toast.makeText(this, "Permission granted.", Toast.LENGTH_SHORT).show();
+                } else {
+                    //Toast.makeText(this, "Permission denied.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
     private void userValidation() {
         final String mobile = editTextUsername.getText().toString();
         final String password = editTextPassword.getText().toString();
@@ -110,12 +136,13 @@ public class LoginActivity extends AppCompatActivity {
 
         progressBarUtil.showProgress();
         ClientApi mService = ApiClient.getClient().create(ClientApi.class);
-        Call<RefCode> call = mService.refCodeSignIn(1,refCode.getUsername(),refCode.getPassword(),refCode.getRef_code());
+        Call<RefCode> call = mService.refCodeSignIn(1,refCode.getUsername(),refCode.getPassword(),refCode.getRef_code(),IMEINumber);
+        Log.i("tag", "callRefCodeSignInApi: "+IMEINumber);
         call.enqueue(new Callback<RefCode>() {
             @Override
             public void onResponse(Call<RefCode> call, Response<RefCode> response) {
                 int statusCode  = response.code();
-                if(statusCode==200 && response.body().getOrg_Code()!=null ) {
+                if(statusCode==200 && response.body().getLoginStatus()!=false ) {
                     progressBarUtil.hideProgress();
                     AssignmentData.Whatsaap=response.body().getWhatsaapNo();
                     Constants.CurrentUser = response.body();
@@ -124,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }else {
                         progressBarUtil.hideProgress();
-                        Toast.makeText(LoginActivity.this, "Invalid UserName Password ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, response.body().getMessageFailure(), Toast.LENGTH_LONG).show();
                     }
 
             }

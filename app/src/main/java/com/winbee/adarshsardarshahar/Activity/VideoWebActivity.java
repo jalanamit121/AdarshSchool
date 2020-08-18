@@ -26,7 +26,7 @@ public class VideoWebActivity extends AppCompatActivity {
     private WebView webView;
     private UrlName urlName;
     private ProgressBarUtil progressBarUtil;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     Button btm_asked_question;
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -45,6 +45,14 @@ public class VideoWebActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://adarshsardarshahar.com/"));
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(VideoWebActivity.this,DiscussionActivity.class);
                 startActivity(intent);
             }
         });

@@ -3,6 +3,8 @@
     <color name="colorPrimary">#6fabf1</color>
     <color name="colorPrimaryDark">#91BDF0</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="dashboard_subtitle">#B7B7CC</color>
+    <color name="home_header">#9CBBF0</color>
 
     <color name="white">#ffffff</color>
     <color name="grey_light">#E0E0E0</color>

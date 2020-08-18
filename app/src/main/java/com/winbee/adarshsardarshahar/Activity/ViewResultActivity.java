@@ -29,7 +29,7 @@ import retrofit2.Response;
 public class ViewResultActivity extends AppCompatActivity {
 
     private TextView tv_paper_name,tv_section_name,tv_total_question,tv_total_attempt,tv_total_correct,tv_total_review,tv_total_wrong,tv_total_marks;
-    private Button backbtn;
+    private Button backbtn,btn_solution;
     String UserID;
     private ViewResult viewResult;
     private List<ViewResult> list;
@@ -52,10 +52,18 @@ public class ViewResultActivity extends AppCompatActivity {
         tv_total_marks=findViewById(R.id.tv_total_marks);
         UserID = SharedPrefManager.getInstance(this).refCode().getUserId();
         backbtn=findViewById(R.id.backbtn);
+        btn_solution=findViewById(R.id.btn_solution);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(ViewResultActivity.this,AdsHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_solution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(ViewResultActivity.this,TestSolutionActivity.class);
                 startActivity(intent);
             }
         });

@@ -35,90 +35,91 @@
         android:layout_alignParentTop="true"/>
 
 
-    <RelativeLayout
-        android:layout_height="60dp"
-        android:layout_width="match_parent"
+    <LinearLayout
         android:id="@+id/footer"
-        android:background="@drawable/bottom_layout"
-        android:layout_alignParentBottom="true">
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:weightSum="3"
+        android:background="@drawable/bottom_layout">
+        <LinearLayout
+            android:id="@+id/layout_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/image_home"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_home_black_24dp"
+                />
+            <TextView
+                android:id="@+id/text_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:layout_below="@id/image_home"
+                android:textColor="#111"/>
 
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/image_history"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_language_black_24dp"
+                />
+            <TextView
+                android:id="@+id/text_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Website"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:layout_below="@id/image_history"
+                android:textColor="#111"/>
 
-    <RelativeLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/layout_home"
-        android:layout_marginStart="25dp">
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/image_logout"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_logout"
+                />
+            <TextView
+                android:id="@+id/text_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:layout_below="@id/image_logout"
+                android:textColor="#111"/>
 
-    <ImageView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/image_home"
-        android:src="@drawable/ic_home_black_24dp"
-        android:layout_centerInParent="true"/>
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/text_home"
-        android:textColor="#111"
-        android:layout_below="@id/image_home"
-        android:layout_marginTop="5dp"
-        android:text="Home"/>
-
-</RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/layout_history"
-        android:layout_marginStart="80dp"
-        android:layout_toRightOf="@id/layout_home">
-
-    <ImageView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/image_history"
-        android:src="@drawable/ic_history_black_24dp"
-        android:layout_centerInParent="true"/>
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/text_history"
-        android:textColor="#111"
-        android:layout_below="@id/image_history"
-        android:layout_marginTop="5dp"
-        android:text="History"/>
-
-</RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/layout_logout"
-        android:layout_marginStart="80dp"
-        android:layout_toRightOf="@id/layout_history">
-
-    <ImageView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/image_logout"
-        android:src="@drawable/ic_logout"
-        android:layout_centerInParent="true"/>
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/text_logout"
-        android:textColor="#111"
-        android:layout_below="@id/image_logout"
-        android:layout_marginTop="5dp"
-        android:text="Logout"/>
-
-</RelativeLayout>
-
-</RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

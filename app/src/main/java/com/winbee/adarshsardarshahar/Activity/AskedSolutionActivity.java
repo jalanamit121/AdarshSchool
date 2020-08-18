@@ -35,7 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AskedSolutionActivity extends AppCompatActivity {
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     private ProgressBarUtil progressBarUtil;
     private AdsAskedSolutionAdapter adapter;
     private ArrayList<UrlSolution> list;
@@ -80,7 +80,14 @@ public class AskedSolutionActivity extends AppCompatActivity {
             editTextDocumentid.setText(urlQuestion.getDocumentId());
 
         }
-
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AskedSolutionActivity.this,DiscussionActivity.class);
+                startActivity(intent);
+            }
+        });
 
         histroy.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AskedQuestionActivity extends AppCompatActivity {
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     private ProgressBarUtil progressBarUtil;
     private AdsAskedQuestionAdapter adapter;
     private ArrayList<UrlQuestion> list;
@@ -72,6 +72,14 @@ public class AskedQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AskedQuestionActivity.this, AdsHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AskedQuestionActivity.this,DiscussionActivity.class);
                 startActivity(intent);
             }
         });

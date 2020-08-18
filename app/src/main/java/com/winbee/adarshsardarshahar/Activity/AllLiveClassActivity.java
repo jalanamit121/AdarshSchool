@@ -33,7 +33,7 @@ public class AllLiveClassActivity extends AppCompatActivity {
     private RecyclerView video_list_recycler;
     private ProgressBarUtil progressBarUtil;
     private AdsAllLiveClassesAdapter adapter;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     String UserId;
 
 
@@ -67,6 +67,14 @@ public class AllLiveClassActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AllLiveClassActivity.this, AdsHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AllLiveClassActivity.this,DiscussionActivity.class);
                 startActivity(intent);
             }
         });

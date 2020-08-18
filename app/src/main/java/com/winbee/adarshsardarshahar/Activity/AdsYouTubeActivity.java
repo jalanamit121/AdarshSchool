@@ -25,7 +25,7 @@ public class AdsYouTubeActivity extends YouTubeBaseActivity implements YouTubePl
     public static final String API_KEY = "AIzaSyBlEPocq2s2bDmWDMBRXAf8Mhf3wlFNYGI";
     public static final String VIDEO_ID = "j36wPW4bGIs";
     private UrlName urlName;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     TextView textSubject,textTopic,textTeacher,textCoaching;
 
     @Override
@@ -41,7 +41,7 @@ public class AdsYouTubeActivity extends YouTubeBaseActivity implements YouTubePl
         textTopic = findViewById(R.id.video_topic);
         textTeacher = findViewById(R.id.video_teacher);
         textCoaching = findViewById(R.id.video_coaching);
-        histroy.setOnClickListener(new View.OnClickListener() {
+        home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdsYouTubeActivity.this, AdsHomeActivity.class);
@@ -54,14 +54,21 @@ public class AdsYouTubeActivity extends YouTubeBaseActivity implements YouTubePl
                 logout();
             }
         });
-        home.setOnClickListener(new View.OnClickListener() {
+        histroy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://adarshsardarshahar.com/"));
                 startActivity(intent);
             }
         });
-
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdsYouTubeActivity.this,DiscussionActivity.class);
+                startActivity(intent);
+            }
+        });
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
             urlName = (UrlName) bundle.getSerializable("URL");

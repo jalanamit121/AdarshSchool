@@ -1,5 +1,6 @@
 package com.winbee.adarshsardarshahar.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +13,16 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +35,10 @@ import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.winbee.adarshsardarshahar.Adapter.AdsHomeAdapter;
 import com.winbee.adarshsardarshahar.Adapter.AdsHomeLiveAdapter;
 import com.winbee.adarshsardarshahar.BuildConfig;
@@ -79,13 +87,36 @@ public class AdsHomeActivity extends AppCompatActivity
     String sCurrentVersion,sLastestVersion,Userid;
     SwipeRefreshLayout ads_home;
     ImageSlider imageSlider;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
+    boolean version = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads_home);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
+        //firebase push notification
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("Notifications","Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+
+        }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("adarshschool")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "";
+                        if (!task.isSuccessful()) {
+                            msg = "failed";
+                        }
+//
+                        //Toast.makeText(GecHomeActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
         new GetLastesVersion().execute();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -117,6 +148,7 @@ public class AdsHomeActivity extends AppCompatActivity
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);
+
         Userid = SharedPrefManager.getInstance(this).refCode().getUserId();
         nocourse=findViewById(R.id.nocourse);
         noclasses=findViewById(R.id.noclasses);
@@ -185,6 +217,14 @@ public class AdsHomeActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdsHomeActivity.this,DiscussionActivity.class);
+                startActivity(intent);
+            }
+        });
         layout_online_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,14 +234,6 @@ public class AdsHomeActivity extends AppCompatActivity
         });
 
         imageSlider =findViewById(R.id.slider);
-
-//        List<SlideModel> slideModels=new ArrayList<>();
-//        slideModels.add(new SlideModel(R.drawable.banner1));
-//        slideModels.add(new SlideModel(R.drawable.banner2));
-//        slideModels.add(new SlideModel(R.drawable.banner3));
-//        slideModels.add(new SlideModel(R.drawable.banner4));
-//        slideModels.add(new SlideModel(R.drawable.banner5));
-      //  imageSlider.setImageList(slideModels,true);
         callApiService(Userid);
         callLiveApiService();
         callBannerService();
@@ -338,12 +370,6 @@ public class AdsHomeActivity extends AppCompatActivity
                     for (int i=0;i<bannerModel.size();i++){
                         bannerModels.add(new SlideModel(bannerModel.get(i).getFile()));
                     }
-//                    bannerModels.add(new SlideModel(bannerModel.get(0).getFile()));
-//                    bannerModels.add(new SlideModel(bannerModel.get(1).getFile()));
-//                    bannerModels.add(new SlideModel(bannerModel.get(2).getFile()));
-//                    bannerModels.add(new SlideModel(bannerModel.get(3).getFile()));
-//                    bannerModels.add(new SlideModel(bannerModel.get(4).getFile()));
-                   // bannerModels.add(new SlideModel("https://s3.amazonaws.com/influencive.com/wp-content/uploads/2020/01/30131217/pexels-photo-2312369-e1580418773326.jpeg"));
                     imageSlider.setImageList(bannerModels,false);
                     progressBarUtil.hideProgress();
                 }
@@ -378,9 +404,6 @@ public class AdsHomeActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -458,13 +481,19 @@ public class AdsHomeActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String s) {
             sCurrentVersion = BuildConfig.VERSION_NAME;
-            if (sLastestVersion !=null){
-                float cVersion = Float.parseFloat(sCurrentVersion);
-                float lVersion = Float.parseFloat(sLastestVersion);
-                // check the condition whether the lastet version is greater than current version
-                if (lVersion>cVersion){
-                    // create update alert dilog box
-                    updateAlertDialog();
+            if (sLastestVersion !=null) {
+                String ver1[] = sCurrentVersion.split("\\.");//"1.3.1"
+                String ver2[] = sLastestVersion.split("\\.");//"1.3.2"
+                int len1 = ver1.length;
+                int len2 = ver2.length;
+
+
+                for (int i = 0; i < len1; i++) {
+                    if (!ver1[i].equals(ver2[i])) {
+                        Log.i("log", "onPostExecute: " + ver1[i] + " " + ver2[i]);
+                        version = true;
+                        updateAlertDialog();
+                    }
                 }
             }
         }

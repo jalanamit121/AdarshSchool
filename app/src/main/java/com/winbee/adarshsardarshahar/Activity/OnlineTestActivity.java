@@ -1,8 +1,11 @@
 package com.winbee.adarshsardarshahar.Activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,11 +20,13 @@ import com.winbee.adarshsardarshahar.Models.SIACDetailsMainModel;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.OnlineTestApiClient;
 import com.winbee.adarshsardarshahar.Utils.OnlineTestData;
+import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import io.supercharge.shimmerlayout.ShimmerLayout;
 import retrofit2.Call;
@@ -33,11 +38,13 @@ public class OnlineTestActivity extends AppCompatActivity {
     private ShimmerLayout shimmerLayout;
     private RecyclerView recycle_test;
     private Toast toast_msg;
+    String UserId;
+    LinearLayout home,histroy,logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_test);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         iniIDs();
         getTestList();
@@ -49,11 +56,35 @@ public class OnlineTestActivity extends AppCompatActivity {
     private void iniIDs(){
         shimmerLayout=findViewById(R.id.shimmerLayout);
         recycle_test=findViewById(R.id.recycle_test);
+        home=findViewById(R.id.layout_home);
+        UserId=SharedPrefManager.getInstance(this).refCode().getUserId();
+        histroy=findViewById(R.id.layout_history);
+        logout=findViewById(R.id.layout_logout);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OnlineTestActivity.this, AdsHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+        histroy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://adarshsardarshahar.com/"));
+                startActivity(intent);
+            }
+        });
     }
     private void getTestList() {
         apiCall();
         ClientApi apiClient= OnlineTestApiClient.getClient().create(ClientApi.class);
-        Call<SIACDetailsMainModel> call=apiClient.fetchSIACDetails(OnlineTestData.org_code,OnlineTestData.auth_code,OnlineTestData.bucketID);
+        Call<SIACDetailsMainModel> call=apiClient.fetchSIACDetails(OnlineTestData.org_code,OnlineTestData.auth_code,OnlineTestData.bucketID,UserId);
         call.enqueue(new Callback<SIACDetailsMainModel>() {
             @Override
             public void onResponse(Call<SIACDetailsMainModel> call, Response<SIACDetailsMainModel> response) {
@@ -96,5 +127,10 @@ public class OnlineTestActivity extends AppCompatActivity {
         }
         toast_msg = Toast.makeText(OnlineTestActivity.this, msg, Toast.LENGTH_SHORT);
         toast_msg.show();
+    }
+    private void logout() {
+        SharedPrefManager.getInstance(this).logout();
+        startActivity(new Intent(this, LoginActivity.class));
+        Objects.requireNonNull(this).finish();
     }
 }

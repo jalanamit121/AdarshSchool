@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import com.winbee.adarshsardarshahar.Adapter.AdsAllLiveClassesAdapter;
 import com.winbee.adarshsardarshahar.Adapter.NotificationAdapter;
-import com.winbee.adarshsardarshahar.Models.LiveClass;
 import com.winbee.adarshsardarshahar.Models.NotificationModel;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
@@ -53,8 +50,6 @@ public class AdsNotificationActivity extends AppCompatActivity {
                 notificationModel = new ArrayList();
                 if(statusCode==200 ){
                     if (response.body().size()!=0) {
-
-
                         System.out.println("Suree body: " + response.body());
                         notificationModel = response.body();
                         adapter = new NotificationAdapter(AdsNotificationActivity.this, notificationModel);

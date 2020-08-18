@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:weightSum="3"
+        android:weightSum="4"
         android:background="@drawable/bottom_layout">
         <LinearLayout
             android:id="@+id/layout_home"
@@ -128,6 +128,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Logout"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:layout_below="@id/image_logout"
+                android:textColor="#111"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_doubt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/image_doubt"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_local_library_24"
+                />
+            <TextView
+                android:id="@+id/text_doubt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ask Doubt"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:textSize="12sp"

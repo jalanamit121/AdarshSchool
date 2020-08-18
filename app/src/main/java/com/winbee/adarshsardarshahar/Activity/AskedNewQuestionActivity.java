@@ -34,7 +34,7 @@ public class AskedNewQuestionActivity extends AppCompatActivity {
     private String CurrentUserName;
     private ProgressBarUtil progressBarUtil;
     Button submit;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,14 @@ public class AskedNewQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://adarshsardarshahar.com/"));
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AskedNewQuestionActivity.this,DiscussionActivity.class);
                 startActivity(intent);
             }
         });

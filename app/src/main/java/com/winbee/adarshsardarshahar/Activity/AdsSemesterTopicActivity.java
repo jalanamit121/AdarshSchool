@@ -39,7 +39,7 @@ public class AdsSemesterTopicActivity extends AppCompatActivity {
     private List<UrlName> list;
     private RecyclerView video_list_recycler;
     private AdsSemesterTopicAdapter adapter;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     private ProgressBarUtil progressBarUtil;
 
 
@@ -79,6 +79,14 @@ public class AdsSemesterTopicActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdsSemesterTopicActivity.this, AdsHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdsSemesterTopicActivity.this,DiscussionActivity.class);
                 startActivity(intent);
             }
         });

@@ -3,6 +3,7 @@ package com.winbee.adarshsardarshahar.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -29,11 +30,13 @@ import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
 import com.winbee.adarshsardarshahar.Utils.AssignmentData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
+import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
 import com.winbee.adarshsardarshahar.helper.MyWebChromeClient;
 import com.winbee.adarshsardarshahar.helper.VideoEnabledWebView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,7 +44,7 @@ import retrofit2.Response;
 
 public class DriveVideoPlayerActivity extends AppCompatActivity {
     private VideoEnabledWebView andExoPlayerView;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     private ProgressBarUtil progressBarUtil;
     private AdsAskedQuestionAdapter adapter;
     private ArrayList<UrlQuestion> list;
@@ -73,6 +76,37 @@ public class DriveVideoPlayerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DriveVideoPlayerActivity.this,AskedNewQuestionActivity.class);
                 intent.putExtra("documentID",AssignmentData.DocumentId);
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DriveVideoPlayerActivity.this,DiscussionActivity.class);
+                startActivity(intent);
+            }
+        });
+        histroy=findViewById(R.id.layout_history);
+        histroy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://adarshsardarshahar.com/"));
+                startActivity(intent);
+            }
+        });
+        logout=findViewById(R.id.layout_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+        home=findViewById(R.id.layout_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DriveVideoPlayerActivity.this,AdsHomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -173,6 +207,10 @@ public class DriveVideoPlayerActivity extends AppCompatActivity {
             }
         });
     }
-
+    private void logout() {
+        SharedPrefManager.getInstance(this).logout();
+        startActivity(new Intent(this, LoginActivity.class));
+        Objects.requireNonNull(this).finish();
+    }
 
 }

@@ -2,6 +2,7 @@ package com.winbee.adarshsardarshahar.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.winbee.adarshsardarshahar.Models.InstructionsModel;
 import com.winbee.adarshsardarshahar.Models.StartTestModel;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.OnlineTestApiClient;
@@ -25,7 +27,7 @@ import retrofit2.Response;
 
 
 public class InstructionsActivity extends AppCompatActivity {
-    private TextView tv_subject_name;
+    private TextView tv_subject_name,text2;
     private RelativeLayout layout_start_test;
     String UserId;
     private ProgressBarUtil progressBarUtil;
@@ -36,7 +38,6 @@ public class InstructionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_instructions);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-
         iniIDs();
          setData();
 
@@ -49,17 +50,16 @@ public class InstructionsActivity extends AppCompatActivity {
         tv_subject_name=findViewById(R.id.tv_subject_name);
 
         layout_start_test=findViewById(R.id.layout_start_test);
+        text2=findViewById(R.id.text2);
         UserId = SharedPrefManager.getInstance(this).refCode().getUserId();
         progressBarUtil   =  new ProgressBarUtil(this);
         layout_start_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(InstructionsActivity.this, OnlineQuestionActivity.class);
-                startActivity(intent);
-                finish();
                 callApiService();
             }
         });
+        callInstructionService();
 
     }
     private void setData() {
@@ -75,8 +75,12 @@ public class InstructionsActivity extends AppCompatActivity {
             public void onResponse(Call<StartTestModel> call, Response<StartTestModel> response) {
                 int statusCode = response.code();
                 if(statusCode==200){
-                    Toast.makeText(getApplicationContext(),"Success" ,Toast.LENGTH_SHORT).show();
                     progressBarUtil.hideProgress();
+                    Intent intent=new Intent(InstructionsActivity.this, OnlineQuestionActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(getApplicationContext(),"Success" , Toast.LENGTH_SHORT).show();
+
                 }
                 else{
                     System.out.println("Suree: response code"+response.message());
@@ -92,5 +96,32 @@ public class InstructionsActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void callInstructionService() {
+        ClientApi apiCAll = OnlineTestApiClient.getClient().create(ClientApi.class);
+        Call<InstructionsModel> call = apiCAll.getInstruction(OnlineTestData.paperID);
+        call.enqueue(new Callback<InstructionsModel>() {
+            @Override
+            public void onResponse(Call<InstructionsModel> call, Response<InstructionsModel> response) {
+                int statusCode = response.code();
+                if (statusCode == 200 ) {
+                    System.out.println("Suree body: " + response.body().getUpdate_user_status());
+                    // Picasso.get().load(response.body().getFile()).into(img_video_thumbails);
+                    text2.setText(Html.fromHtml(response.body().getUpdate_user_status()));
+                } else {
+                    System.out.println("Suree: response code" + response.message());
+                    Toast.makeText(getApplicationContext(), "NetWork Issue,Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<InstructionsModel> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failed" + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                System.out.println("Suree: Error " + t.getMessage());
+            }
+        });
+    }
+
 
 }

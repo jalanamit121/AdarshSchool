@@ -41,7 +41,7 @@ public class SubmittedAssignmentActivity extends AppCompatActivity {
     private RecyclerView assignmentView;
     String Userid;
     private Button btn_submitted;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,14 @@ public class SubmittedAssignmentActivity extends AppCompatActivity {
 
             }
         });
-
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SubmittedAssignmentActivity.this,DiscussionActivity.class);
+                startActivity(intent);
+            }
+        });
         histroy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

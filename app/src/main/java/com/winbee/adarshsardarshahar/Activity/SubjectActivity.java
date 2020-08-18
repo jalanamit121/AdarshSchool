@@ -1,8 +1,11 @@
 package com.winbee.adarshsardarshahar.Activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +25,7 @@ import com.winbee.adarshsardarshahar.WebApi.ClientApi;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import io.supercharge.shimmerlayout.ShimmerLayout;
 import retrofit2.Call;
@@ -33,11 +37,12 @@ public class SubjectActivity extends AppCompatActivity {
     private RecyclerView recycle_subject;
     private Toast toast_msg;
     String UserId;
+    LinearLayout home,histroy,logout,layout_doubt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+      //  getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         iniIDs();
         getSubjectName();
@@ -49,6 +54,37 @@ public class SubjectActivity extends AppCompatActivity {
     private void iniIDs(){
         shimmerLayout=findViewById(R.id.shimmerLayout);
         recycle_subject=findViewById(R.id.recycle_subject);
+        home=findViewById(R.id.layout_home);
+        histroy=findViewById(R.id.layout_history);
+        logout=findViewById(R.id.layout_logout);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SubjectActivity.this, AdsHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+        histroy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://adarshsardarshahar.com/"));
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SubjectActivity.this,DiscussionActivity.class);
+                startActivity(intent);
+            }
+        });
         UserId= SharedPrefManager.getInstance(this).refCode().getUserId();
     }
     private void getSubjectName() {
@@ -73,7 +109,7 @@ public class SubjectActivity extends AppCompatActivity {
                         doToast(sectionDetailsMainModel.getMessage());
                 }
                 else
-                    doToast("data null");
+                    doToast("No Test Available");
             }
             @Override
             public void onFailure(Call<SectionDetailsMainModel> call, Throwable t) {
@@ -97,5 +133,10 @@ public class SubjectActivity extends AppCompatActivity {
         }
         toast_msg = Toast.makeText(SubjectActivity.this, msg, Toast.LENGTH_SHORT);
         toast_msg.show();
+    }
+    private void logout() {
+        SharedPrefManager.getInstance(this).logout();
+        startActivity(new Intent(this, LoginActivity.class));
+        Objects.requireNonNull(this).finish();
     }
 }

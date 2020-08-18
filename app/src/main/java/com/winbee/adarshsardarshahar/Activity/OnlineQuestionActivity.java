@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.squareup.picasso.Picasso;
 import com.winbee.adarshsardarshahar.Fragment.BottomSheetQuestionFragment;
 import com.winbee.adarshsardarshahar.Fragment.BottomSheetResultFragment;
 import com.winbee.adarshsardarshahar.Models.ResultModel;
@@ -48,12 +49,12 @@ import retrofit2.Response;
 
 public class OnlineQuestionActivity extends AppCompatActivity implements View.OnClickListener {
     private ShimmerLayout shimmerLayout;
-    private ImageView pauseBtn,listBtn;
+    private ImageView pauseBtn,listBtn,img_title,img_option1,img_option2,img_option3,img_option4;
     private TextView tv_testName,tv_timer;
     private RelativeLayout layout_question;
     private TextView tv_question_num,text_view_marks,tv_review_question,textview_Question,textview_option1,textview_option2,textview_option3,textview_option4;
     private Button buttonSubmit,buttonSubmitAndReview,buttonReview,buttonNext,buttonSaveNext;
-    private LinearLayout layout_option1,layout_option2,layout_option3,layout_option4;
+    private RelativeLayout layout_option1,layout_option2,layout_option3,layout_option4;
     private int currentQuestion=0,totalQuestion=0,ansSelected=0,questionReview=0;
     private String selectedAns="";
     int milliTimer,cntMillitimer,countTimer;
@@ -94,7 +95,26 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
     }
     @Override
     public void onBackPressed(){
-        super.onBackPressed();
+       // super.onBackPressed();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                OnlineQuestionActivity.this);
+        alertDialogBuilder.setTitle("Exit");
+        alertDialogBuilder
+                .setMessage("Do you really want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        OnlineQuestionActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
     @Override
     public void onClick(View v) {
@@ -303,6 +323,11 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
         layout_option2=findViewById(R.id.layout_option2);
         layout_option3=findViewById(R.id.layout_option3);
         layout_option4=findViewById(R.id.layout_option4);
+        img_title=findViewById(R.id.img_title);
+        img_option1=findViewById(R.id.img_option1);
+        img_option2=findViewById(R.id.img_option2);
+        img_option3=findViewById(R.id.img_option3);
+        img_option4=findViewById(R.id.img_option4);
 
 
         buttonSubmit=findViewById(R.id.buttonSubmit);
@@ -378,6 +403,46 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
         textview_option1.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption1()));
         textview_option2.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption2()));
         textview_option3.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption3()));
+        textview_option4.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption4()));
+        //image implement
+        if (siaddQuestionDataModelList.get(currentQuestion).getQuestionTitle_img().endsWith("jpg")){
+            img_title.setVisibility(View.VISIBLE);
+            Picasso.get().load(siaddQuestionDataModelList.get(currentQuestion).getQuestionTitle_img()).into(img_title);
+        }else{
+            img_title.setVisibility(View.GONE);
+        }
+        textview_Question.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getQuestionTitle()));
+        if (siaddQuestionDataModelList.get(currentQuestion).getOption1_img().endsWith("jpg"))
+        {
+            img_option1.setVisibility(View.VISIBLE);
+            Picasso.get().load(siaddQuestionDataModelList.get(currentQuestion).getOption1_img()).into(img_option1);
+        }else{
+            img_option1.setVisibility(View.GONE);
+        }
+        textview_option1.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption1()));
+        if (siaddQuestionDataModelList.get(currentQuestion).getOption2_img().endsWith("jpg"))
+        {
+            img_option2.setVisibility(View.VISIBLE);
+            Picasso.get().load(siaddQuestionDataModelList.get(currentQuestion).getOption2_img()).into(img_option2);
+        }else{
+            img_option2.setVisibility(View.GONE);
+        }
+        textview_option2.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption2()));
+        if (siaddQuestionDataModelList.get(currentQuestion).getOption3_img().endsWith("jpg"))
+        {
+            img_option3.setVisibility(View.VISIBLE);
+            Picasso.get().load(siaddQuestionDataModelList.get(currentQuestion).getOption3_img()).into(img_option3);
+        }else{
+            img_option3.setVisibility(View.GONE);
+        }
+        textview_option3.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption3()));
+        if (siaddQuestionDataModelList.get(currentQuestion).getOption4_img().endsWith("jpg"))
+        {
+            img_option4.setVisibility(View.VISIBLE);
+            Picasso.get().load(siaddQuestionDataModelList.get(currentQuestion).getOption4_img()).into(img_option4);
+        }else{
+            img_option4.setVisibility(View.GONE);
+        }
         textview_option4.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption4()));
     }
     private void setTimer() {

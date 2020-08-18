@@ -33,7 +33,7 @@ public class RefCode implements Serializable {
     private Boolean loginStatus;
     @SerializedName("MessageFailure")
     @Expose
-    private Boolean messageFailure;
+    private String messageFailure;
     @SerializedName("CurrentLoginStatus")
     @Expose
     private String currentLoginStatus;
@@ -128,11 +128,11 @@ public class RefCode implements Serializable {
         this.loginStatus = loginStatus;
     }
 
-    public Boolean getMessageFailure() {
+    public String getMessageFailure() {
         return messageFailure;
     }
 
-    public void setMessageFailure(Boolean messageFailure) {
+    public void setMessageFailure(String messageFailure) {
         this.messageFailure = messageFailure;
     }
 

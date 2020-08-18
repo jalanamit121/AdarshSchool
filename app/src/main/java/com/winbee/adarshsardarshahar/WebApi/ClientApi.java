@@ -1,10 +1,17 @@
 package com.winbee.adarshsardarshahar.WebApi;
 
+import com.winbee.adarshsardarshahar.Models.AskDoubtQuestion;
 import com.winbee.adarshsardarshahar.Models.AssignmentToSubmit;
 import com.winbee.adarshsardarshahar.Models.AttendenceModel;
 import com.winbee.adarshsardarshahar.Models.BannerModel;
 import com.winbee.adarshsardarshahar.Models.ForgetMobile;
+import com.winbee.adarshsardarshahar.Models.InstructionsModel;
 import com.winbee.adarshsardarshahar.Models.LiveClass;
+import com.winbee.adarshsardarshahar.Models.McqAskedQuestionModel;
+import com.winbee.adarshsardarshahar.Models.McqQuestionModel;
+import com.winbee.adarshsardarshahar.Models.McqQuestionSolutionModel;
+import com.winbee.adarshsardarshahar.Models.McqSolutionModel;
+import com.winbee.adarshsardarshahar.Models.NewDoubtQuestion;
 import com.winbee.adarshsardarshahar.Models.NotificationModel;
 import com.winbee.adarshsardarshahar.Models.OtpVerify;
 import com.winbee.adarshsardarshahar.Models.PurchasedMainModel;
@@ -14,8 +21,11 @@ import com.winbee.adarshsardarshahar.Models.ResetPassword;
 import com.winbee.adarshsardarshahar.Models.ResultModel;
 import com.winbee.adarshsardarshahar.Models.SIACDetailsMainModel;
 import com.winbee.adarshsardarshahar.Models.SIADMainModel;
+import com.winbee.adarshsardarshahar.Models.SIADSolutionMainModel;
 import com.winbee.adarshsardarshahar.Models.SectionDetailsMainModel;
 import com.winbee.adarshsardarshahar.Models.SemesterName;
+import com.winbee.adarshsardarshahar.Models.SolutionDoubtQuestion;
+import com.winbee.adarshsardarshahar.Models.SolutionQuestion;
 import com.winbee.adarshsardarshahar.Models.StartTestModel;
 import com.winbee.adarshsardarshahar.Models.SubmitAssignment;
 import com.winbee.adarshsardarshahar.Models.SubmittedAssignment;
@@ -47,7 +57,8 @@ public interface ClientApi {
             @Query("SubURL") int SubURL,
             @Query("username") String username,
             @Query("password") String password,
-            @Query("refcode") String refcode
+            @Query("refcode") String refcode,
+            @Query("IMEI") String IMEI
     );
 
     @POST("user_registration_information.php")
@@ -181,7 +192,8 @@ public interface ClientApi {
     Call<SIACDetailsMainModel> fetchSIACDetails(
             @Field("org_code") String org_code,
             @Field("auth_code") String auth_code,
-            @Field("bucket_code") String bucket_code
+            @Field("bucket_code") String bucket_code,
+            @Field("user_code") String user_code
     );
 
     @POST("fetch-section-individual-assessment-data.php")
@@ -249,5 +261,94 @@ public interface ClientApi {
             @Query("USER_ID") String USER_ID
     );
 
+    @POST("fetch-exam-instruction.php")
+    @FormUrlEncoded
+    Call<InstructionsModel> getInstruction(
+            @Field("PaperID") String PaperID
+    );
 
+    //submit doubt
+    @FormUrlEncoded
+    @POST("ask-doubt.php")
+    Call<NewDoubtQuestion> getNewQuestion(
+            @Field("title") String title,
+            @Field("question") String question,
+            @Field("userid") String userid
+    );
+
+
+    // get all doubt
+    @POST("beta-doubt-storage.php")
+    Call<ArrayList<AskDoubtQuestion>> getQuestion();
+
+    @FormUrlEncoded
+    @POST("ask-doubt.php")
+    Call<SolutionDoubtQuestion> getNewSolution(
+            @Field("userid") String userid,
+            @Field("filename") String filename,
+            @Field("answer") String answer
+    );
+
+    @POST("doubt-storage.php")
+    Call<ArrayList<SolutionQuestion>> getSolution(
+            @Query("filename") String filename
+    );
+
+    @POST("insert_mcq.php")
+    Call<McqQuestionModel> mcqQuestionYes(
+            @Query("UserId") String UserId,
+            @Query("Question") String Question,
+            @Query("QuestionTitle") String QuestionTitle,
+            @Query("Opt1") String Opt1,
+            @Query("Opt2") String Opt2,
+            @Query("Opt3") String Opt3,
+            @Query("Opt4") String Opt4,
+            @Query("SubURL") int SubURL,
+            @Query("SolutionFlag") int SolutionFlag,
+            @Query("Solution") String Solution
+    );
+    @POST("insert_mcq.php")
+    Call<McqQuestionModel> mcqQuestionNo(
+            @Query("UserId") String UserId,
+            @Query("Question") String Question,
+            @Query("QuestionTitle") String QuestionTitle,
+            @Query("Opt1") String Opt1,
+            @Query("Opt2") String Opt2,
+            @Query("Opt3") String Opt3,
+            @Query("Opt4") String Opt4,
+            @Query("SubURL") int SubURL,
+            @Query("SolutionFlag") int SolutionFlag,
+            @Query("Solution") String Solution
+    );
+
+    @POST("insert_mcq.php")
+    Call<McqAskedQuestionModel> mcqAskedQuestion(
+            @Query("UserId") String UserId,
+            @Query("SubURL") int SubURL
+    );
+
+
+    @POST("insert_mcq.php")
+    Call<McqQuestionSolutionModel> getMcqSolution(
+            @Query("UserId") String UserId,
+            @Query("SubURL") int SubURL,
+            @Query("Solution") String Solution,
+            @Query("QuestionId") String QuestionId
+    );
+
+    @POST("view-MCQ-data.php")
+    Call<ArrayList<McqSolutionModel>> getMcqQuestionSolution(
+            @Query("question_id") String question_id,
+            @Query("user_id") String user_id,
+            @Query("user_name") String user_name
+
+            //user_id,user_name
+    );
+    @POST("view-solutions.php")
+    @FormUrlEncoded
+    Call<SIADSolutionMainModel> getTestSolution(
+            @Field("OrgID") String OrgID,
+            @Field("paper_code") String paper_code,
+            @Field("UserID") String UserID
+    );
 }

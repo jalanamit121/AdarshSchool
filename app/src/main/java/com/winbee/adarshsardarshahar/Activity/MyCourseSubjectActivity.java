@@ -35,7 +35,7 @@ public class MyCourseSubjectActivity extends AppCompatActivity {
     private ArrayList<SemesterName> list;
     private RecyclerView video_list_recycler;
     private AdsSemesterAdapter adapter;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     private ProgressBarUtil progressBarUtil;
     SwipeRefreshLayout ads_course;
 
@@ -82,6 +82,14 @@ public class MyCourseSubjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://adarshsardarshahar.com/"));
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyCourseSubjectActivity.this,DiscussionActivity.class);
                 startActivity(intent);
             }
         });
