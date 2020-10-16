@@ -88,4 +88,17 @@
         android:text="5. All rights are reserved by Adarsh Institute."
         android:textSize="18sp"
         />
+    <TextView
+        android:id="@+id/aboutus_textview6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="2dp"
+        android:paddingRight="10dp"
+        android:layout_below="@id/aboutus_textview5"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:textColor="#111"
+        android:text="6. No one can claim /file complaint about videos  / syllabus which are uploaded on application."
+        android:textSize="18sp"
+        />
 </RelativeLayout>

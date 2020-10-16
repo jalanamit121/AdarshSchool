@@ -1,8 +1,10 @@
 package com.winbee.adarshsardarshahar.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -14,10 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.winbee.adarshsardarshahar.Adapter.AdsAskedQuestionAdapter;
+import com.winbee.adarshsardarshahar.Models.LogOut;
 import com.winbee.adarshsardarshahar.Models.UrlName;
 import com.winbee.adarshsardarshahar.Models.UrlQuestion;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
+import com.winbee.adarshsardarshahar.Utils.AssignmentData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
@@ -35,10 +39,9 @@ public class AskedQuestionActivity extends AppCompatActivity {
     private AdsAskedQuestionAdapter adapter;
     private ArrayList<UrlQuestion> list;
     private RecyclerView askedQuestion;
-    private UrlName urlName;
     private RelativeLayout today_classes;
-
     ImageView btmNewQuestion;
+    String UserMobile,UserPassword,android_id;
 
 
     @Override
@@ -51,7 +54,11 @@ public class AskedQuestionActivity extends AppCompatActivity {
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);
+        UserMobile=SharedPrefManager.getInstance(this).refCode().getUsername();
+        UserPassword=SharedPrefManager.getInstance(this).refCode().getPassword();
         progressBarUtil   =  new ProgressBarUtil(this);
+        android_id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
         btmNewQuestion=findViewById(R.id.btmNewQuestion);
         today_classes=findViewById(R.id.today_classes);
 
@@ -83,26 +90,24 @@ public class AskedQuestionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       final String documentID=getIntent().getStringExtra("documentID");
-        if(documentID!=null)
-            callAskedQuestionApiService(documentID);
-        System.out.println("intent "+documentID);
+
+            callAskedQuestionApiService();
+
 
         btmNewQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AskedQuestionActivity.this, AskedNewQuestionActivity.class);
-                intent.putExtra("documentID",documentID);
                 startActivity(intent);
             }
         });
 
     }
 
-    private void callAskedQuestionApiService(String documentID){
+    private void callAskedQuestionApiService(){
         progressBarUtil.showProgress();
         ClientApi apiCall = ApiClient.getClient().create(ClientApi.class);
-        Call<ArrayList<UrlQuestion>> call =apiCall.getQuestion(documentID);
+        Call<ArrayList<UrlQuestion>> call =apiCall.getQuestion(AssignmentData.DocumentId);
         call.enqueue(new Callback<ArrayList<UrlQuestion>>() {
             @Override
             public void onResponse(Call<ArrayList<UrlQuestion>> call, Response<ArrayList<UrlQuestion>> response) {
@@ -127,7 +132,6 @@ public class AskedQuestionActivity extends AppCompatActivity {
             public void onFailure(Call<ArrayList<UrlQuestion>> call, Throwable t) {
                 System.out.println("Suree: "+t.getMessage());
                 progressBarUtil.hideProgress();
-               // Toast.makeText(getApplicationContext(),"Failed"+t.getMessage() ,Toast.LENGTH_SHORT).show();
                 today_classes.setVisibility(View.VISIBLE);
 
             }
@@ -137,6 +141,54 @@ public class AskedQuestionActivity extends AppCompatActivity {
 
 
     private void logout() {
+
+        progressBarUtil.showProgress();
+        ClientApi mService = ApiClient.getClient().create(ClientApi.class);
+        Call<LogOut> call = mService.refCodeLogout(3, UserMobile, UserPassword, "ADS001",android_id);
+        call.enqueue(new Callback<LogOut>() {
+            @Override
+            public void onResponse(Call<LogOut> call, Response<LogOut> response) {
+                int statusCode = response.code();
+                if (statusCode == 200 && response.body().getLoginStatus()!=false) {
+                    if (response.body().getError()==false){
+                        progressBarUtil.hideProgress();
+                        SharedPrefManager.getInstance(AskedQuestionActivity.this).logout();
+                        startActivity(new Intent(AskedQuestionActivity.this, LoginActivity.class));
+                        finish();
+                    }else{
+                        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(
+                                AskedQuestionActivity.this);
+                        alertDialogBuilder.setTitle("Alert");
+                        alertDialogBuilder
+                                .setMessage(response.body().getError_Message())
+                                .setCancelable(false)
+                                .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        forceLogout();
+                                    }
+                                });
+
+                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+
+                    }
+
+
+                } else {
+                    progressBarUtil.hideProgress();
+                    Toast.makeText(AskedQuestionActivity.this, response.body().getMessageFailure(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LogOut> call, Throwable t) {
+                Toast.makeText(AskedQuestionActivity.this, "Failed" + t.getMessage(), Toast.LENGTH_LONG).show();
+                System.out.println(t.getLocalizedMessage());
+            }
+        });
+    }
+    private void forceLogout() {
         SharedPrefManager.getInstance(this).logout();
         startActivity(new Intent(this, LoginActivity.class));
         Objects.requireNonNull(this).finish();

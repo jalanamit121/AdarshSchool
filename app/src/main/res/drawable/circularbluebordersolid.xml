@@ -7,7 +7,7 @@
             android:type="linear"
             android:angle="0"
             android:startColor="@color/gradientViolet"
-            android:endColor="@color/gradientLightBlue" />
+            android:endColor="@color/gradientViolet" />
         </shape>
     </item>
 </selector>

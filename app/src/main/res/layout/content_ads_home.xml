@@ -51,7 +51,7 @@
                     android:id="@+id/slider"
                     app:period="5000"
                     app:error_image="@drawable/bg_gery"
-                    app:placeholder="@drawable/bg_gery"
+                    app:placeholder="@drawable/adarsh_dummy_image"
                     android:layout_height="220dp"/>
 
 
@@ -60,7 +60,7 @@
             <RelativeLayout
                 android:id="@+id/layout_noCourse"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="140dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
@@ -109,8 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="55dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="35dp"
                 android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -365,7 +364,7 @@
                 android:visibility="gone"
                 android:layout_marginStart="10dp"
                 android:textStyle="bold"
-                android:textColor="@color/gradientViolet" />
+                android:textColor="@color/white" />
             <Button
                 android:id="@+id/purchase_btn"
                 android:layout_width="wrap_content"
@@ -401,7 +400,7 @@
                 android:text="Welcome"
                 android:textSize="28dp"
                 android:gravity="center"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/welccome_to"
                 android:layout_width="match_parent"
@@ -410,7 +409,7 @@
                 android:textSize="28dp"
                 android:gravity="center"
                 android:layout_below="@id/welcome"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/welccome_adarsh"
                 android:layout_width="match_parent"
@@ -419,7 +418,7 @@
                 android:textSize="28dp"
                 android:gravity="center"
                 android:layout_below="@id/welccome_to"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/welccome_contact"
                 android:layout_width="match_parent"
@@ -429,7 +428,7 @@
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/welccome_adarsh"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/welccome_email"
                 android:layout_width="match_parent"
@@ -439,7 +438,7 @@
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/welccome_contact"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/white"/>
         </RelativeLayout>
     </RelativeLayout>
 

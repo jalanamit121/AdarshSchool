@@ -12,8 +12,8 @@
     android:background="@drawable/shadow">
     <ImageView
         android:id="@+id/live_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/test"
@@ -23,9 +23,20 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="7dp"
         android:layout_toRightOf="@id/live_image"
         android:text="Subject Name"
         android:textColor="#8EC3CF"
-        android:textSize="20sp"/>
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/online_totaltest"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/live_image"
+        android:layout_below="@id/online_subjectname"
+        android:text="test"
+        android:textColor="@color/edit_text"
+        android:textSize="14sp"/>
 </RelativeLayout>

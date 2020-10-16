@@ -100,7 +100,8 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_ROLE_ENCODE, null),
                 sharedPreferences.getString(KEY_USERID, null),
                 sharedPreferences.getString(KEY_REF_CODE, null),
-                sharedPreferences.getString(KEY_WHATSAAP, null)
+                sharedPreferences.getString(KEY_WHATSAAP, null),
+                sharedPreferences.getString(KEY_PASSWORD, null)
 
         );
 

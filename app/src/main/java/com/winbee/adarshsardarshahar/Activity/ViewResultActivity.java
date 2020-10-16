@@ -1,10 +1,12 @@
 package com.winbee.adarshsardarshahar.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,9 @@ import com.winbee.adarshsardarshahar.Utils.OnlineTestData;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
 
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +33,11 @@ import retrofit2.Response;
 
 public class ViewResultActivity extends AppCompatActivity {
 
-    private TextView tv_paper_name,tv_section_name,tv_total_question,tv_total_attempt,tv_total_correct,tv_total_review,tv_total_wrong,tv_total_marks;
-    private Button backbtn,btn_solution;
+    private TextView tv_paper_name,tv_section_name,tv_total_question,tv_total_attempt,tv_total_correct,
+            tv_total_review,tv_total_wrong,tv_total_marks,tv_user_name,backbtn,btn_solution;
+    RelativeLayout layout_home,layout_solution;
     String UserID;
+    PieChart pieChart;
     private ViewResult viewResult;
     private List<ViewResult> list;
     private RecyclerView view_result_recycle;
@@ -41,9 +48,11 @@ public class ViewResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_result);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-
         tv_paper_name=findViewById(R.id.tv_paper_name);
-        tv_section_name=findViewById(R.id.tv_section_name);
+        layout_home=findViewById(R.id.layout_home);
+        layout_solution=findViewById(R.id.layout_solution);
+        pieChart = findViewById(R.id.piechart);
+        tv_user_name=findViewById(R.id.tv_user_name);
         tv_total_question=findViewById(R.id.tv_total_question);
         tv_total_attempt=findViewById(R.id.tv_total_attempt);
         tv_total_correct=findViewById(R.id.tv_total_correct);
@@ -53,14 +62,14 @@ public class ViewResultActivity extends AppCompatActivity {
         UserID = SharedPrefManager.getInstance(this).refCode().getUserId();
         backbtn=findViewById(R.id.backbtn);
         btn_solution=findViewById(R.id.btn_solution);
-        backbtn.setOnClickListener(new View.OnClickListener() {
+        layout_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(ViewResultActivity.this,AdsHomeActivity.class);
                 startActivity(intent);
             }
         });
-        btn_solution.setOnClickListener(new View.OnClickListener() {
+        layout_solution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(ViewResultActivity.this,TestSolutionActivity.class);
@@ -95,7 +104,31 @@ public class ViewResultActivity extends AppCompatActivity {
                     String Wrong=String.valueOf(response.body().getWrong());
                     tv_total_wrong.setText(Wrong);
                     String Total=response.body().getTotalMarks();
+                    String ReviewQ=String.valueOf(response.body().getReview());
                     tv_total_marks.setText(Total);
+                    pieChart.addPieSlice(
+                            new PieModel(
+                                    "Total Attempt",
+                                    Integer.parseInt(tv_total_attempt.getText().toString()),
+                                    Color.parseColor("#FFA726")));
+                    pieChart.addPieSlice(
+                            new PieModel(
+                                    "Total Correct",
+                                    Integer.parseInt(tv_total_correct.getText().toString()),
+                                    Color.parseColor("#66BB6A")));
+                    pieChart.addPieSlice(
+                            new PieModel(
+                                    "Total Wrong++",
+                                    Integer.parseInt(tv_total_wrong.getText().toString()),
+                                    Color.parseColor("#EF5350")));
+                    pieChart.addPieSlice(
+                            new PieModel(
+                                    "Total Review",
+                                    Integer.parseInt(ReviewQ),
+                                    Color.parseColor("#29B6F6")));
+
+                    // To animate the pie chart
+                    pieChart.startAnimation();
 
                 }
                 else{
@@ -112,7 +145,6 @@ public class ViewResultActivity extends AppCompatActivity {
             }
         });
         tv_paper_name.setText(OnlineTestData.paperName);
-        tv_section_name.setText(OnlineTestData.paperName);
+        tv_user_name.setText(SharedPrefManager.getInstance(this).refCode().getName());
     }
-
 }

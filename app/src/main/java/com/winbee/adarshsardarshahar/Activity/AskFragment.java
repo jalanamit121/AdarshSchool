@@ -3,6 +3,7 @@ package com.winbee.adarshsardarshahar.Activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.winbee.adarshsardarshahar.Adapter.AskDoubtAdapter;
 import com.winbee.adarshsardarshahar.Models.AskDoubtQuestion;
 import com.winbee.adarshsardarshahar.Models.NewDoubtQuestion;
+import com.winbee.adarshsardarshahar.NewModels.AskDoubtContent;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
@@ -48,6 +50,7 @@ public class AskFragment extends Fragment {
     private ArrayList<AskDoubtQuestion> list;
     private RecyclerView askedQuestion;
     private RelativeLayout today_classes;
+    String android_id;
 
 
     public AskFragment() {
@@ -69,6 +72,7 @@ public class AskFragment extends Fragment {
         btn_asked=view.findViewById(R.id.btn_asked);
         today_classes=view.findViewById(R.id.today_classes);
         askedQuestion = view.findViewById(R.id.gec_asked_question_recycle);
+        android_id = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         submit=view.findViewById(R.id.buttonSubmit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,11 +114,11 @@ public class AskFragment extends Fragment {
         progressBarUtil.showProgress();
         // final UrlNewQuestion urlNewQuestion = new UrlNewQuestion(title,description,documentid,userid);
         ClientApi apiCall = ApiClient.getClient().create(ClientApi.class);
-        Call<NewDoubtQuestion> call =apiCall.getNewQuestion(newDoubtQuestion.getTitle(),newDoubtQuestion.getQuestion(),newDoubtQuestion.getUserId());
+        Call<AskDoubtContent> call =apiCall.getNewDoubt(newDoubtQuestion.getTitle(),newDoubtQuestion.getQuestion(),newDoubtQuestion.getUserId(),android_id);
         Log.d("TAG", "callNewAskedQuestionApiService: "+newDoubtQuestion.getTitle()+""+newDoubtQuestion.getQuestion()+""+newDoubtQuestion.getUserId());
-        call.enqueue(new Callback<NewDoubtQuestion>() {
+        call.enqueue(new Callback<AskDoubtContent>() {
             @Override
-            public void onResponse(Call<NewDoubtQuestion> call, Response<NewDoubtQuestion> response) {
+            public void onResponse(Call<AskDoubtContent> call, Response<AskDoubtContent> response) {
                 int statusCode = response.code();
                 if(statusCode==200 && response.body()!=null){
                     progressBarUtil.hideProgress();
@@ -140,7 +144,7 @@ public class AskFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<NewDoubtQuestion> call, Throwable t) {
+            public void onFailure(Call<AskDoubtContent> call, Throwable t) {
                 System.out.println("Suree: "+t.getMessage());
                 progressBarUtil.hideProgress();
                 Toast.makeText(getContext(),"Failed"+t.getMessage() , Toast.LENGTH_SHORT).show();

@@ -39,6 +39,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.CustomVi
     public void onBindViewHolder(@NonNull CustomViewHolder viewHolder, int position) {
         final SectionDetailsDataModel sectionDetailsDataModel = sectionDetailsDataModelList.get(position);
         viewHolder.online_subjectname.setText(sectionDetailsDataModel.getBucketName());
+        viewHolder.online_totaltest.setText("Total test-" + " " + sectionDetailsDataModelList.get(position).getTotalTest());
         viewHolder.branch_live1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,12 +63,13 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.CustomVi
     static class CustomViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout branch_live1;
         ImageView live_image;
-        TextView online_subjectname;
+        TextView online_subjectname,online_totaltest;
         CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             branch_live1=itemView.findViewById(R.id.branch_live1);
             live_image=itemView.findViewById(R.id.live_image);
             online_subjectname=itemView.findViewById(R.id.online_subjectname);
+            online_totaltest=itemView.findViewById(R.id.online_totaltest);
         }
     }
 }

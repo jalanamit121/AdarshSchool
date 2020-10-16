@@ -18,6 +18,7 @@ public class OnlineTestData {
     public static String logData="";
     public static String status="";
     public static String totalTest="";
+    public static int totalQuestion;
 
     //fetch-section-individual-assessment-cover-details.php data
     public static String bucketIDre="";
@@ -48,7 +49,7 @@ public class OnlineTestData {
 
     //view-result.php data
     public static String PaperID="";
-    public static String TotalQuestion="";
+   // public static String TotalQuestion="";
     public static String Attempt="";
     public static String Correct="";
     public static String Wrong="";

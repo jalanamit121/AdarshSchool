@@ -17,15 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import com.winbee.adarshsardarshahar.Activity.AdsSemesterTopicActivity;
 import com.winbee.adarshsardarshahar.Models.SemesterName;
+import com.winbee.adarshsardarshahar.NewModels.SubjectContentArray;
 import com.winbee.adarshsardarshahar.R;
+import com.winbee.adarshsardarshahar.Utils.LocalData;
 
 import java.util.ArrayList;
 
 public class AdsSemesterAdapter extends RecyclerView.Adapter<AdsSemesterAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<SemesterName> list;
+    private ArrayList<SubjectContentArray> list;
 
-    public AdsSemesterAdapter(Context context, ArrayList<SemesterName> list){
+    public AdsSemesterAdapter(Context context, ArrayList<SubjectContentArray> list){
         this.context = context;
         this.list = list;
     }
@@ -58,10 +60,9 @@ public class AdsSemesterAdapter extends RecyclerView.Adapter<AdsSemesterAdapter.
             holder.branch_sem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle bundle = new Bundle();
+                    LocalData.Topic_Bucket_ID=list.get(position).getBucket_ID();
+                    LocalData.Topic_Child_link=list.get(position).getChild_Link();
                     Intent intent = new Intent(context, AdsSemesterTopicActivity.class);
-                    bundle.putSerializable("semester_name",list.get(position));
-                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });

@@ -14,6 +14,10 @@ public class LocalData {
     public static String Title="";
     public static String Duration="";
     public static String Commnts="";
+    public static String Mobile="";
+    public static String Otp="";
+    public static String Topic_Bucket_ID="";
+    public static String Topic_Child_link="";
 
 
 

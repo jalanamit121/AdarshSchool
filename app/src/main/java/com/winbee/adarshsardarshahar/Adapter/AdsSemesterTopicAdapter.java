@@ -22,6 +22,7 @@ import com.winbee.adarshsardarshahar.Activity.VideoWebActivity;
 import com.winbee.adarshsardarshahar.Activity.VimeoActivity;
 import com.winbee.adarshsardarshahar.Activity.WebActivity;
 import com.winbee.adarshsardarshahar.Models.UrlName;
+import com.winbee.adarshsardarshahar.NewModels.TopicContentArray;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.Utils.AssignmentData;
 
@@ -32,9 +33,9 @@ import static android.content.ContentValues.TAG;
 
 public class AdsSemesterTopicAdapter extends RecyclerView.Adapter<AdsSemesterTopicAdapter.ViewHolder> {
     private Context context;
-    private List<UrlName> list;
+    private List<TopicContentArray> list;
 
-    public AdsSemesterTopicAdapter(Context context, List<UrlName> list){
+    public AdsSemesterTopicAdapter(Context context, List<TopicContentArray> list){
         this.context = context;
         this.list = list;
     }
@@ -49,23 +50,17 @@ public class AdsSemesterTopicAdapter extends RecyclerView.Adapter<AdsSemesterTop
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         //setting data toAd apter List
-        holder.subject.setText(list.get(position).getSubject());
         holder.topic.setText(list.get(position).getTopic());
         holder.faculty_name.setText(list.get(position).getFaculty());
-        holder.faculty_designation.setText(list.get(position).getDesignation());
         holder.released_date.setText(list.get(position).getPublished());
-      //  holder.document_type_text.setText(list.get(position).getType());
         if(list.get(position).getType().equalsIgnoreCase("PDF")){
             holder.document_type.setImageResource(R.drawable.ic_pdf);
-            //holder.document_type.setText("PDF");
-
             holder.branch_sem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle bundle = new Bundle();
+                    AssignmentData.PdfUrl=list.get(position).getURL();
+                    AssignmentData.DocumentId=list.get(position).getDocumentId();
                     Intent intent = new Intent(context, WebActivity.class);
-                    bundle.putSerializable("URL",list.get(position));
-                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });
@@ -122,10 +117,12 @@ public class AdsSemesterTopicAdapter extends RecyclerView.Adapter<AdsSemesterTop
             holder.branch_sem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle bundle = new Bundle();
+                    AssignmentData.YoutubeUrl=list.get(position).getURL();
+                    AssignmentData.VideoSubject=list.get(position).getSubject();
+                    AssignmentData.VideoTopic=list.get(position).getTopic();
+                    AssignmentData.VideoFaculty=list.get(position).getFaculty();
+                    AssignmentData.VideoPublish=list.get(position).getPublished();
                     Intent intent = new Intent(context, AdsYouTubeActivity.class);
-                    bundle.putSerializable("URL",list.get(position));
-                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
 
@@ -152,10 +149,8 @@ public class AdsSemesterTopicAdapter extends RecyclerView.Adapter<AdsSemesterTop
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            subject = itemView.findViewById(R.id.gec_subject);
             topic = itemView.findViewById(R.id.gec_topic);
             faculty_name = itemView.findViewById(R.id.faculty_name);
-            faculty_designation = itemView.findViewById(R.id.faculty_designation);
             released_date = itemView.findViewById(R.id.released_date);
             document_type = itemView.findViewById(R.id.document_type);
           //  document_type_text = itemView.findViewById(R.id.document_type_text);

@@ -16,28 +16,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.winbee.adarshsardarshahar.Activity.AdsYouTubeLiveActivity;
 import com.winbee.adarshsardarshahar.Models.LiveClass;
+import com.winbee.adarshsardarshahar.NewModels.LiveClassContentaArray;
 import com.winbee.adarshsardarshahar.R;
 
 import java.util.ArrayList;
 
 public class AdsHomeLiveAdapter extends RecyclerView.Adapter<AdsHomeLiveAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<LiveClass> list;
+    private ArrayList<LiveClassContentaArray> list;
 
-    public AdsHomeLiveAdapter(Context context, ArrayList<LiveClass> List){
+    public AdsHomeLiveAdapter(Context context, ArrayList<LiveClassContentaArray> List){
         this.context = context;
         this.list = List;
     }
 
     @NonNull
     @Override
-    public AdsHomeLiveAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ads_home_adepter_live,parent, false);
-        return  new AdsHomeLiveAdapter.ViewHolder(view);
+        return  new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdsHomeLiveAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //setting data toAd apter List
 
 
@@ -74,7 +75,7 @@ public class AdsHomeLiveAdapter extends RecyclerView.Adapter<AdsHomeLiveAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView subjectName,subjectTopic,StartingTime,video_started;
-        ImageView branch_image;
+        ImageView live_image;
         private RelativeLayout branch_live;
         RelativeLayout cardView;
         public ViewHolder(@NonNull View itemView) {
@@ -84,7 +85,7 @@ public class AdsHomeLiveAdapter extends RecyclerView.Adapter<AdsHomeLiveAdapter.
             StartingTime = itemView.findViewById(R.id.live_started);
             video_started = itemView.findViewById(R.id.video_started);
             cardView = itemView.findViewById(R.id.branch_sem);
-            branch_image=itemView.findViewById(R.id.branch_image);
+            live_image=itemView.findViewById(R.id.live_image);
             branch_live=itemView.findViewById(R.id.branch_live);
         }
     }

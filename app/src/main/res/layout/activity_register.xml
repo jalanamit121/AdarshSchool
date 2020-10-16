@@ -21,10 +21,17 @@
             android:paddingRight="24dp">
 
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/logo"/>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -33,20 +40,12 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proximanovaregular"
                     android:gravity="center"
-                    android:text="@string/new_account"
-                    android:textColor="#3c4b5d"
-                    android:textSize="22sp" />
+                    android:text="Register Now"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="22sp"  />
 
-                <TextView
-                    android:id="@+id/desctxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/proximanovaregular"
-                    android:gravity="center"
-                    android:text="@string/signup_desc"
-                    android:textColor="@color/darkgrey"
-                    android:textSize="16sp" />
+
 
             </LinearLayout>
 
@@ -66,7 +65,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/circularbordersolid"
                     android:gravity="center"
-                    android:padding="18dp">
+                    android:padding="13dp">
 
                     <EditText
                         android:id="@+id/editTextUsername"
@@ -78,7 +77,7 @@
                         android:textColor="@color/edit_text"
                         android:textColorHint="@color/edit_text"
                         android:inputType="text"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -87,7 +86,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/circularbordersolid"
                     android:gravity="center"
-                    android:padding="18dp">
+                    android:padding="13dp">
 
 
                     <EditText
@@ -103,6 +102,45 @@
                         android:singleLine="true"/>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circularbordersolid"
+                    android:gravity="center"
+                    android:padding="13dp">
+
+
+                    <EditText
+                        android:id="@+id/editTextFatherName"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@null"
+                        android:inputType="text"
+                        android:textSize="14sp"
+                        android:textColorHint="@color/edit_text"
+                        android:hint="Father Name"
+                        android:textColor="@color/edit_text"
+                        android:singleLine="true"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circularbordersolid"
+                    android:gravity="center"
+                    android:padding="13dp">
+
+
+                    <Spinner
+                        android:id="@+id/spinner_std"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:entries="@array/std" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/emailll"
@@ -111,7 +149,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/circularbordersolid"
                     android:gravity="center"
-                    android:padding="18dp">
+                    android:padding="13dp">
 
                     <EditText
                         android:id="@+id/editTextEmail"
@@ -123,7 +161,7 @@
                         android:textColor="@color/edit_text"
                         android:textColorHint="@color/edit_text"
                         android:inputType="textEmailAddress"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/state"
@@ -132,7 +170,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/circularbordersolid"
                     android:gravity="center"
-                    android:padding="16dp">
+                    android:padding="13dp">
 
                     <AutoCompleteTextView
                         android:layout_height="wrap_content"
@@ -140,7 +178,7 @@
                         android:hint="Enter State"
                         android:background="@null"
                         android:textColorHint="@color/edit_text"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:id="@+id/actState"
                         android:maxLines="1"/>
 
@@ -152,7 +190,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/circularbordersolid"
                     android:gravity="center"
-                    android:padding="16dp">
+                    android:padding="13dp">
 
                     <AutoCompleteTextView
                         android:layout_height="wrap_content"
@@ -161,34 +199,12 @@
                         android:hint="Enter City"
                         android:background="@null"
                         android:textColorHint="@color/edit_text"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:maxLines="1"/>
 
 
                 </LinearLayout>
 
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/org_code"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:background="@drawable/circularbordersolid"-->
-<!--                    android:gravity="center"-->
-<!--                    android:padding="18dp">-->
-
-<!--                    <ss.anoop.awesomeedittext.AwesomeEditText-->
-<!--                        android:id="@+id/editTextOrgCode"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@null"-->
-<!--                        android:fontFamily="@font/proximanovaregular"-->
-<!--                        android:hint="Org Code"-->
-<!--                        android:textColorHint="@color/edit_text"-->
-<!--                        android:inputType="textEmailAddress"-->
-<!--                        android:textSize="14sp" />-->
-
-<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:id="@+id/referal_code"
@@ -198,7 +214,7 @@
                     android:background="@drawable/circularbordersolid"
                     android:visibility="gone"
                     android:gravity="center"
-                    android:padding="18dp">
+                    android:padding="13dp">
 
                     <TextView
                         android:id="@+id/editTextreferal_code"
@@ -208,20 +224,20 @@
                         android:fontFamily="@font/proximanovaregular"
                         android:textColor="@color/edit_text"
                         android:text="ADS001"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
 
 
-                <LinearLayout
+                <RelativeLayout
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/circularbordersolid"
                     android:gravity="center"
-                    android:padding="18dp">
+                    android:padding="13dp">
 
                     <EditText
                         android:id="@+id/editTextPassword"
@@ -233,17 +249,25 @@
                         android:textColor="@color/edit_text"
                         android:textColorHint="@color/edit_text"
                         android:inputType="textPassword"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
+                    <ImageView
+                        android:id="@+id/show_pass_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="5dp"
+                        android:onClick="ShowHidePass"
+                        android:src="@drawable/ic_baseline_remove_red_eye_24" />
 
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/circularbordersolid"
                     android:gravity="center"
-                    android:padding="18dp">
+                    android:padding="13dp">
 
                     <EditText
                         android:id="@+id/editTextre_Password"
@@ -255,81 +279,17 @@
                         android:textColor="@color/edit_text"
                         android:textColorHint="@color/edit_text"
                         android:inputType="textPassword"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
+                    <ImageView
+                        android:id="@+id/show_repass_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="5dp"
+                        android:onClick="ReShowHidePass"
+                        android:src="@drawable/ic_baseline_remove_red_eye_24" />
 
-                </LinearLayout>
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="@drawable/circularbordersolid"-->
-<!--                    android:gravity="center"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:padding="18dp">-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/editTextReferalCode"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@null"-->
-<!--                        android:fontFamily="@font/proximanovaregular"-->
-<!--                        android:hint="I am :"-->
-<!--                        android:inputType="textPassword"-->
-<!--                        android:textColorHint="@color/edit_text"-->
-<!--                        android:textSize="14sp" />-->
-
-<!--                    <Space-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/link_forgotpassword"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:fontFamily="@font/proximanovaregular"-->
-<!--                        android:gravity="right"-->
-<!--                        android:text="Student"-->
-<!--                        android:textColorHint="@color/edit_text"-->
-<!--                        android:textSize="14sp" />-->
-
-<!--                </LinearLayout>-->
-
-
-
-
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:padding="15dp"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:background="@drawable/circularbordersolid"-->
-<!--                    android:id="@+id/phonenumberll"-->
-<!--                    android:gravity="center_vertical">-->
-<!--                    <Button-->
-<!--                        android:id="@+id/btnOrder"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentTop="true"-->
-<!--                        android:layout_centerHorizontal="true"-->
-<!--                        android:text="Area of Interest" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/tvItemSelected"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_centerHorizontal="true"-->
-<!--                        android:layout_centerVertical="true"-->
-<!--                        android:gravity="center"-->
-<!--                        android:textColor="@color/colorPrimary"-->
-<!--                        android:textSize="25sp"-->
-<!--                        android:textStyle="italic" />-->
-
-
-
-
-<!--                </LinearLayout>-->
+                </RelativeLayout>
                 <LinearLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:orientation="vertical"
@@ -360,27 +320,18 @@
                 </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/phonenumbertextll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:padding="10dp"
-                    android:fontFamily="@font/proximanovaregular"
-                    android:text="@string/message"
-                    android:textAlignment="center"
-                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/buttonRegister"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="14dp"
                     android:background="@drawable/circularbluebordersolid"
                     android:fontFamily="@font/proximanovaregular"
                     android:padding="16dp"
-                    android:text="Continue"
+                    android:text="REGISTER"
+                    android:layout_gravity="center"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -421,7 +372,7 @@
                     android:gravity="center"
                     android:text=" Login"
                     android:onClick="loginactivity"
-                    android:textColor="#8e9cfe"
+                    android:textColor="#112DEC"
                     android:textSize="16dip" />
 
             </LinearLayout>

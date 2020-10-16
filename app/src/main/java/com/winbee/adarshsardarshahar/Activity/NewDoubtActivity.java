@@ -74,45 +74,45 @@ public class NewDoubtActivity extends AppCompatActivity {
 
 
 
-        callNewAskedQuestionApiService(newDoubtQuestion);
+      //  callNewAskedQuestionApiService(newDoubtQuestion);
 
     }
 
-    private void callNewAskedQuestionApiService(NewDoubtQuestion newDoubtQuestion){
-        progressBarUtil.showProgress();
-        // final UrlNewQuestion urlNewQuestion = new UrlNewQuestion(title,description,documentid,userid);
-        ClientApi apiCall = ApiClient.getClient().create(ClientApi.class);
-        Call<NewDoubtQuestion> call =apiCall.getNewQuestion(newDoubtQuestion.getTitle(),newDoubtQuestion.getQuestion(),newDoubtQuestion.getUserId());
-        Log.d("TAG", "callNewAskedQuestionApiService: "+newDoubtQuestion.getTitle()+""+newDoubtQuestion.getQuestion()+""+newDoubtQuestion.getUserId());
-        call.enqueue(new Callback<NewDoubtQuestion>() {
-            @Override
-            public void onResponse(Call<NewDoubtQuestion> call, Response<NewDoubtQuestion> response) {
-                int statusCode = response.code();
-                if(statusCode==200 && response.body()!=null){
-                    progressBarUtil.hideProgress();
-                    submitAlertDialog();
-                    editTextQuestionTitle.getText().clear();
-                    editTextQuestionDescription.getText().clear();
-//                    startActivity(new Intent(NewDoubtActivity.this, NewDoubtActivity.class));
+//    private void callNewAskedQuestionApiService(NewDoubtQuestion newDoubtQuestion){
+//        progressBarUtil.showProgress();
+//        // final UrlNewQuestion urlNewQuestion = new UrlNewQuestion(title,description,documentid,userid);
+//        ClientApi apiCall = ApiClient.getClient().create(ClientApi.class);
+//        Call<NewDoubtQuestion> call =apiCall.getNewQuestion(newDoubtQuestion.getTitle(),newDoubtQuestion.getQuestion(),newDoubtQuestion.getUserId());
+//        Log.d("TAG", "callNewAskedQuestionApiService: "+newDoubtQuestion.getTitle()+""+newDoubtQuestion.getQuestion()+""+newDoubtQuestion.getUserId());
+//        call.enqueue(new Callback<NewDoubtQuestion>() {
+//            @Override
+//            public void onResponse(Call<NewDoubtQuestion> call, Response<NewDoubtQuestion> response) {
+//                int statusCode = response.code();
+//                if(statusCode==200 && response.body()!=null){
+//                    progressBarUtil.hideProgress();
+//                    submitAlertDialog();
+//                    editTextQuestionTitle.getText().clear();
+//                    editTextQuestionDescription.getText().clear();
+////                    startActivity(new Intent(NewDoubtActivity.this, NewDoubtActivity.class));
+////
+////                    finish();
+//                }
+//                else{
+//                    System.out.println("Sur: response code"+response.message());
+//                    Toast.makeText(getApplicationContext(),"Ërror due to" + response.message(), Toast.LENGTH_SHORT).show();
+//                }
 //
-//                    finish();
-                }
-                else{
-                    System.out.println("Sur: response code"+response.message());
-                    Toast.makeText(getApplicationContext(),"Ërror due to" + response.message(), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<NewDoubtQuestion> call, Throwable t) {
-                System.out.println("Suree: "+t.getMessage());
-                progressBarUtil.hideProgress();
-                Toast.makeText(getApplicationContext(),"Failed"+t.getMessage() , Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NewDoubtQuestion> call, Throwable t) {
+//                System.out.println("Suree: "+t.getMessage());
+//                progressBarUtil.hideProgress();
+//                Toast.makeText(getApplicationContext(),"Failed"+t.getMessage() , Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//    }
 
     private void submitAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

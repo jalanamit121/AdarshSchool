@@ -56,19 +56,6 @@ public class SubmitAssignmentActivity extends AppCompatActivity {
     ImageView image_view;
     LinearLayout layout_description;
 
-    //private String filePath;
-    private static final int PICK_PHOTO = 1958;
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onEvent(EventModel event) throws ClassNotFoundException {
-//        if (event.isTagMatchWith("response")) {
-//            String responseMessage = "Response from Server:\n" + event.getMessage();
-//            responseTextView.setText(responseMessage);
-
 
 
     @Override
@@ -164,10 +151,6 @@ public class SubmitAssignmentActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,IMG_REQUEST);
-//        Intent intent = new Intent();
-//        intent.setType("application/pdf");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(Intent.createChooser(intent, "Select Pdf"), PICK_PDF_REQUEST);
     }
 
     @Override

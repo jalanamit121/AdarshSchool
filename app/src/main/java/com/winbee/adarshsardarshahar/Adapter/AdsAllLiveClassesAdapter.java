@@ -15,28 +15,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.winbee.adarshsardarshahar.Activity.AdsYouTubeLiveActivity;
 import com.winbee.adarshsardarshahar.Models.LiveClass;
+import com.winbee.adarshsardarshahar.NewModels.LiveClassContentaArray;
 import com.winbee.adarshsardarshahar.R;
 
 import java.util.ArrayList;
 
 public class AdsAllLiveClassesAdapter extends RecyclerView.Adapter<AdsAllLiveClassesAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<LiveClass> list;
+    private ArrayList<LiveClassContentaArray> list;
 
-    public AdsAllLiveClassesAdapter(Context context, ArrayList<LiveClass> list){
+    public AdsAllLiveClassesAdapter(Context context, ArrayList<LiveClassContentaArray> list){
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public AdsAllLiveClassesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ads_all_live_classes,parent, false);
-        return  new AdsAllLiveClassesAdapter.ViewHolder(view);
+        return  new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdsAllLiveClassesAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //setting data toAd apter List
         holder.live_topic.setText(list.get(position).getTopic());
         holder.live_subject.setText(list.get(position).getSubject());

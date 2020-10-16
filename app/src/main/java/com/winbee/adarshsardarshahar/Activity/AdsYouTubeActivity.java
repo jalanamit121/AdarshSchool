@@ -1,8 +1,10 @@
 package com.winbee.adarshsardarshahar.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -14,11 +16,20 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.winbee.adarshsardarshahar.Models.LogOut;
 import com.winbee.adarshsardarshahar.Models.UrlName;
 import com.winbee.adarshsardarshahar.R;
+import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
+import com.winbee.adarshsardarshahar.Utils.AssignmentData;
+import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
+import com.winbee.adarshsardarshahar.WebApi.ClientApi;
 
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdsYouTubeActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
@@ -27,6 +38,8 @@ public class AdsYouTubeActivity extends YouTubeBaseActivity implements YouTubePl
     private UrlName urlName;
     LinearLayout home,histroy,logout,layout_doubt;
     TextView textSubject,textTopic,textTeacher,textCoaching;
+    String UserMobile,UserPassword,android_id;
+    private ProgressBarUtil progressBarUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +54,11 @@ public class AdsYouTubeActivity extends YouTubeBaseActivity implements YouTubePl
         textTopic = findViewById(R.id.video_topic);
         textTeacher = findViewById(R.id.video_teacher);
         textCoaching = findViewById(R.id.video_coaching);
+        UserMobile=SharedPrefManager.getInstance(this).refCode().getUsername();
+        UserPassword=SharedPrefManager.getInstance(this).refCode().getPassword();
+        progressBarUtil   =  new ProgressBarUtil(this);
+        android_id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,17 +87,12 @@ public class AdsYouTubeActivity extends YouTubeBaseActivity implements YouTubePl
                 startActivity(intent);
             }
         });
-        Bundle bundle = getIntent().getExtras();
-        if(bundle!=null){
-            urlName = (UrlName) bundle.getSerializable("URL");
-            if(urlName!=null){
-                System.out.println("Suree:"+urlName.getType().equalsIgnoreCase("URL"));            }
-        }
 
-        textSubject.setText(urlName.getSubject());
-        textTopic.setText(urlName.getTopic());
-        textTeacher.setText(urlName.getFaculty());
-        textCoaching.setText(urlName.getPublished());
+
+        textSubject.setText(AssignmentData.VideoSubject);
+        textTopic.setText(AssignmentData.VideoTopic);
+        textTeacher.setText(AssignmentData.VideoFaculty);
+        textCoaching.setText(AssignmentData.VideoPublish);
 
         /** Initializing YouTube Player View **/
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
@@ -102,7 +115,7 @@ public class AdsYouTubeActivity extends YouTubeBaseActivity implements YouTubePl
         /** Start buffering **/
         if (!wasRestored) {
             //player.cueVideo(topicName.getURL());
-            player.cueVideo(urlName.getURL());
+            player.cueVideo(AssignmentData.YoutubeUrl);
         }
     }
 
@@ -155,6 +168,54 @@ public class AdsYouTubeActivity extends YouTubeBaseActivity implements YouTubePl
     };
 
     private void logout() {
+
+        progressBarUtil.showProgress();
+        ClientApi mService = ApiClient.getClient().create(ClientApi.class);
+        Call<LogOut> call = mService.refCodeLogout(3, UserMobile, UserPassword, "ADS001",android_id);
+        call.enqueue(new Callback<LogOut>() {
+            @Override
+            public void onResponse(Call<LogOut> call, Response<LogOut> response) {
+                int statusCode = response.code();
+                if (statusCode == 200 && response.body().getLoginStatus()!=false) {
+                    if (response.body().getError()==false){
+                        progressBarUtil.hideProgress();
+                        SharedPrefManager.getInstance(AdsYouTubeActivity.this).logout();
+                        startActivity(new Intent(AdsYouTubeActivity.this, LoginActivity.class));
+                        finish();
+                    }else{
+                        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(
+                                AdsYouTubeActivity.this);
+                        alertDialogBuilder.setTitle("Alert");
+                        alertDialogBuilder
+                                .setMessage(response.body().getError_Message())
+                                .setCancelable(false)
+                                .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        forceLogout();
+                                    }
+                                });
+
+                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+
+                    }
+
+
+                } else {
+                    progressBarUtil.hideProgress();
+                    Toast.makeText(AdsYouTubeActivity.this, response.body().getMessageFailure(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LogOut> call, Throwable t) {
+                Toast.makeText(AdsYouTubeActivity.this, "Failed" + t.getMessage(), Toast.LENGTH_LONG).show();
+                System.out.println(t.getLocalizedMessage());
+            }
+        });
+    }
+    private void forceLogout() {
         SharedPrefManager.getInstance(this).logout();
         startActivity(new Intent(this, LoginActivity.class));
         Objects.requireNonNull(this).finish();

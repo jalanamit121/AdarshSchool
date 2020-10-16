@@ -1,11 +1,13 @@
 package com.winbee.adarshsardarshahar.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.winbee.adarshsardarshahar.Adapter.AdsAskedQuestionAdapter;
+import com.winbee.adarshsardarshahar.Models.LogOut;
 import com.winbee.adarshsardarshahar.Models.UrlName;
 import com.winbee.adarshsardarshahar.Models.UrlQuestion;
 import com.winbee.adarshsardarshahar.R;
@@ -52,6 +55,7 @@ public class DriveVideoPlayerActivity extends AppCompatActivity {
     private RecyclerView askedQuestion;
     private Button btm_asked_question;
     private RelativeLayout today_classes;
+    String UserMobile,UserPassword,android_id;
     private String TEST_URL_HLS = "https://drive.google.com/file/d/1AOroyeM5P8ZwZ15EGqR4SvRDW7lHoqeZ/preview";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,9 @@ public class DriveVideoPlayerActivity extends AppCompatActivity {
         progressBarUtil   =  new ProgressBarUtil(this);
         btm_asked_question=findViewById(R.id.btm_asked_question);
         today_classes=findViewById(R.id.today_classes);
+        UserMobile=SharedPrefManager.getInstance(this).refCode().getUsername();
+        UserPassword=SharedPrefManager.getInstance(this).refCode().getPassword();
+        android_id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         btm_asked_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,7 +139,7 @@ public class DriveVideoPlayerActivity extends AppCompatActivity {
     private class MyChrome extends WebChromeClient {
 
         private View mCustomView;
-        private WebChromeClient.CustomViewCallback mCustomViewCallback;
+        private CustomViewCallback mCustomViewCallback;
         protected FrameLayout mFullscreenContainer;
         private int mOriginalOrientation;
         private int mOriginalSystemUiVisibility;
@@ -157,7 +164,7 @@ public class DriveVideoPlayerActivity extends AppCompatActivity {
             this.mCustomViewCallback = null;
         }
 
-        public void onShowCustomView(View paramView, WebChromeClient.CustomViewCallback paramCustomViewCallback)
+        public void onShowCustomView(View paramView, CustomViewCallback paramCustomViewCallback)
         {
             if (this.mCustomView != null)
             {
@@ -208,6 +215,54 @@ public class DriveVideoPlayerActivity extends AppCompatActivity {
         });
     }
     private void logout() {
+
+        progressBarUtil.showProgress();
+        ClientApi mService = ApiClient.getClient().create(ClientApi.class);
+        Call<LogOut> call = mService.refCodeLogout(3, UserMobile, UserPassword, "ADS001",android_id);
+        call.enqueue(new Callback<LogOut>() {
+            @Override
+            public void onResponse(Call<LogOut> call, Response<LogOut> response) {
+                int statusCode = response.code();
+                if (statusCode == 200 && response.body().getLoginStatus()!=false) {
+                    if (response.body().getError()==false){
+                        progressBarUtil.hideProgress();
+                        SharedPrefManager.getInstance(DriveVideoPlayerActivity.this).logout();
+                        startActivity(new Intent(DriveVideoPlayerActivity.this, LoginActivity.class));
+                        finish();
+                    }else{
+                        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(
+                                DriveVideoPlayerActivity.this);
+                        alertDialogBuilder.setTitle("Alert");
+                        alertDialogBuilder
+                                .setMessage(response.body().getError_Message())
+                                .setCancelable(false)
+                                .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        forceLogout();
+                                    }
+                                });
+
+                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+
+                    }
+
+
+                } else {
+                    progressBarUtil.hideProgress();
+                    Toast.makeText(DriveVideoPlayerActivity.this, response.body().getMessageFailure(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LogOut> call, Throwable t) {
+                Toast.makeText(DriveVideoPlayerActivity.this, "Failed" + t.getMessage(), Toast.LENGTH_LONG).show();
+                System.out.println(t.getLocalizedMessage());
+            }
+        });
+    }
+    private void forceLogout() {
         SharedPrefManager.getInstance(this).logout();
         startActivity(new Intent(this, LoginActivity.class));
         Objects.requireNonNull(this).finish();

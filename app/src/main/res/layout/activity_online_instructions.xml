@@ -25,9 +25,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textSize="15sp"
-                android:text="Subject Name"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Loading Paper Name../"
+                android:textColor="#FD3478C8"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_instruction"
@@ -72,45 +73,19 @@
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:weightSum="2"
-        android:background="@drawable/bottom_layout">
-        <RelativeLayout
-            android:id="@+id/layout_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="25dp">
-            <TextView
-                android:id="@+id/text_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Select Language"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"
-                android:textColor="#3F51B5"/>
-            <Spinner
-                android:id="@+id/select_language"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_alignParentTop="true"
-                android:entries="@array/language" />
-
-        </RelativeLayout>
+        android:layout_alignParentBottom="true">
         <RelativeLayout
             android:id="@+id/layout_start_test"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="80dp"
             android:background="@color/colorPrimaryDark"
-            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_toRightOf="@id/layout_home">
             <ImageView
                 android:id="@+id/image_history"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-
                 android:src="@drawable/ic_history_black_24dp"
                 />
             <TextView

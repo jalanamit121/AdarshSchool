@@ -14,20 +14,7 @@
         android:layout_marginRight="5dp"
         android:layout_height="80dp">
 
-        <!--        <ImageView-->
-        <!--            xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--            android:id="@+id/alumni_friends_image"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_marginTop="15dp"-->
-        <!--            android:layout_marginLeft="15dp"/>-->
-        <!--        <com.theophrast.ui.widget.SquareImageView-->
-        <!--            android:id="@+id/alumni_friends_image"-->
-        <!--            android:layout_width="130dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:layout_marginLeft="10dp"-->
-        <!--            app:hwRatio="0.6" />-->
+
         <ImageView
             android:id="@+id/live_image"
             android:layout_width="100dp"

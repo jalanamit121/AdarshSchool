@@ -27,6 +27,12 @@ public class AssignmentData {
 
 
     public static String DocumentId="";
+    public static String VideoSubject="";
+    public static String VideoTopic="";
+    public static String VideoFaculty="";
+    public static String VideoPublish="";
+    public static String PdfUrl="";
+    public static String YoutubeUrl="";
     public static int VideoUrl;
 
 

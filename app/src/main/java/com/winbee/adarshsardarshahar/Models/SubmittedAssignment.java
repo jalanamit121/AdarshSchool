@@ -7,27 +7,66 @@ import java.io.Serializable;
 
 public class SubmittedAssignment implements Serializable {
 
-@SerializedName("Assignment")
-@Expose
-private Boolean assignment;
+    @SerializedName("Assignment")
+    @Expose
+    private Boolean assignment;
+    @SerializedName("Assignment_Data")
+    @Expose
+    private SubmittedDatum[] assignment_Data;
+    @SerializedName("Error")
+    @Expose
+    private Boolean error;
+    @SerializedName("Error_Message")
+    @Expose
+    private String error_Message;
+    @SerializedName("Error_Code")
+    @Expose
+    private String error_Code;
 
-private SubmittedDatum[] Assignment_Data ;
-
-    public SubmittedAssignment(Boolean assignment, SubmittedDatum[] assignment_Data) {
+    public SubmittedAssignment(Boolean assignment, SubmittedDatum[] assignment_Data, Boolean error, String error_Message, String error_Code) {
         this.assignment = assignment;
-        Assignment_Data = assignment_Data;
+        this.assignment_Data = assignment_Data;
+        this.error = error;
+        this.error_Message = error_Message;
+        this.error_Code = error_Code;
     }
 
     public Boolean getAssignment() {
-return assignment;
-}
+        return assignment;
+    }
 
-public void setAssignment(Boolean assignment) {
-this.assignment = assignment;
-}
+    public void setAssignment(Boolean assignment) {
+        this.assignment = assignment;
+    }
 
-    public SubmittedDatum[] getData(){
-        return Assignment_Data;
+    public SubmittedDatum[] getAssignment_Data() {
+        return assignment_Data;
+    }
+
+
+
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
+    }
+
+    public String getError_Message() {
+        return error_Message;
+    }
+
+    public void setError_Message(String error_Message) {
+        this.error_Message = error_Message;
+    }
+
+    public String getError_Code() {
+        return error_Code;
+    }
+
+    public void setError_Code(String error_Code) {
+        this.error_Code = error_Code;
     }
 
 }

@@ -26,6 +26,12 @@ public class RefUser {
     @SerializedName("refcode")
     @Expose
     private String refcode;
+    @SerializedName("father_name")
+    @Expose
+    private String father_name;
+    @SerializedName("class_for_reg")
+    @Expose
+    private String class_for_reg;
     @SerializedName("Success")
     @Expose
     private Boolean success;
@@ -45,7 +51,6 @@ public class RefUser {
     @Expose
     private String messageOTP;
 
-
     public RefUser(String name, String mobile, String email, String password, String referalcode) {
         this.name = name;
         this.mobile = mobile;
@@ -57,6 +62,8 @@ public class RefUser {
 
     public RefUser() {
     }
+
+
 
     public String getName() {
         return name;
@@ -112,6 +119,22 @@ public class RefUser {
 
     public void setRefcode(String refcode) {
         this.refcode = refcode;
+    }
+
+    public String getFather_name() {
+        return father_name;
+    }
+
+    public void setFather_name(String father_name) {
+        this.father_name = father_name;
+    }
+
+    public String getClass_for_reg() {
+        return class_for_reg;
+    }
+
+    public void setClass_for_reg(String class_for_reg) {
+        this.class_for_reg = class_for_reg;
     }
 
     public Boolean getSuccess() {

@@ -7,6 +7,7 @@ import com.winbee.adarshsardarshahar.Models.BannerModel;
 import com.winbee.adarshsardarshahar.Models.ForgetMobile;
 import com.winbee.adarshsardarshahar.Models.InstructionsModel;
 import com.winbee.adarshsardarshahar.Models.LiveClass;
+import com.winbee.adarshsardarshahar.Models.LogOut;
 import com.winbee.adarshsardarshahar.Models.McqAskedQuestionModel;
 import com.winbee.adarshsardarshahar.Models.McqQuestionModel;
 import com.winbee.adarshsardarshahar.Models.McqQuestionSolutionModel;
@@ -17,6 +18,7 @@ import com.winbee.adarshsardarshahar.Models.OtpVerify;
 import com.winbee.adarshsardarshahar.Models.PurchasedMainModel;
 import com.winbee.adarshsardarshahar.Models.RefCode;
 import com.winbee.adarshsardarshahar.Models.RefUser;
+import com.winbee.adarshsardarshahar.Models.ResendOtp;
 import com.winbee.adarshsardarshahar.Models.ResetPassword;
 import com.winbee.adarshsardarshahar.Models.ResultModel;
 import com.winbee.adarshsardarshahar.Models.SIACDetailsMainModel;
@@ -36,6 +38,11 @@ import com.winbee.adarshsardarshahar.Models.UrlQuestionSolution;
 import com.winbee.adarshsardarshahar.Models.UrlSolution;
 import com.winbee.adarshsardarshahar.Models.ViewResult;
 import com.winbee.adarshsardarshahar.Models.WhatsAppData;
+import com.winbee.adarshsardarshahar.NewModels.AskDoubtContent;
+import com.winbee.adarshsardarshahar.NewModels.Attendence;
+import com.winbee.adarshsardarshahar.NewModels.LiveClassContent;
+import com.winbee.adarshsardarshahar.NewModels.SubjectContent;
+import com.winbee.adarshsardarshahar.NewModels.TopicContent;
 
 import org.json.JSONArray;
 
@@ -52,6 +59,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ClientApi {
+    //login
     @POST("fetch_user_cover_information.php")
     Call<RefCode> refCodeSignIn(
             @Query("SubURL") int SubURL,
@@ -61,10 +69,39 @@ public interface ClientApi {
             @Query("IMEI") String IMEI
     );
 
+    //logout
+    @POST("fetch_user_cover_information.php")
+    Call<LogOut> refCodeLogout(
+            @Query("SubURL") int SubURL,//3
+            @Query("username") String username,
+            @Query("password") String password,
+            @Query("refcode") String refcode,
+            @Query("IMEI") String IMEI
+    );
+
+    //force login
+    @POST("fetch_user_cover_information.php")
+    Call<RefCode> refCodeForceLogout(
+            @Query("SubURL") int SubURL,//4
+            @Query("username") String username,
+            @Query("password") String password,
+            @Query("refcode") String refcode,
+            @Query("IMEI") String IMEI
+    );
+    @POST("send-otp.php")
+    Call<ResendOtp> getResendOtp(
+            @Query("username") String username,
+            @Query("SubURL") int SubURL
+    );
+
+
+
     @POST("user_registration_information.php")
     Call<RefUser> refUserSignIn(
             @Query("SubURL") int SubURL,
             @Query("name") String name,
+            @Query("father_name") String father_name,
+            @Query("class_for_reg ") String class_for_reg,
             @Query("email") String email,
             @Query("mobile") String mobile,
             @Query("refcode") String refcode,
@@ -96,31 +133,37 @@ public interface ClientApi {
 
 
     @POST("fetch_live_classes.php")
-    Call<ArrayList<LiveClass>> getLive(
+    Call<LiveClassContent> getLive(
             @Query("SubURL") int SubURL,
             @Query("ORG_ID") String ORG_ID,
-            @Query("USER_ID") String USER_ID
+            @Query("USER_ID") String USER_ID,
+            @Query("DEVICE_ID") String DEVICE_ID
     );
 
     @POST("fetch_purchased_bucket_information.php")
     Call<PurchasedMainModel> getCourseById(
             @Query("SubURL") int SubURL,
             @Query("USER_ID") String USER_ID,
-            @Query("ORG_ID") String ORG_ID
+            @Query("ORG_ID") String ORG_ID,
+            @Query("DEVICE_ID") String DEVICE_ID
     );
 
     @POST("fetch_bucket_cover_information.php")
-    Call<ArrayList<SemesterName>> getCourseSubject(
+    Call<SubjectContent> getCourseSubject(
             @Query("SubURL") int SubURL,
             @Query("ORG_ID") String ORG_ID,
-            @Query("PARENT_ID") String PARENT_ID
+            @Query("PARENT_ID") String PARENT_ID,
+            @Query("USER_ID") String USER_ID,
+            @Query("DEVICE_ID") String DEVICE_ID
     );
 
     @POST("fetch_bucket_cover_information.php")
-    Call<ArrayList<UrlName>> getTopic(
+    Call<TopicContent> getTopic(
             @Query("SubURL") int SubURL,
             @Query("ORG_ID") String ORG_ID,
-            @Query("PARENT_ID") String PARENT_ID
+            @Query("PARENT_ID") String PARENT_ID,
+            @Query("USER_ID") String USER_ID,
+            @Query("DEVICE_ID") String DEVICE_ID
     );
     @FormUrlEncoded
     @POST("submit-doubt.php")
@@ -155,13 +198,15 @@ public interface ClientApi {
     @POST("fetch_assignment_data.php")
     Call<AssignmentToSubmit> getAllAssignment(
             @Query("org_id") String org_id,
-            @Query("user_id") String user_id
+            @Query("user_id") String user_id,
+            @Query("device_id") String device_id
     );
 
     @POST("fetch_assignment_submitted_student.php")
     Call<SubmittedAssignment> getSubmitedAssignment(
             @Query("org_id") String org_id,
-            @Query("user_id") String user_id
+            @Query("user_id") String user_id,
+            @Query("device_id") String device_id
     );
 
 
@@ -244,8 +289,9 @@ public interface ClientApi {
     );
 
     @POST("record-attendence.php")
-    Call<AttendenceModel> fetchAttendence(
-            @Query("user_id") String user_id
+    Call<Attendence> fetchAttendence(
+            @Query("user_id") String user_id,
+            @Query("DEVICE_ID") String DEVICE_ID
     );
 
     @POST("fetch-cover-banner.php")
@@ -270,10 +316,11 @@ public interface ClientApi {
     //submit doubt
     @FormUrlEncoded
     @POST("ask-doubt.php")
-    Call<NewDoubtQuestion> getNewQuestion(
+    Call<AskDoubtContent> getNewDoubt(
             @Field("title") String title,
             @Field("question") String question,
-            @Field("userid") String userid
+            @Field("userid") String userid,
+            @Field("device_id") String device_id
     );
 
 

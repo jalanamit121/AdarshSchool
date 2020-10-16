@@ -32,13 +32,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @NonNull
     @Override
-    public NotificationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_adapter,parent, false);
-        return  new NotificationAdapter.ViewHolder(view);
+        return  new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotificationAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //setting data toAd apter List
         holder.text_message.setText(list.get(position).getMessage());
       //  holder.text_sender.setText(list.get(position).getSender());

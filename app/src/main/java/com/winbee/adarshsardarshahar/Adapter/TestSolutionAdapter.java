@@ -29,106 +29,148 @@ public class TestSolutionAdapter extends RecyclerView.Adapter<TestSolutionAdapte
 
     @NonNull
     @Override
-    public TestSolutionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_test_solution_adapter,parent, false);
-        return  new TestSolutionAdapter.ViewHolder(view);
+        return  new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TestSolutionAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //setting data toAd apter List
         holder.text_title.setText(Html.fromHtml(list.get(position).getQuestionTitle()));
+        holder.tv_question_num.setText("Q"+Integer.toString(position+1)+".");
         holder.text_discription.setText(Html.fromHtml(list.get(position).getAnswerDetails()));
         holder.editTextOtion1.setText(Html.fromHtml(list.get(position).getOption1()));
         holder.editTextOtion2.setText(Html.fromHtml(list.get(position).getOption2()));
         holder.editTextOtion3.setText(Html.fromHtml(list.get(position).getOption3()));
         holder.editTextOtion4.setText(Html.fromHtml(list.get(position).getOption4()));
-        holder.editTextOtion1_correct.setText(Html.fromHtml(list.get(position).getOption1()));
-        holder.editTextOtion2_correct.setText(Html.fromHtml(list.get(position).getOption2()));
-        holder.editTextOtion3_correct.setText(Html.fromHtml(list.get(position).getOption3()));
-        holder.editTextOtion4_correct.setText(Html.fromHtml(list.get(position).getOption4()));
-        holder.editTextOtion1_wrong.setText(Html.fromHtml(list.get(position).getOption1()));
-        holder.editTextOtion2_wrong.setText(Html.fromHtml(list.get(position).getOption2()));
-        holder.editTextOtion3_wrong.setText(Html.fromHtml(list.get(position).getOption3()));
-        holder.editTextOtion4_wrong.setText(Html.fromHtml(list.get(position).getOption4()));
-        holder.editTextOtion1_unselected.setText(Html.fromHtml(list.get(position).getOption1()));
-        holder.editTextOtion2_unselected.setText(Html.fromHtml(list.get(position).getOption2()));
-        holder.editTextOtion3_unselected.setText(Html.fromHtml(list.get(position).getOption3()));
-        holder.editTextOtion4_unselected.setText(Html.fromHtml(list.get(position).getOption4()));
+
+
+
+        if (list.get(position).getAnswerDetails().equalsIgnoreCase("")){
+            holder.txt_discription.setVisibility(View.GONE);
+        }else{
+            holder.txt_discription.setVisibility(View.VISIBLE);
+        }
+
+
+
         if (list.get(position).getIsAnswered().equals(1)){
             if (list.get(position).getUserAnswer().equals(list.get(position).getCorrectAnswer())){
                 if (list.get(position).getOption1().equals(list.get(position).getCorrectAnswer())){
-                    holder.editTextOtion1.setVisibility(View.GONE);
-                    holder.editTextOtion1_correct.setVisibility(View.VISIBLE);
+                    holder.view_correct_a.setVisibility(View.VISIBLE);
+                    holder.view_b.setVisibility(View.VISIBLE);
+                    holder.view_c.setVisibility(View.VISIBLE);
+                    holder.view_d.setVisibility(View.VISIBLE);
+                    holder.correct_image_a.setVisibility(View.VISIBLE);
                 }else if (list.get(position).getOption2().equals(list.get(position).getCorrectAnswer())){
-                    holder.editTextOtion2.setVisibility(View.GONE);
-                    holder.editTextOtion2_correct.setVisibility(View.VISIBLE);
+                    holder.view_correct_b.setVisibility(View.VISIBLE);
+                    holder.view_a.setVisibility(View.VISIBLE);
+                    holder.view_c.setVisibility(View.VISIBLE);
+                    holder.view_d.setVisibility(View.VISIBLE);
+                    holder.correct_image_b.setVisibility(View.VISIBLE);
                 }else if (list.get(position).getOption3().equals(list.get(position).getCorrectAnswer())){
-                    holder.editTextOtion3.setVisibility(View.GONE);
-                    holder.editTextOtion3_correct.setVisibility(View.VISIBLE);
+                    holder.view_correct_c.setVisibility(View.VISIBLE);
+                    holder.view_b.setVisibility(View.VISIBLE);
+                    holder.view_a.setVisibility(View.VISIBLE);
+                    holder.view_d.setVisibility(View.VISIBLE);
+                    holder.correct_image_c.setVisibility(View.VISIBLE);
                 }else if (list.get(position).getOption4().equals(list.get(position).getCorrectAnswer())){
-                    holder.editTextOtion4.setVisibility(View.GONE);
-                    holder.editTextOtion4_correct.setVisibility(View.VISIBLE);
+                    holder.view_correct_d.setVisibility(View.VISIBLE);
+                    holder.view_b.setVisibility(View.VISIBLE);
+                    holder.view_c.setVisibility(View.VISIBLE);
+                    holder.view_a.setVisibility(View.VISIBLE);
+                    holder.correct_image_d.setVisibility(View.VISIBLE);
                 }
 
                 // option is wrong
             }else if (list.get(position).getUserAnswer()!=(list.get(position).getCorrectAnswer())){
                 if (list.get(position).getOption1().equals(list.get(position).getUserAnswer())){
                     if (list.get(position).getOption2().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion2.setVisibility(View.GONE);
-                        holder.editTextOtion2_correct.setVisibility(View.VISIBLE);
+                        holder.view_correct_b.setVisibility(View.VISIBLE);
+                        holder.correct_image_b.setVisibility(View.VISIBLE);
+                        holder.view_d.setVisibility(View.VISIBLE);
+                        holder.view_c.setVisibility(View.VISIBLE);
                     }else if (list.get(position).getOption3().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion3.setVisibility(View.GONE);
-                        holder.editTextOtion3_correct.setVisibility(View.VISIBLE);
+                        holder.view_correct_c.setVisibility(View.VISIBLE);
+                        holder.correct_image_c.setVisibility(View.VISIBLE);
+                        holder.view_d.setVisibility(View.VISIBLE);
+                        holder.view_b.setVisibility(View.VISIBLE);
                     }else if (list.get(position).getOption4().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion4.setVisibility(View.GONE);
-                        holder.editTextOtion4_correct.setVisibility(View.VISIBLE);
+                        holder.view_correct_d.setVisibility(View.VISIBLE);
+                        holder.correct_image_d.setVisibility(View.VISIBLE);
+                        holder.view_b.setVisibility(View.VISIBLE);
+                        holder.view_c.setVisibility(View.VISIBLE);
                     }
-                    holder.editTextOtion1.setVisibility(View.GONE);
-                    holder.editTextOtion1_correct.setVisibility(View.GONE);
-                    holder.editTextOtion1_wrong.setVisibility(View.VISIBLE);
+                    holder.editTextOtion1.setVisibility(View.VISIBLE);
+                    holder.view_wrong_a.setVisibility(View.VISIBLE);
+                    holder.worng_image_a.setVisibility(View.VISIBLE);
                 }else if (list.get(position).getOption2().equals(list.get(position).getUserAnswer())){
                     if (list.get(position).getOption1().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion1.setVisibility(View.GONE);
-                        holder.editTextOtion1_correct.setVisibility(View.VISIBLE);
+                        holder.view_correct_a.setVisibility(View.VISIBLE);
+                        holder.correct_image_a.setVisibility(View.VISIBLE);
+                        holder.view_d.setVisibility(View.VISIBLE);
+                        holder.view_c.setVisibility(View.VISIBLE);
                     }else if (list.get(position).getOption3().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion3.setVisibility(View.GONE);
-                        holder.editTextOtion3_correct.setVisibility(View.VISIBLE);
+                        holder.view_correct_c.setVisibility(View.VISIBLE);
+                        holder.correct_image_c.setVisibility(View.VISIBLE);
+                        holder.view_d.setVisibility(View.VISIBLE);
+                        holder.view_a.setVisibility(View.VISIBLE);
                     }else if (list.get(position).getOption4().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion4.setVisibility(View.GONE);
-                        holder.editTextOtion4_correct.setVisibility(View.VISIBLE);
+                        holder.view_correct_d.setVisibility(View.VISIBLE);
+                        holder.correct_image_d.setVisibility(View.VISIBLE);
+                        holder.view_a.setVisibility(View.VISIBLE);
+                        holder.view_c.setVisibility(View.VISIBLE);
                     }
-                    holder.editTextOtion2.setVisibility(View.GONE);
-                    holder.editTextOtion2_correct.setVisibility(View.GONE);
-                    holder.editTextOtion2_wrong.setVisibility(View.VISIBLE);
+                    holder.editTextOtion2.setVisibility(View.VISIBLE);
+                    holder.view_wrong_b.setVisibility(View.VISIBLE);
+                    holder.worng_image_b.setVisibility(View.VISIBLE);
                 }else if (list.get(position).getOption3().equals(list.get(position).getUserAnswer())){
                     if (list.get(position).getOption1().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion1.setVisibility(View.GONE);
-                        holder.editTextOtion1_correct.setVisibility(View.VISIBLE);
+                        holder.editTextOtion1.setVisibility(View.VISIBLE);
+                        holder.view_correct_a.setVisibility(View.VISIBLE);
+                        holder.correct_image_a.setVisibility(View.VISIBLE);
+                        holder.view_d.setVisibility(View.VISIBLE);
+                        holder.view_b.setVisibility(View.VISIBLE);
                     }else if (list.get(position).getOption2().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion2.setVisibility(View.GONE);
-                        holder.editTextOtion2_correct.setVisibility(View.VISIBLE);
+                        holder.editTextOtion2.setVisibility(View.generateViewId());
+                        holder.view_correct_b.setVisibility(View.VISIBLE);
+                        holder.correct_image_b.setVisibility(View.VISIBLE);
+                        holder.view_d.setVisibility(View.VISIBLE);
+                        holder.view_a.setVisibility(View.VISIBLE);
                     }else if (list.get(position).getOption4().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion4.setVisibility(View.GONE);
-                        holder.editTextOtion4_correct.setVisibility(View.VISIBLE);
+                        holder.editTextOtion4.setVisibility(View.VISIBLE);
+                        holder.view_correct_d.setVisibility(View.VISIBLE);
+                        holder.correct_image_d.setVisibility(View.VISIBLE);
+                        holder.view_a.setVisibility(View.VISIBLE);
+                        holder.view_b.setVisibility(View.VISIBLE);
                     }
-                    holder.editTextOtion3.setVisibility(View.GONE);
-                    holder.editTextOtion3_correct.setVisibility(View.GONE);
-                    holder.editTextOtion3_wrong.setVisibility(View.VISIBLE);
+                    holder.editTextOtion3.setVisibility(View.VISIBLE);
+                    holder.view_wrong_c.setVisibility(View.VISIBLE);
+                    holder.worng_image_c.setVisibility(View.VISIBLE);
                 }else if (list.get(position).getOption4().equals(list.get(position).getUserAnswer())){
                     if (list.get(position).getOption1().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion1.setVisibility(View.GONE);
-                        holder.editTextOtion1_correct.setVisibility(View.VISIBLE);
+                        holder.editTextOtion1.setVisibility(View.VISIBLE);
+                        holder.view_correct_a.setVisibility(View.VISIBLE);
+                        holder.correct_image_a.setVisibility(View.VISIBLE);
+                        holder.view_b.setVisibility(View.VISIBLE);
+                        holder.view_c.setVisibility(View.VISIBLE);
                     }else if (list.get(position).getOption2().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion2.setVisibility(View.GONE);
-                        holder.editTextOtion2_correct.setVisibility(View.VISIBLE);
+                        holder.editTextOtion2.setVisibility(View.VISIBLE);
+                        holder.view_correct_b.setVisibility(View.VISIBLE);
+                        holder.correct_image_b.setVisibility(View.VISIBLE);
+                        holder.view_a.setVisibility(View.VISIBLE);
+                        holder.view_c.setVisibility(View.VISIBLE);
                     }else if (list.get(position).getOption3().equals(list.get(position).getCorrectAnswer())){
-                        holder.editTextOtion3.setVisibility(View.GONE);
-                        holder.editTextOtion3_correct.setVisibility(View.VISIBLE);
+                        holder.editTextOtion3.setVisibility(View.VISIBLE);
+                        holder.view_correct_c.setVisibility(View.VISIBLE);
+                        holder.correct_image_c.setVisibility(View.VISIBLE);
+                        holder.view_a.setVisibility(View.VISIBLE);
+                        holder.view_b.setVisibility(View.VISIBLE);
                     }
-                    holder.editTextOtion4.setVisibility(View.GONE);
-                    holder.editTextOtion4_correct.setVisibility(View.GONE);
-                    holder.editTextOtion4_wrong.setVisibility(View.VISIBLE);
+                    holder.editTextOtion4.setVisibility(View.VISIBLE);
+                    holder.view_wrong_d.setVisibility(View.VISIBLE);
+                    holder.worng_image_d.setVisibility(View.VISIBLE);
                 }
 
 
@@ -136,17 +178,29 @@ public class TestSolutionAdapter extends RecyclerView.Adapter<TestSolutionAdapte
             //if user has not given answer only show the correct answer
         }else if (list.get(position).getIsAnswered().equals(0)){
             if (list.get(position).getOption1().equals(list.get(position).getCorrectAnswer())){
-                holder.editTextOtion1.setVisibility(View.GONE);
-                holder.editTextOtion1_unselected.setVisibility(View.VISIBLE);
+                holder.editTextOtion1.setVisibility(View.VISIBLE);
+                holder.view_unselected_a.setVisibility(View.VISIBLE);
+                holder.view_b.setVisibility(View.VISIBLE);
+                holder.view_c.setVisibility(View.VISIBLE);
+                holder.view_d.setVisibility(View.VISIBLE);
             }else if (list.get(position).getOption2().equals(list.get(position).getCorrectAnswer())){
-                holder.editTextOtion2.setVisibility(View.GONE);
-                holder.editTextOtion2_unselected.setVisibility(View.VISIBLE);
+                holder.editTextOtion2.setVisibility(View.VISIBLE);
+                holder.view_unselected_b.setVisibility(View.VISIBLE);
+                holder.view_a.setVisibility(View.VISIBLE);
+                holder.view_c.setVisibility(View.VISIBLE);
+                holder.view_d.setVisibility(View.VISIBLE);
             }else if (list.get(position).getOption3().equals(list.get(position).getCorrectAnswer())){
-                holder.editTextOtion3.setVisibility(View.GONE);
-                holder.editTextOtion3_unselected.setVisibility(View.VISIBLE);
+                holder.editTextOtion3.setVisibility(View.VISIBLE);
+                holder.view_unselected_c.setVisibility(View.VISIBLE);
+                holder.view_b.setVisibility(View.VISIBLE);
+                holder.view_a.setVisibility(View.VISIBLE);
+                holder.view_d.setVisibility(View.VISIBLE);
             }else if (list.get(position).getOption4().equals(list.get(position).getCorrectAnswer())){
-                holder.editTextOtion4.setVisibility(View.GONE);
-                holder.editTextOtion4_unselected.setVisibility(View.VISIBLE);
+                holder.editTextOtion4.setVisibility(View.VISIBLE);
+                holder.view_unselected_d.setVisibility(View.VISIBLE);
+                holder.view_b.setVisibility(View.VISIBLE);
+                holder.view_c.setVisibility(View.VISIBLE);
+                holder.view_a.setVisibility(View.VISIBLE);
             }
         }
 
@@ -200,31 +254,34 @@ public class TestSolutionAdapter extends RecyclerView.Adapter<TestSolutionAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView text_title,editTextOtion1,editTextOtion2,editTextOtion3,editTextOtion4,
-                editTextOtion1_correct,editTextOtion2_correct,editTextOtion3_correct,editTextOtion4_correct,
-                editTextOtion1_wrong,editTextOtion2_wrong,editTextOtion3_wrong,editTextOtion4_wrong,
-                editTextOtion1_unselected,editTextOtion2_unselected,editTextOtion3_unselected,editTextOtion4_unselected,text_discription;
+        private TextView text_title,editTextOtion1,editTextOtion2,editTextOtion3,editTextOtion4,text_discription,tv_question_num,txt_discription;
         private RelativeLayout branch_live;
-        private ImageView img_solution_title,img_solution_option1,img_solution_option2,img_solution_option3,img_solution_option4,img_solution_discription;
+        private View view_correct_a,view_correct_b,view_correct_c,view_correct_d,view_wrong_a,view_wrong_b,view_wrong_c,view_wrong_d,
+                view_unselected_a,view_unselected_b,view_unselected_c,view_unselected_d,view_a,view_b,view_c,view_d;
+        private ImageView img_solution_title,img_solution_option1,img_solution_option2,img_solution_option3,
+                img_solution_option4,img_solution_discription,correct_image_a,correct_image_b,correct_image_c,correct_image_d,
+                worng_image_a,worng_image_b,worng_image_c,worng_image_d;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             text_title = itemView.findViewById(R.id.text_title);
+            tv_question_num = itemView.findViewById(R.id.tv_question_num);
+            txt_discription = itemView.findViewById(R.id.txt_discription);
             editTextOtion1 = itemView.findViewById(R.id.editTextOtion1);
             editTextOtion2 = itemView.findViewById(R.id.editTextOtion2);
             editTextOtion3 = itemView.findViewById(R.id.editTextOtion3);
             editTextOtion4 = itemView.findViewById(R.id.editTextOtion4);
-            editTextOtion1_correct = itemView.findViewById(R.id.editTextOtion1_correct);
-            editTextOtion2_correct = itemView.findViewById(R.id.editTextOtion2_correct);
-            editTextOtion3_correct = itemView.findViewById(R.id.editTextOtion3_correct);
-            editTextOtion4_correct = itemView.findViewById(R.id.editTextOtion4_correct);
-            editTextOtion1_wrong = itemView.findViewById(R.id.editTextOtion1_wrong);
-            editTextOtion2_wrong = itemView.findViewById(R.id.editTextOtion2_wrong);
-            editTextOtion3_wrong = itemView.findViewById(R.id.editTextOtion3_wrong);
-            editTextOtion4_wrong = itemView.findViewById(R.id.editTextOtion4_wrong);
-            editTextOtion1_unselected = itemView.findViewById(R.id.editTextOtion1_unselected);
-            editTextOtion2_unselected = itemView.findViewById(R.id.editTextOtion2_unselected);
-            editTextOtion3_unselected = itemView.findViewById(R.id.editTextOtion3_unselected);
-            editTextOtion4_unselected = itemView.findViewById(R.id.editTextOtion4_unselected);
+            view_correct_a = itemView.findViewById(R.id.view_correct_a);
+            view_correct_b = itemView.findViewById(R.id.view_correct_b);
+            view_correct_c = itemView.findViewById(R.id.view_correct_c);
+            view_correct_d = itemView.findViewById(R.id.view_correct_d);
+            view_wrong_a = itemView.findViewById(R.id.view_wrong_a);
+            view_wrong_b = itemView.findViewById(R.id.view_wrong_b);
+            view_wrong_c = itemView.findViewById(R.id.view_wrong_c);
+            view_wrong_d = itemView.findViewById(R.id.view_wrong_d);
+            view_unselected_a = itemView.findViewById(R.id.view_unselected_a);
+            view_unselected_b = itemView.findViewById(R.id.view_unselected_b);
+            view_unselected_c = itemView.findViewById(R.id.view_unselected_c);
+            view_unselected_d = itemView.findViewById(R.id.view_unselected_d);
             text_discription = itemView.findViewById(R.id.text_discription);
             img_solution_title = itemView.findViewById(R.id.img_solution_title);
             img_solution_option1 = itemView.findViewById(R.id.img_solution_option1);
@@ -232,6 +289,18 @@ public class TestSolutionAdapter extends RecyclerView.Adapter<TestSolutionAdapte
             img_solution_option3 = itemView.findViewById(R.id.img_solution_option3);
             img_solution_option4 = itemView.findViewById(R.id.img_solution_option4);
             img_solution_discription = itemView.findViewById(R.id.img_solution_discription);
+            correct_image_a = itemView.findViewById(R.id.correct_image_a);
+            correct_image_b = itemView.findViewById(R.id.correct_image_b);
+            correct_image_c = itemView.findViewById(R.id.correct_image_c);
+            correct_image_d = itemView.findViewById(R.id.correct_image_d);
+            worng_image_a = itemView.findViewById(R.id.worng_image_a);
+            worng_image_b = itemView.findViewById(R.id.worng_image_b);
+            worng_image_c = itemView.findViewById(R.id.worng_image_c);
+            worng_image_d = itemView.findViewById(R.id.worng_image_d);
+            view_a = itemView.findViewById(R.id.view_a);
+            view_b = itemView.findViewById(R.id.view_b);
+            view_c = itemView.findViewById(R.id.view_c);
+            view_d = itemView.findViewById(R.id.view_d);
         }
     }
 }

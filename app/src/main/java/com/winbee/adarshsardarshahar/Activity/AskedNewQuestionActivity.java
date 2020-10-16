@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.winbee.adarshsardarshahar.Models.UrlNewQuestion;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
+import com.winbee.adarshsardarshahar.Utils.AssignmentData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
@@ -50,13 +51,11 @@ public class AskedNewQuestionActivity extends AppCompatActivity {
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);
-        String documentID=getIntent().getStringExtra("documentID");
-        if(documentID!=null)
-            System.out.println("intent "+documentID);
+
 
         CurrentUserName =  SharedPrefManager.getInstance(this).refCode().getUserId();
         editTextUserid.setText(CurrentUserName);
-        editTextDocumentId.setText(documentID);
+        editTextDocumentId.setText(AssignmentData.DocumentId);
 
         submit=findViewById(R.id.buttonSubmit);
         submit.setOnClickListener(new View.OnClickListener() {

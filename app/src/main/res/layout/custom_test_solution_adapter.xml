@@ -8,18 +8,35 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
+        android:elevation="2dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/botton_layout_white">
+        <RelativeLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/tv_question_num"
+                android:fontFamily="@font/proximanovaregular"
+                android:text=""
+                android:textSize="16sp" />
         <TextView
-            android:id="@+id/text_title"
+            android:id="@+id/tv_question_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="what is ur name"
-            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_circle_gray_trans"
+            android:text="1"
             android:layout_marginTop="5dp"
-            android:textSize="16sp"
-            android:fontFamily="@font/proximanovaregular"/>
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:textColor="@color/black"/>
         <ImageView
             android:id="@+id/img_solution_title"
             android:layout_width="match_parent"
@@ -29,81 +46,97 @@
             android:visibility="visible"
             android:layout_marginEnd="10dp"
             android:layout_below="@id/text_title"/>
-        <LinearLayout
+        </RelativeLayout>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_below="@id/layout_title"
+    android:background="@color/grey"/>
+        <RelativeLayout
             android:id="@+id/edit_option1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/botton_layout_white"
+            android:layout_height="55dp"
             android:gravity="center"
             android:visibility="visible"
             android:clickable="true"
-            android:layout_below="@id/img_solution_title"
+            android:layout_below="@id/layout_title"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="5dp"
-            android:src="@drawable/a_letter"/>
+            <TextView
+                android:id="@+id/image_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle_gray_trans"
+                android:text="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/editTextOtion1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/botton_layout_white"
             android:fontFamily="@font/proximanovaregular"
             android:text=""
             android:textColor="@color/edit_text"
             android:textColorHint="@color/edit_text"
-            android:inputType="text"
+            android:layout_toRightOf="@id/image_a"
             android:visibility="visible"
             android:padding="18dp"
             android:layout_marginStart="5dp"
             android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion1_correct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_correct"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
+
+            <ImageView
+                android:id="@+id/correct_image_a"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
                 android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion1_wrong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_selected"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
+                android:src="@drawable/success_image"/>
+
+            <ImageView
+                android:id="@+id/worng_image_a"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
                 android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion1_unselected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_flag"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
-                android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:src="@drawable/failed_image"/>
+        </RelativeLayout>
+        <View
+            android:id="@+id/view_correct_a"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option1"
+            android:background="@drawable/option_correct"/>
+        <View
+            android:id="@+id/view_wrong_a"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option1"
+            android:background="@drawable/option_selected"/>
+        <View
+            android:id="@+id/view_unselected_a"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option1"
+            android:background="@drawable/option_flag"/>
+        <View
+            android:id="@+id/view_a"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option1"
+            android:background="@color/grey"/>
+
         <RelativeLayout
             android:id="@+id/layout_img1"
             android:layout_width="match_parent"
@@ -121,11 +154,10 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/edit_option2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/botton_layout_white"
+            android:layout_height="55dp"
             android:gravity="center"
             android:visibility="visible"
             android:clickable="true"
@@ -133,69 +165,76 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+            <TextView
+                android:id="@+id/image_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle_gray_trans"
+                android:text="2"
+                android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/b_letter"/>
-
+                android:gravity="center"
+                android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/editTextOtion2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/botton_layout_white"
                 android:fontFamily="@font/proximanovaregular"
                 android:text=""
                 android:textColor="@color/edit_text"
                 android:textColorHint="@color/edit_text"
-                android:inputType="text"
+               android:layout_toRightOf="@id/image_b"
                 android:visibility="visible"
                 android:padding="18dp"
                 android:layout_marginStart="5dp"
                 android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion2_correct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_correct"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
+            <ImageView
+                android:id="@+id/correct_image_b"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
                 android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion2_wrong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_selected"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
+                android:src="@drawable/success_image"/>
+            <ImageView
+                android:id="@+id/worng_image_b"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
                 android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion2_unselected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_flag"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
-                android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:src="@drawable/failed_image"/>
+        </RelativeLayout>
+        <View
+            android:id="@+id/view_correct_b"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option2"
+            android:background="@drawable/option_correct"/>
+        <View
+            android:id="@+id/view_wrong_b"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option2"
+            android:background="@drawable/option_selected"/>
+        <View
+            android:id="@+id/view_unselected_b"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option2"
+            android:background="@drawable/option_flag"/>
+        <View
+            android:id="@+id/view_b"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option2"
+            android:background="@color/grey"/>
         <RelativeLayout
             android:id="@+id/layout_img2"
             android:layout_width="match_parent"
@@ -212,11 +251,10 @@
                 android:src="@drawable/ic_businessman"/>
 
         </RelativeLayout>
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/edit_option3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/botton_layout_white"
+            android:layout_height="55dp"
             android:gravity="center"
             android:visibility="visible"
             android:clickable="true"
@@ -224,69 +262,78 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+            <TextView
+                android:id="@+id/image_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle_gray_trans"
+                android:text="3"
+                android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/c_letter"/>
+                android:gravity="center"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/editTextOtion3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/botton_layout_white"
                 android:fontFamily="@font/proximanovaregular"
                 android:text=""
                 android:textColor="@color/edit_text"
                 android:textColorHint="@color/edit_text"
-                android:inputType="text"
+               android:layout_toRightOf="@id/image_c"
                 android:visibility="visible"
                 android:padding="18dp"
                 android:layout_marginStart="5dp"
                 android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion3_correct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_correct"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
+            <ImageView
+                android:id="@+id/correct_image_c"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
                 android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion3_wrong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_selected"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
+                android:src="@drawable/success_image"/>
+
+            <ImageView
+                android:id="@+id/worng_image_c"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
                 android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion3_unselected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_flag"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
-                android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:src="@drawable/failed_image"/>
+        </RelativeLayout>
+        <View
+            android:id="@+id/view_correct_c"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option3"
+            android:background="@drawable/option_correct"/>
+        <View
+            android:id="@+id/view_wrong_c"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option3"
+            android:background="@drawable/option_selected"/>
+        <View
+            android:id="@+id/view_unselected_c"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option3"
+            android:background="@drawable/option_flag"/>
+        <View
+            android:id="@+id/view_c"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option3"
+            android:background="@color/grey"/>
         <RelativeLayout
             android:id="@+id/layout_img3"
             android:layout_width="match_parent"
@@ -303,11 +350,10 @@
                 android:src="@drawable/ic_businessman"/>
 
         </RelativeLayout>
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/edit_option4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/botton_layout_white"
+            android:layout_height="55dp"
             android:gravity="center"
             android:visibility="visible"
             android:clickable="true"
@@ -316,70 +362,80 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+            <TextView
+                android:id="@+id/image_d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle_gray_trans"
+                android:text="4"
+                android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/d_letter"/>
+                android:gravity="center"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/editTextOtion4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/botton_layout_white"
                 android:fontFamily="@font/proximanovaregular"
                 android:text=""
                 android:textColor="@color/edit_text"
                 android:textColorHint="@color/edit_text"
-                android:inputType="text"
+               android:layout_toRightOf="@id/image_d"
                 android:visibility="visible"
                 android:padding="18dp"
                 android:layout_marginStart="5dp"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/editTextOtion4_correct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_correct"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
+
+            <ImageView
+                android:id="@+id/correct_image_d"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
                 android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion4_wrong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_selected"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/success_image"/>
+
+            <ImageView
+                android:id="@+id/worng_image_d"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
                 android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/editTextOtion4_unselected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/option_flag"
-                android:fontFamily="@font/proximanovaregular"
-                android:text=""
-                android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-                android:inputType="text"
-                android:visibility="gone"
-                android:padding="18dp"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:src="@drawable/failed_image"/>
+        </RelativeLayout>
+        <View
+            android:id="@+id/view_correct_d"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option4"
+            android:background="@drawable/option_correct"/>
+        <View
+            android:id="@+id/view_wrong_d"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option4"
+            android:background="@drawable/option_selected"/>
+        <View
+            android:id="@+id/view_unselected_d"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option4"
+            android:background="@drawable/option_flag"/>
+        <View
+            android:id="@+id/view_d"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:visibility="gone"
+            android:layout_below="@id/edit_option4"
+            android:background="@color/grey"/>
         <RelativeLayout
             android:id="@+id/layout_img4"
             android:layout_width="match_parent"

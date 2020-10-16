@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.winbee.adarshsardarshahar.Activity.OnlineQuestionActivity;
+import com.winbee.adarshsardarshahar.Activity.TestOnlineActivity;
 import com.winbee.adarshsardarshahar.Models.StudentQAModel;
 import com.winbee.adarshsardarshahar.R;
 
@@ -40,6 +41,12 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
         String quesNum=String.valueOf(position+1);
         viewHolder.tv_question_num.setText(quesNum);
         setBackGround(viewHolder.tv_question_num,studentQAModel.getAnsStatus());
+//        viewHolder.rl_question_num.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ((OnlineQuestionActivity)context).questionSelected(position);
+//            }
+//        });
         viewHolder.rl_question_num.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

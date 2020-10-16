@@ -1,5 +1,6 @@
 package com.winbee.adarshsardarshahar.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.winbee.adarshsardarshahar.Activity.OnlineQuestionActivity;
+import com.winbee.adarshsardarshahar.Activity.TestOnlineActivity;
 import com.winbee.adarshsardarshahar.Models.StudentQAModel;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.Utils.OnlineTestData;
@@ -19,7 +21,7 @@ import java.util.List;
 public class BottomSheetResultFragment extends BottomSheetDialogFragment {
     private Context mContext;
     private View view;
-    private TextView total_attempted,total_review,total_unattempted,total_submit_review;
+    private TextView total_attempted,total_review,total_unattempted,total_submit_review,total_question;
     private Button button_submit,button_back_test;
     public BottomSheetResultFragment() {
         // Required empty public constructor
@@ -59,6 +61,7 @@ public class BottomSheetResultFragment extends BottomSheetDialogFragment {
         total_review=view.findViewById(R.id.total_review);
         total_unattempted=view.findViewById(R.id.total_unattempted);
         total_submit_review=view.findViewById(R.id.total_submit_review);
+        total_question=view.findViewById(R.id.total_question);
         button_submit=view.findViewById(R.id.button_submit);
         button_back_test=view.findViewById(R.id.button_back_test);
     }
@@ -92,6 +95,7 @@ public class BottomSheetResultFragment extends BottomSheetDialogFragment {
         total_review.setText(String.valueOf(total_reviewInt));
         total_unattempted.setText(String.valueOf(total_unattemptedInt));
         total_submit_review.setText(String.valueOf(total_submit_reviewInt));
+        total_question.setText(Integer.toString(OnlineTestData.totalQuestion));
     }
 
 }

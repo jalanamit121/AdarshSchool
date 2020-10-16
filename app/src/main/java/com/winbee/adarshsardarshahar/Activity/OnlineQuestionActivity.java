@@ -52,8 +52,9 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
     private ImageView pauseBtn,listBtn,img_title,img_option1,img_option2,img_option3,img_option4;
     private TextView tv_testName,tv_timer;
     private RelativeLayout layout_question;
-    private TextView tv_question_num,text_view_marks,tv_review_question,textview_Question,textview_option1,textview_option2,textview_option3,textview_option4;
-    private Button buttonSubmit,buttonSubmitAndReview,buttonReview,buttonNext,buttonSaveNext;
+    private TextView tv_question_num,text_view_marks,tv_review_question,textview_Question,textview_option1,
+            textview_option2,textview_option3,textview_option4,tv_review_question_selected,buttonSubmit;
+    private Button buttonSubmitAndReview,buttonReview,buttonNext,buttonSaveNext;
     private RelativeLayout layout_option1,layout_option2,layout_option3,layout_option4;
     private int currentQuestion=0,totalQuestion=0,ansSelected=0,questionReview=0;
     private String selectedAns="";
@@ -70,7 +71,7 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_test_question);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         countTimer=Integer.parseInt(OnlineTestData.time);
         countTimer=countTimer*60;
@@ -84,6 +85,8 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
         layout_option3.setOnClickListener(this);
         layout_option4.setOnClickListener(this);
         listBtn.setOnClickListener(this);
+        tv_review_question_selected.setOnClickListener(this);
+        tv_review_question.setOnClickListener(this);
 
         buttonSaveNext.setOnClickListener(this);
         buttonNext.setOnClickListener(this);
@@ -253,7 +256,9 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
                     }
                 }
                 break;
-            case R.id.buttonReview:
+            case R.id.tv_review_question:
+                tv_review_question.setVisibility(View.GONE);
+                tv_review_question_selected.setVisibility(View.VISIBLE);
                 if(questionReview==0){
                     questionReview=1;
                     tv_review_question.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,getDrawable(R.drawable.ic_star_black_24dp),null);
@@ -267,6 +272,36 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
                     studentQAModelList.get(currentQuestion).setAnsStatusCode("2");
                 }
                 break;
+            case R.id.tv_review_question_selected:
+                tv_review_question.setVisibility(View.VISIBLE);
+                tv_review_question_selected.setVisibility(View.GONE);
+                if(questionReview==0){
+                    questionReview=0;
+                    tv_review_question.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,getDrawable(R.drawable.ic_star_border_black_24dp),null);
+                    studentQAModelList.get(currentQuestion).setAnsStatus("not_answered");
+                    studentQAModelList.get(currentQuestion).setAnsStatusCode("2");
+                }
+                else{
+                    questionReview=1;
+                    tv_review_question.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,getDrawable(R.drawable.ic_star_black_24dp),null);
+                    studentQAModelList.get(currentQuestion).setAnsStatus("review");
+                    studentQAModelList.get(currentQuestion).setAnsStatusCode("3");
+                }
+                break;
+//            case R.id.buttonReview:
+//                if(questionReview==0){
+//                    questionReview=1;
+//                    tv_review_question.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,getDrawable(R.drawable.ic_star_black_24dp),null);
+//                    studentQAModelList.get(currentQuestion).setAnsStatus("review");
+//                    studentQAModelList.get(currentQuestion).setAnsStatusCode("3");
+//                }
+//                else{
+//                    questionReview=0;
+//                    tv_review_question.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,getDrawable(R.drawable.ic_star_border_black_24dp),null);
+//                    studentQAModelList.get(currentQuestion).setAnsStatus("not_answered");
+//                    studentQAModelList.get(currentQuestion).setAnsStatusCode("2");
+//                }
+//                break;
             case R.id.buttonSubmitAndReview:
                 if(ansSelected==1)
                 {
@@ -314,6 +349,7 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
         tv_question_num=findViewById(R.id.tv_question_num);
         text_view_marks=findViewById(R.id.text_view_marks);
         tv_review_question=findViewById(R.id.tv_review_question);
+        tv_review_question_selected=findViewById(R.id.tv_review_question_selected);
         textview_Question=findViewById(R.id.textview_Question);
         textview_option1=findViewById(R.id.textview_option1);
         textview_option2=findViewById(R.id.textview_option2);
@@ -398,7 +434,7 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
         layout_option3.setBackgroundResource(R.drawable.q_non_selected);
         layout_option4.setBackgroundResource(R.drawable.q_non_selected);
         int q=currentQuestion+1;
-        tv_question_num.setText(""+q);
+        tv_question_num.setText("Q"+q+".");
         textview_Question.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getQuestionTitle()));
         textview_option1.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption1()));
         textview_option2.setText(Html.fromHtml(siaddQuestionDataModelList.get(currentQuestion).getOption2()));

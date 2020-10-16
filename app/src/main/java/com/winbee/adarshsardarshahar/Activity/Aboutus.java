@@ -16,7 +16,6 @@ public class Aboutus extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutus);
-       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(" About Us");
         actionBar.setDisplayHomeAsUpEnabled(true);

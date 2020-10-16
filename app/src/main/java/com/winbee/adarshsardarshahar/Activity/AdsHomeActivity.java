@@ -22,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,8 +48,12 @@ import com.winbee.adarshsardarshahar.Models.BannerModel;
 import com.winbee.adarshsardarshahar.Models.BranchName;
 import com.winbee.adarshsardarshahar.Models.CourseDatum;
 import com.winbee.adarshsardarshahar.Models.LiveClass;
+import com.winbee.adarshsardarshahar.Models.LogOut;
 import com.winbee.adarshsardarshahar.Models.PurchasedMainModel;
 import com.winbee.adarshsardarshahar.Models.RefCode;
+import com.winbee.adarshsardarshahar.NewModels.Attendence;
+import com.winbee.adarshsardarshahar.NewModels.LiveClassContent;
+import com.winbee.adarshsardarshahar.NewModels.LiveClassContentaArray;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
 import com.winbee.adarshsardarshahar.Utils.AssignmentData;
@@ -74,7 +79,7 @@ public class AdsHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private List<CourseDatum> list;
     private ArrayList<BannerModel> bannerModel;
-    private ArrayList<LiveClass> liveList;
+    private ArrayList<LiveClassContentaArray> liveList;
     private RecyclerView video_list_recycler,video_list_recycler1;
     private AdsHomeAdapter adapter;
     private AdsHomeLiveAdapter liveAdapter;
@@ -84,7 +89,7 @@ public class AdsHomeActivity extends AppCompatActivity
     private ProgressBarUtil progressBarUtil;
     boolean doubleBackToExitPressedOnce = false;
     TextView viewAll,nocourse,noclasses;
-    String sCurrentVersion,sLastestVersion,Userid;
+    String sCurrentVersion,sLastestVersion,Userid,android_id,UserMobile,UserPassword;
     SwipeRefreshLayout ads_home;
     ImageSlider imageSlider;
     LinearLayout home,histroy,logout,layout_doubt;
@@ -112,8 +117,6 @@ public class AdsHomeActivity extends AppCompatActivity
                         if (!task.isSuccessful()) {
                             msg = "failed";
                         }
-//
-                        //Toast.makeText(GecHomeActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -142,14 +145,17 @@ public class AdsHomeActivity extends AppCompatActivity
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(video_list_recycler1);
         video_list_recycler1.addItemDecoration(new LinePagerIndicatorDecoration());
-
+        UserMobile=SharedPrefManager.getInstance(this).refCode().getUsername();
+        UserPassword=SharedPrefManager.getInstance(this).refCode().getPassword();
+        Userid = SharedPrefManager.getInstance(this).refCode().getUserId();
+        android_id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
 
         home=findViewById(R.id.layout_home);
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);
 
-        Userid = SharedPrefManager.getInstance(this).refCode().getUserId();
+
         nocourse=findViewById(R.id.nocourse);
         noclasses=findViewById(R.id.noclasses);
         layout_online_test=findViewById(R.id.layout_online_test);
@@ -245,22 +251,42 @@ public class AdsHomeActivity extends AppCompatActivity
     private void callLiveApiService() {
         progressBarUtil.showProgress();
         ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-        Call<ArrayList<LiveClass>> call = apiCAll.getLive(3,"wb_005",Userid);
-        call.enqueue(new Callback<ArrayList<LiveClass>>() {
+        Call<LiveClassContent> call = apiCAll.getLive(3,"WB_005",Userid,android_id);
+        call.enqueue(new Callback<LiveClassContent>() {
             @Override
-            public void onResponse(Call<ArrayList<LiveClass>> call, Response<ArrayList<LiveClass>> response) {
+            public void onResponse(Call<LiveClassContent> call, Response<LiveClassContent> response) {
+                LiveClassContent liveClassContent = response.body();
                 int statusCode = response.code();
                 liveList = new ArrayList();
                 if(statusCode==200) {
-                    if (response.body().size()!=0) {
+                    if (response.body().getError()==false) {
                         System.out.println("Suree body: " + response.body());
-                        liveList = response.body();
+                        liveList = new ArrayList<>(Arrays.asList(Objects.requireNonNull(liveClassContent).getData()));
+                        if (liveList.size()!=0){
+                            noclasses.setVisibility(View.GONE);
                         liveAdapter = new AdsHomeLiveAdapter(AdsHomeActivity.this, liveList);
                         video_list_recycler1.setAdapter(liveAdapter);
                         progressBarUtil.hideProgress();
+                        }else{
+                            progressBarUtil.hideProgress();
+                            noclasses.setVisibility(View.VISIBLE);
+                        }
+
                     }else{
-                        progressBarUtil.hideProgress();
-                        noclasses.setVisibility(View.VISIBLE);
+                        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(
+                                AdsHomeActivity.this);
+                        alertDialogBuilder.setTitle("Alert");
+                        alertDialogBuilder
+                                .setMessage(response.body().getError_Message())
+                                .setCancelable(false)
+                                .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        forceLogout();
+                                    }
+                                });
+
+                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
                     }
                 } else{
                     System.out.println("Suree: response code"+response.message());
@@ -269,7 +295,7 @@ public class AdsHomeActivity extends AppCompatActivity
             }
 
             @Override
-            public void onFailure(Call<ArrayList<LiveClass>> call, Throwable t) {
+            public void onFailure(Call<LiveClassContent> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"Failed" + t.getMessage(),Toast.LENGTH_SHORT).show();
 
                 System.out.println("Suree: Error "+t.getMessage());
@@ -281,16 +307,34 @@ public class AdsHomeActivity extends AppCompatActivity
     private void callAttendenceService() {
         progressBarUtil.showProgress();
         ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-        Call<AttendenceModel> call = apiCAll.fetchAttendence(Userid);
-        call.enqueue(new Callback<AttendenceModel>() {
+        Call<Attendence> call = apiCAll.fetchAttendence(Userid,android_id);
+        call.enqueue(new Callback<Attendence>() {
             @Override
-            public void onResponse(Call<AttendenceModel> call, Response<AttendenceModel> response) {
+            public void onResponse(Call<Attendence> call, Response<Attendence> response) {
                 int statusCode = response.code();
                 liveList = new ArrayList();
                 if(statusCode==200) {
-                    AssignmentData.AttendenceMessage=response.body().getMessage();
+                    if (response.body().getError()==false){
+                    AssignmentData.AttendenceMessage=response.body().getData().getMessage();
                     updateAttendenceDialog();
                     progressBarUtil.hideProgress();
+                    }else{
+                        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(
+                                AdsHomeActivity.this);
+                        alertDialogBuilder.setTitle("Alert");
+                        alertDialogBuilder
+                                .setMessage(response.body().getError_Message())
+                                .setCancelable(false)
+                                .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        forceLogout();
+                                    }
+                                });
+
+                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+                    }
+
                 } else{
                     System.out.println("Suree: response code"+response.message());
                     Toast.makeText(getApplicationContext(),"Network Issues" ,Toast.LENGTH_SHORT).show();
@@ -298,7 +342,7 @@ public class AdsHomeActivity extends AppCompatActivity
             }
 
             @Override
-            public void onFailure(Call<AttendenceModel> call, Throwable t) {
+            public void onFailure(Call<Attendence> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"Failed" + t.getMessage(),Toast.LENGTH_SHORT).show();
 
                 System.out.println("Suree: Error "+t.getMessage());
@@ -310,7 +354,7 @@ public class AdsHomeActivity extends AppCompatActivity
     private void callApiService(String Userid) {
         progressBarUtil.showProgress();
         ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-        Call<PurchasedMainModel> call = apiCAll.getCourseById(1,Userid,"WB_005");
+        Call<PurchasedMainModel> call = apiCAll.getCourseById(1,Userid,"WB_005",android_id);
         call.enqueue(new Callback<PurchasedMainModel>() {
             @Override
             public void onResponse(Call<PurchasedMainModel> call, Response<PurchasedMainModel> response) {
@@ -322,7 +366,7 @@ public class AdsHomeActivity extends AppCompatActivity
                         layout_noCourse.setVisibility(View.VISIBLE);
                         layout_welcome.setVisibility(View.INVISIBLE);
                         if (purchasedMainModel !=null) {
-                            list = new ArrayList<>(Arrays.asList(Objects.requireNonNull(purchasedMainModel).getData()));
+                            list = new ArrayList<>(Arrays.asList(Objects.requireNonNull(purchasedMainModel).getCourseData()));
                             System.out.println("Suree body: " + response.body());
                             adapter = new AdsHomeAdapter(AdsHomeActivity.this, list);
                             video_list_recycler.setAdapter(adapter);
@@ -454,12 +498,65 @@ public class AdsHomeActivity extends AppCompatActivity
         return true;
     }
 
-    private void logout() {
+//    private void logout() {
+//        SharedPrefManager.getInstance(this).logout();
+//        startActivity(new Intent(this, LoginActivity.class));
+//        Objects.requireNonNull(this).finish();
+//    }
+//
+private void logout() {
+
+    progressBarUtil.showProgress();
+    ClientApi mService = ApiClient.getClient().create(ClientApi.class);
+    Call<LogOut> call = mService.refCodeLogout(3, UserMobile, UserPassword, "ADS001",android_id);
+    call.enqueue(new Callback<LogOut>() {
+        @Override
+        public void onResponse(Call<LogOut> call, Response<LogOut> response) {
+            int statusCode = response.code();
+            if (statusCode == 200 && response.body().getLoginStatus()!=false) {
+                if (response.body().getError()==false){
+                    progressBarUtil.hideProgress();
+                    SharedPrefManager.getInstance(AdsHomeActivity.this).logout();
+                    startActivity(new Intent(AdsHomeActivity.this, LoginActivity.class));
+                    finish();
+                }else{
+                    android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(
+                            AdsHomeActivity.this);
+                    alertDialogBuilder.setTitle("Alert");
+                    alertDialogBuilder
+                            .setMessage(response.body().getError_Message())
+                            .setCancelable(false)
+                            .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    forceLogout();
+                                }
+                            });
+
+                    android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+
+                }
+
+
+            } else {
+                progressBarUtil.hideProgress();
+                Toast.makeText(AdsHomeActivity.this, response.body().getMessageFailure(), Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+        @Override
+        public void onFailure(Call<LogOut> call, Throwable t) {
+            Toast.makeText(AdsHomeActivity.this, "Failed" + t.getMessage(), Toast.LENGTH_LONG).show();
+            System.out.println(t.getLocalizedMessage());
+        }
+    });
+}
+    private void forceLogout() {
         SharedPrefManager.getInstance(this).logout();
         startActivity(new Intent(this, LoginActivity.class));
         Objects.requireNonNull(this).finish();
     }
-
 
     // showing the update pop up to user
     private class GetLastesVersion extends AsyncTask<String,Void,String> {

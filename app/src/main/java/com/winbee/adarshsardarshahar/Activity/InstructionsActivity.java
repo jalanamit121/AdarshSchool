@@ -76,10 +76,13 @@ public class InstructionsActivity extends AppCompatActivity {
                 int statusCode = response.code();
                 if(statusCode==200){
                     progressBarUtil.hideProgress();
+//                    Intent intent=new Intent(InstructionsActivity.this, OnlineQuestionActivity.class);
+//                    startActivity(intent);
+//                    finish();
                     Intent intent=new Intent(InstructionsActivity.this, OnlineQuestionActivity.class);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(getApplicationContext(),"Success" , Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(),"Success" , Toast.LENGTH_SHORT).show();
 
                 }
                 else{

@@ -22,7 +22,6 @@ import retrofit2.Response;
 
 
 public class ForgetPasswordActivity extends AppCompatActivity {
-
     EditText forgetMobile;
     Button forgetButton;
     private ProgressBarUtil progressBarUtil;

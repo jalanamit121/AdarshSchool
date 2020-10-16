@@ -45,4 +45,40 @@
 
     </string-array>
 
+    <string-array name="std">
+
+        <item>Select Class</item>//0
+        <item>Class XII - Science</item>//1
+        <item>Class XII - Commerce</item>//2
+        <item>Class XII - Arts</item>//2
+        <item>Class XII Agriculture</item>
+        <item>XII SCIENCE (ENGLISH MEDIUM)</item>
+        <item>Class XI - Science</item>
+        <item>Class XI - Commerce</item>
+        <item>Class XI - Arts</item>
+        <item>Class XI - Agriculture</item>
+        <item>Class X</item>
+        <item>Class IX</item>
+        <item>Class VIII</item>
+        <item>Class VII</item>
+        <item>Class VI</item>
+        <item>Class V</item>
+        <item>Class IV</item>
+        <item>Class III</item>
+        <item>Class II</item>
+        <item>Class I</item>
+        <item>B.Sc. Part-I</item>
+        <item>B.Sc. Part-II</item>
+        <item>B.Sc. Part-III</item>
+        <item>B.Sc. B.Ed Part-I</item>
+        <item>B.Sc. B.Ed Part-II</item>
+        <item>B.Sc. B.Ed Part-III</item>
+        <item>B.Sc. B.Ed Part-IV</item>
+        <item>B.A. B.Ed. Part-I</item>
+        <item>B.A. B.Ed. Part-II</item>
+        <item>B.A. B.Ed. Part-III</item>
+        <item>B.A. B.Ed. Part-IV</item>
+
+    </string-array>
+
 </resources>

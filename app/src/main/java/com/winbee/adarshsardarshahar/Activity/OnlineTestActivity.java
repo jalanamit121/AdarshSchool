@@ -39,7 +39,7 @@ public class OnlineTestActivity extends AppCompatActivity {
     private RecyclerView recycle_test;
     private Toast toast_msg;
     String UserId;
-    LinearLayout home,histroy,logout;
+    LinearLayout home,histroy,logout,layout_doubt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +77,14 @@ public class OnlineTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://adarshsardarshahar.com/"));
+                startActivity(intent);
+            }
+        });
+        layout_doubt=findViewById(R.id.layout_doubt);
+        layout_doubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OnlineTestActivity.this,DiscussionActivity.class);
                 startActivity(intent);
             }
         });

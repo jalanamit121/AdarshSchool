@@ -41,11 +41,23 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.Custom
     public void onBindViewHolder(@NonNull CustomViewHolder viewHolder, int position) {
         final SIACDetailsDataModel siacDetailsDataModel = siacDetailsDataModelList.get(position);
         viewHolder.online_testname.setText(siacDetailsDataModel.getPaperName());
-        if (siacDetailsDataModel.getIsAttempted()!=true) {
-            viewHolder.branch_live1.setOnClickListener(new View.OnClickListener() {
+        viewHolder.total_question.setText(siacDetailsDataModel.getTotal_Number_of_question()+" Questions");
+        viewHolder.total_time.setText(siacDetailsDataModel.getTime()+" Mins");
+
+        if (siacDetailsDataModel.getIsAttempted()) {
+            viewHolder.layout_pervious.setVisibility(View.VISIBLE);
+            viewHolder.layout_start.setVisibility(View.VISIBLE);
+            viewHolder.layout_new_start.setVisibility(View.GONE);
+        }else if (!siacDetailsDataModel.getIsAttempted()){
+            viewHolder.layout_pervious.setVisibility(View.GONE);
+            viewHolder.layout_start.setVisibility(View.GONE);
+            viewHolder.layout_new_start.setVisibility(View.VISIBLE);
+        }
+            viewHolder.layout_start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     OnlineTestData.bucketIDre = siacDetailsDataModel.getBucketID();
+                    OnlineTestData.totalQuestion = siacDetailsDataModel.getTotal_Number_of_question();
                     OnlineTestData.paperID = siacDetailsDataModel.getPaperID();
                     OnlineTestData.paperName = siacDetailsDataModel.getPaperName();
                     OnlineTestData.paperSection_Encode = siacDetailsDataModel.getPaperSection_Encode();
@@ -61,54 +73,46 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.Custom
                     context.startActivity(intent);
                 }
             });
-        }else{
-            viewHolder.branch_live1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Adarsh Sardarshahar");
-                    builder.setMessage("You Have Attempted the Test");
-                    builder.setCancelable(false);
 
-                    builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
+        viewHolder.layout_new_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnlineTestData.bucketIDre = siacDetailsDataModel.getBucketID();
+                OnlineTestData.paperID = siacDetailsDataModel.getPaperID();
+                OnlineTestData.paperName = siacDetailsDataModel.getPaperName();
+                OnlineTestData.paperSection_Encode = siacDetailsDataModel.getPaperSection_Encode();
+                OnlineTestData.isNegativeMarking_encode = siacDetailsDataModel.getIsNegativeMarking_encode();
+                OnlineTestData.time = siacDetailsDataModel.getTime();
+                OnlineTestData.isOpen = siacDetailsDataModel.getIsOpen();
+                OnlineTestData.openDate = siacDetailsDataModel.getOpenDate();
+                OnlineTestData.isNegativeMarking_decode = siacDetailsDataModel.getIsNegativeMarking_decode();
+                OnlineTestData.isPremium_encode = siacDetailsDataModel.getIsPremium_encode();
+                OnlineTestData.isPremium_decode = siacDetailsDataModel.getIsPremium_decode();
+                OnlineTestData.description = siacDetailsDataModel.getDescription();
+                Intent intent = new Intent(context, InstructionsActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
-                            dialogInterface.cancel();
-
-                        }
-                    });
-                    builder.setPositiveButton("View Solution", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            OnlineTestData.bucketIDre = siacDetailsDataModel.getBucketID();
-                            OnlineTestData.paperID = siacDetailsDataModel.getPaperID();
-                            OnlineTestData.paperName = siacDetailsDataModel.getPaperName();
-                            OnlineTestData.paperSection_Encode = siacDetailsDataModel.getPaperSection_Encode();
-                            OnlineTestData.isNegativeMarking_encode = siacDetailsDataModel.getIsNegativeMarking_encode();
-                            OnlineTestData.time = siacDetailsDataModel.getTime();
-                            OnlineTestData.isOpen = siacDetailsDataModel.getIsOpen();
-                            OnlineTestData.openDate = siacDetailsDataModel.getOpenDate();
-                            OnlineTestData.isNegativeMarking_decode = siacDetailsDataModel.getIsNegativeMarking_decode();
-                            OnlineTestData.isPremium_encode = siacDetailsDataModel.getIsPremium_encode();
-                            OnlineTestData.isPremium_decode = siacDetailsDataModel.getIsPremium_decode();
-                            OnlineTestData.description = siacDetailsDataModel.getDescription();
-
-                            Intent intent  =new Intent(context, TestSolutionActivity.class);
-                            context.startActivity(intent);
-                            dialogInterface.dismiss();
-
-                        }
-                    });
-
-                    builder.show();
-
-
-                }
-            });
-
-        }
-
+        viewHolder.layout_pervious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OnlineTestData.bucketIDre = siacDetailsDataModel.getBucketID();
+                OnlineTestData.paperID = siacDetailsDataModel.getPaperID();
+                OnlineTestData.paperName = siacDetailsDataModel.getPaperName();
+                OnlineTestData.paperSection_Encode = siacDetailsDataModel.getPaperSection_Encode();
+                OnlineTestData.isNegativeMarking_encode = siacDetailsDataModel.getIsNegativeMarking_encode();
+                OnlineTestData.time = siacDetailsDataModel.getTime();
+                OnlineTestData.isOpen = siacDetailsDataModel.getIsOpen();
+                OnlineTestData.openDate = siacDetailsDataModel.getOpenDate();
+                OnlineTestData.isNegativeMarking_decode = siacDetailsDataModel.getIsNegativeMarking_decode();
+                OnlineTestData.isPremium_encode = siacDetailsDataModel.getIsPremium_encode();
+                OnlineTestData.isPremium_decode = siacDetailsDataModel.getIsPremium_decode();
+                OnlineTestData.description = siacDetailsDataModel.getDescription();
+                Intent intent = new Intent(context, TestSolutionActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
     @Override
@@ -118,12 +122,18 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.Custom
     static class CustomViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout branch_live1;
         ImageView live_image;
-        TextView online_testname;
+        RelativeLayout layout_start,layout_pervious,layout_new_start;
+        TextView online_testname,total_question,total_time;
         CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             branch_live1=itemView.findViewById(R.id.branch_live1);
             live_image=itemView.findViewById(R.id.live_image);
             online_testname=itemView.findViewById(R.id.online_testname);
+            layout_start=itemView.findViewById(R.id.layout_start);
+            layout_new_start=itemView.findViewById(R.id.layout_new_start);
+            layout_pervious=itemView.findViewById(R.id.layout_pervious);
+            total_question=itemView.findViewById(R.id.total_question);
+            total_time=itemView.findViewById(R.id.total_time);
         }
     }
 }

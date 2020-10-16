@@ -20,6 +20,8 @@
         android:layout_gravity="start"
         android:background="@drawable/background_color"
         android:fitsSystemWindows="true"
+        app:itemIconTint="#fff"
+        app:itemTextColor="@color/white"
         app:headerLayout="@layout/nav_header_ads_home"
         app:menu="@menu/activity_ads_home_drawer" />
 

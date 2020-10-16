@@ -49,8 +49,12 @@ public class RefCode implements Serializable {
     @SerializedName("Cred")
     @Expose
     private String cred;
+    @SerializedName("error_code")
+    @Expose
+    private Integer error_code;
 
-    public RefCode(String username, String name, String email, String role_Encode, String userId, String ref_code,String whatsaapNo ) {
+
+    public RefCode(String username, String name, String email, String role_Encode, String userId, String ref_code,String whatsaapNo,String password ) {
         this.username=username;
         this.name=name;
         this.email=email;
@@ -58,6 +62,7 @@ public class RefCode implements Serializable {
         this.userId=userId;
         this.ref_code=ref_code;
         this.whatsaapNo=whatsaapNo;
+        this.password=password;
     }
 
     public RefCode() {
@@ -174,6 +179,14 @@ public class RefCode implements Serializable {
 
     public void setCred(String cred) {
         this.cred = cred;
+    }
+
+    public Integer getError_code() {
+        return error_code;
+    }
+
+    public void setError_code(Integer error_code) {
+        this.error_code = error_code;
     }
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="167dp"
-    android:layout_height="193dp"
+    android:layout_height="200dp"
     android:layout_marginTop="10dp"
     android:id="@+id/branch_sem"
     android:elevation="3dp"
@@ -12,7 +12,7 @@
     <RelativeLayout
        android:id="@+id/branch_name1"
         android:layout_width="165dp"
-        android:layout_height="190dp"
+        android:layout_height="200dp"
         android:clickable="true"
         android:clipToPadding="false"
         android:orientation="horizontal">
@@ -20,13 +20,14 @@
         <!--title and desc-->
         <LinearLayout
             android:layout_width="165dp"
-            android:layout_height="190dp"
+            android:layout_height="200dp"
             android:layout_alignParentTop="true"
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/branch_image"
                 android:layout_width="165dp"
                 android:layout_height="100dp"
+                android:elevation="3dp"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/dummy"/>
 
@@ -50,7 +51,7 @@
                 android:layout_marginEnd="10dp"
                 android:text=""
                 android:textColor="#111"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -68,9 +69,9 @@
                     android:id="@+id/text_video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="video"
+                    android:text="Video"
                     android:textColor="@color/edit_text"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
                 <TextView
                     android:id="@+id/total_video"
                     android:layout_width="wrap_content"
@@ -90,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="Document"
                     android:textColor="@color/edit_text"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
                 <TextView
                     android:id="@+id/total_document"
                     android:layout_width="wrap_content"

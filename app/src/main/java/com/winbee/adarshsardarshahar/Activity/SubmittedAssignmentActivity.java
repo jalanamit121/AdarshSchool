@@ -1,8 +1,10 @@
 package com.winbee.adarshsardarshahar.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.winbee.adarshsardarshahar.Adapter.SubmittedAdapter;
+import com.winbee.adarshsardarshahar.Models.LogOut;
 import com.winbee.adarshsardarshahar.Models.SubmittedAssignment;
 import com.winbee.adarshsardarshahar.Models.SubmittedDatum;
 import com.winbee.adarshsardarshahar.R;
@@ -39,7 +42,7 @@ public class SubmittedAssignmentActivity extends AppCompatActivity {
     ScrollView scrollView;
     private SubmittedAdapter submittedAdapter;
     private RecyclerView assignmentView;
-    String Userid;
+    String Userid,UserMobile,UserPassword,android_id;
     private Button btn_submitted;
     LinearLayout home,histroy,logout,layout_doubt;
 
@@ -53,8 +56,12 @@ public class SubmittedAssignmentActivity extends AppCompatActivity {
         histroy=findViewById(R.id.layout_history);
         logout=findViewById(R.id.layout_logout);
         today_classes=findViewById(R.id.today_classes);
-        Userid = SharedPrefManager.getInstance(this).refCode().getUserId();
         progressBarUtil   =  new ProgressBarUtil(this);
+        UserMobile=SharedPrefManager.getInstance(this).refCode().getUsername();
+        UserPassword=SharedPrefManager.getInstance(this).refCode().getPassword();
+        Userid = SharedPrefManager.getInstance(this).refCode().getUserId();
+        android_id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
         assignmentView = findViewById(R.id.assignment_review);
         btn_submitted=findViewById(R.id.btn_submitted);
         btn_submitted.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +106,7 @@ public class SubmittedAssignmentActivity extends AppCompatActivity {
     private void callAllAssignment(String Userid) {
         progressBarUtil.showProgress();
         ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-        Call<SubmittedAssignment> call = apiCAll.getSubmitedAssignment("WB_005",Userid);
+        Call<SubmittedAssignment> call = apiCAll.getSubmitedAssignment("WB_005",Userid,android_id);
         call.enqueue(new Callback<SubmittedAssignment>() {
             @Override
             public void onResponse(Call<SubmittedAssignment> call, Response<SubmittedAssignment> response) {
@@ -108,11 +115,29 @@ public class SubmittedAssignmentActivity extends AppCompatActivity {
                 list = new ArrayList();
                 if(statusCode==200) {
                     if (response.body().getAssignment() == true) {
-                        list = new ArrayList<>(Arrays.asList(submittedAssignment.getData()));
-                        System.out.println("Suree body: " + response.body());
-                        submittedAdapter = new SubmittedAdapter(SubmittedAssignmentActivity.this, list);
-                        assignmentView.setAdapter(submittedAdapter);
-                        progressBarUtil.hideProgress();
+                        if (response.body().getError()==false) {
+                            list = new ArrayList<>(Arrays.asList(Objects.requireNonNull(submittedAssignment).getAssignment_Data()));
+                            System.out.println("Suree body: " + response.body());
+                                submittedAdapter = new SubmittedAdapter(SubmittedAssignmentActivity.this, list);
+                                assignmentView.setAdapter(submittedAdapter);
+                                progressBarUtil.hideProgress();
+
+                        }else{
+                            android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(
+                                    SubmittedAssignmentActivity.this);
+                            alertDialogBuilder.setTitle("Alert");
+                            alertDialogBuilder
+                                    .setMessage(response.body().getError_Message())
+                                    .setCancelable(false)
+                                    .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            forceLogout();
+                                        }
+                                    });
+
+                            android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                            alertDialog.show();
+                        }
                     }else
                     {
                         today_classes.setVisibility(View.VISIBLE);
@@ -135,10 +160,57 @@ public class SubmittedAssignmentActivity extends AppCompatActivity {
     }
 
     private void logout() {
+
+        progressBarUtil.showProgress();
+        ClientApi mService = ApiClient.getClient().create(ClientApi.class);
+        Call<LogOut> call = mService.refCodeLogout(3, UserMobile, UserPassword, "ADS001",android_id);
+        call.enqueue(new Callback<LogOut>() {
+            @Override
+            public void onResponse(Call<LogOut> call, Response<LogOut> response) {
+                int statusCode = response.code();
+                if (statusCode == 200 && response.body().getLoginStatus()!=false) {
+                    if (response.body().getError()==false){
+                        progressBarUtil.hideProgress();
+                        SharedPrefManager.getInstance(SubmittedAssignmentActivity.this).logout();
+                        startActivity(new Intent(SubmittedAssignmentActivity.this, LoginActivity.class));
+                        finish();
+                    }else{
+                        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(
+                                SubmittedAssignmentActivity.this);
+                        alertDialogBuilder.setTitle("Alert");
+                        alertDialogBuilder
+                                .setMessage(response.body().getError_Message())
+                                .setCancelable(false)
+                                .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        forceLogout();
+                                    }
+                                });
+
+                        android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+
+                    }
+
+
+                } else {
+                    progressBarUtil.hideProgress();
+                    Toast.makeText(SubmittedAssignmentActivity.this, response.body().getMessageFailure(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LogOut> call, Throwable t) {
+                Toast.makeText(SubmittedAssignmentActivity.this, "Failed" + t.getMessage(), Toast.LENGTH_LONG).show();
+                System.out.println(t.getLocalizedMessage());
+            }
+        });
+    }
+    private void forceLogout() {
         SharedPrefManager.getInstance(this).logout();
         startActivity(new Intent(this, LoginActivity.class));
         Objects.requireNonNull(this).finish();
     }
-
 }
 

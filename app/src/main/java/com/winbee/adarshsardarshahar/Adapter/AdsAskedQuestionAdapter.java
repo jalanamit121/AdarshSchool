@@ -2,6 +2,7 @@ package com.winbee.adarshsardarshahar.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.winbee.adarshsardarshahar.Activity.AskedSolutionActivity;
 import com.winbee.adarshsardarshahar.Models.UrlQuestion;
 import com.winbee.adarshsardarshahar.R;
+import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 
 import java.util.ArrayList;
 
@@ -29,17 +31,16 @@ public class AdsAskedQuestionAdapter extends RecyclerView.Adapter<AdsAskedQuesti
 
     @NonNull
     @Override
-    public AdsAskedQuestionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.askedquestionadapter,parent, false);
-        return  new AdsAskedQuestionAdapter.ViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.askedquestionadapterdocument,parent, false);
+        return  new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdsAskedQuestionAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //setting data toAd apter List
-      //  holder.text_question.setText(list.get(position).getFile_name_to_show());
-
-
+        holder.txt_user.setText(SharedPrefManager.getInstance(context).refCode().getName());
+        holder.txt_ask_question.setText(list.get(position).getFile_name_to_show());
             holder.branch_live.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -61,11 +62,15 @@ public class AdsAskedQuestionAdapter extends RecyclerView.Adapter<AdsAskedQuesti
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView text_question;
+        private TextView txt_time,txt_user,txt_ask_title,txt_ask_question,txt_commments;
         private RelativeLayout branch_live;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-       //     text_question = itemView.findViewById(R.id.text_question);
+            txt_time = itemView.findViewById(R.id.txt_time);
+            txt_user = itemView.findViewById(R.id.txt_user);
+            txt_ask_title = itemView.findViewById(R.id.txt_ask_title);
+            txt_ask_question = itemView.findViewById(R.id.txt_ask_question);
+            txt_commments = itemView.findViewById(R.id.txt_commments);
             branch_live = itemView.findViewById(R.id.branch_live);
         }
     }
