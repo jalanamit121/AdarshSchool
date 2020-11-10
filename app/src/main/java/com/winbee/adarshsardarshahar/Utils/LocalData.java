@@ -3,6 +3,7 @@ package com.winbee.adarshsardarshahar.Utils;
 public class LocalData {
 
     public static String File="";
+    public static String org_code="WB_005";
     public static String ContentLink="";
     public static String LiveId="";
     public static String UserName="";
@@ -18,6 +19,7 @@ public class LocalData {
     public static String Otp="";
     public static String Topic_Bucket_ID="";
     public static String Topic_Child_link="";
+    public static String ResultMessage="";
 
 
 

@@ -16,6 +16,7 @@ import com.winbee.adarshsardarshahar.Models.InstructionsModel;
 import com.winbee.adarshsardarshahar.Models.StartTestModel;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.OnlineTestApiClient;
+import com.winbee.adarshsardarshahar.Utils.LocalData;
 import com.winbee.adarshsardarshahar.Utils.OnlineTestData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
@@ -69,7 +70,7 @@ public class InstructionsActivity extends AppCompatActivity {
     private void callApiService() {
         progressBarUtil.showProgress();
         ClientApi apiCAll = OnlineTestApiClient.getClient().create(ClientApi.class);
-        Call<StartTestModel> call = apiCAll.getStartTest("WB_004",UserId,OnlineTestData.paperID,"1","true");
+        Call<StartTestModel> call = apiCAll.getStartTest(LocalData.org_code,UserId,OnlineTestData.paperID,"1","true");
         call.enqueue(new Callback<StartTestModel>() {
             @Override
             public void onResponse(Call<StartTestModel> call, Response<StartTestModel> response) {

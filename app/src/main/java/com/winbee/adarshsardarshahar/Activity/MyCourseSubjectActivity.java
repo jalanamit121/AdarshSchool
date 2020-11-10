@@ -13,9 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.winbee.adarshsardarshahar.Adapter.AdsHomeAdapter;
 import com.winbee.adarshsardarshahar.Adapter.AdsSemesterAdapter;
 import com.winbee.adarshsardarshahar.Models.CourseDatum;
 import com.winbee.adarshsardarshahar.Models.LogOut;
@@ -24,6 +26,7 @@ import com.winbee.adarshsardarshahar.NewModels.SubjectContent;
 import com.winbee.adarshsardarshahar.NewModels.SubjectContentArray;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
+import com.winbee.adarshsardarshahar.Utils.LocalData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
@@ -60,6 +63,9 @@ public class MyCourseSubjectActivity extends AppCompatActivity {
         Userid = SharedPrefManager.getInstance(this).refCode().getUserId();
         UserMobile=SharedPrefManager.getInstance(this).refCode().getUsername();
         UserPassword=SharedPrefManager.getInstance(this).refCode().getPassword();
+        AdsSemesterAdapter myAdapter = new AdsSemesterAdapter(this,list);
+        video_list_recycler.setLayoutManager(new GridLayoutManager(this,2));
+        video_list_recycler.setAdapter(myAdapter);
         android_id = Settings.Secure.getString(getBaseContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         ads_course.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -124,7 +130,7 @@ public class MyCourseSubjectActivity extends AppCompatActivity {
     private void callCourseSubjectApiService(){
         progressBarUtil.showProgress();
         ClientApi mService = ApiClient.getClient().create(ClientApi.class);
-        Call<SubjectContent> call = mService.getCourseSubject(1,"WB_005",
+        Call<SubjectContent> call = mService.getCourseSubject(1, LocalData.org_code,
                 courseDatum.getChild_Link(),Userid,android_id);
         call.enqueue(new Callback<SubjectContent>() {
             @Override

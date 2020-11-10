@@ -1,13 +1,16 @@
 package com.winbee.adarshsardarshahar.Activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Html;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -571,11 +574,31 @@ public class OnlineQuestionActivity extends AppCompatActivity implements View.On
             public void onResponse(Call<ResultModel> call, Response<ResultModel> response) {
                 ResultModel resultModel=response.body();
                 pd.cancel();
-                if(resultModel!=null){
+                if(resultModel!=null) {
                     doToast("Response Submitted");
-                    Intent intent=new Intent(OnlineQuestionActivity.this, ViewResultActivity.class);
+                    if (OnlineTestData.resultPublish==true){
+                        Intent intent=new Intent(OnlineQuestionActivity.this, ViewResultActivity.class);
                     startActivity(intent);
                     finish();
+                    }else if (OnlineTestData.resultPublish==false) {
+                        final Dialog dialog = new Dialog(OnlineQuestionActivity.this);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.custom_payment_alert);
+                        RelativeLayout layout_home = dialog.findViewById(R.id.layout_home);
+                        TextView txt_course = dialog.findViewById(R.id.txt_course);
+                        txt_course.setText(OnlineTestData.resultMessage);
+                        layout_home.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(OnlineQuestionActivity.this, AdsHomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+
+                        dialog.show();
+                        dialog.setCancelable(false);
+                    }
                 }
                 else
                     doToast("data null");

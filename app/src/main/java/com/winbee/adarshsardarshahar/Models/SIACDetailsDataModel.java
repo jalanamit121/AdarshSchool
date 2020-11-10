@@ -28,6 +28,12 @@ public class SIACDetailsDataModel {
     @SerializedName("OpenDate")
     @Expose
     private String openDate;
+    @SerializedName("CloseDate")
+    @Expose
+    private String closeDate;
+    @SerializedName("IsPaperClosed")
+    @Expose
+    private Boolean isPaperClosed;
     @SerializedName("IsAttempted")
     @Expose
     private Boolean isAttempted;
@@ -46,6 +52,15 @@ public class SIACDetailsDataModel {
     @SerializedName("Test_Closed_Message")
     @Expose
     private String test_Closed_Message;
+    @SerializedName("IsResultPublish")
+    @Expose
+    private Boolean isResultPublish;
+    @SerializedName("ResultPublishMessage")
+    @Expose
+    private String resultPublishMessage;
+    @SerializedName("ResultPublishDate")
+    @Expose
+    private String resultPublishDate;
     @SerializedName("IsNegativeMarking_decode")
     @Expose
     private String isNegativeMarking_decode;
@@ -58,28 +73,6 @@ public class SIACDetailsDataModel {
     @SerializedName("Description")
     @Expose
     private String description;
-
-
-    public SIACDetailsDataModel(String bucketID, String paperID, String paperName, String paperSection_Encode, String isNegativeMarking_encode, String time, String isOpen, String openDate, Boolean isAttempted, Boolean is_Live, Integer total_Number_of_question, Boolean is_closed_Notification_On, String test_Closed_date, String test_Closed_Message, String isNegativeMarking_decode, String isPremium_encode, String isPremium_decode, String description) {
-        this.bucketID = bucketID;
-        this.paperID = paperID;
-        this.paperName = paperName;
-        this.paperSection_Encode = paperSection_Encode;
-        this.isNegativeMarking_encode = isNegativeMarking_encode;
-        this.time = time;
-        this.isOpen = isOpen;
-        this.openDate = openDate;
-        this.isAttempted = isAttempted;
-        this.is_Live = is_Live;
-        this.total_Number_of_question = total_Number_of_question;
-        this.is_closed_Notification_On = is_closed_Notification_On;
-        this.test_Closed_date = test_Closed_date;
-        this.test_Closed_Message = test_Closed_Message;
-        this.isNegativeMarking_decode = isNegativeMarking_decode;
-        this.isPremium_encode = isPremium_encode;
-        this.isPremium_decode = isPremium_decode;
-        this.description = description;
-    }
 
     public String getBucketID() {
         return bucketID;
@@ -145,6 +138,22 @@ public class SIACDetailsDataModel {
         this.openDate = openDate;
     }
 
+    public String getCloseDate() {
+        return closeDate;
+    }
+
+    public void setCloseDate(String closeDate) {
+        this.closeDate = closeDate;
+    }
+
+    public Boolean getIsPaperClosed() {
+        return isPaperClosed;
+    }
+
+    public void setIsPaperClosed(Boolean isPaperClosed) {
+        this.isPaperClosed = isPaperClosed;
+    }
+
     public Boolean getIsAttempted() {
         return isAttempted;
     }
@@ -191,6 +200,30 @@ public class SIACDetailsDataModel {
 
     public void setTest_Closed_Message(String test_Closed_Message) {
         this.test_Closed_Message = test_Closed_Message;
+    }
+
+    public Boolean getIsResultPublish() {
+        return isResultPublish;
+    }
+
+    public void setIsResultPublish(Boolean isResultPublish) {
+        this.isResultPublish = isResultPublish;
+    }
+
+    public String getResultPublishMessage() {
+        return resultPublishMessage;
+    }
+
+    public void setResultPublishMessage(String resultPublishMessage) {
+        this.resultPublishMessage = resultPublishMessage;
+    }
+
+    public String getResultPublishDate() {
+        return resultPublishDate;
+    }
+
+    public void setResultPublishDate(String resultPublishDate) {
+        this.resultPublishDate = resultPublishDate;
     }
 
     public String getIsNegativeMarking_decode() {

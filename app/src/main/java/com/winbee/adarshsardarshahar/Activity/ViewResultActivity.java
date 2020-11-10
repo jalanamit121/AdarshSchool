@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.winbee.adarshsardarshahar.Models.ViewResult;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.OnlineTestApiClient;
+import com.winbee.adarshsardarshahar.Utils.LocalData;
 import com.winbee.adarshsardarshahar.Utils.OnlineTestData;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
@@ -84,7 +85,7 @@ public class ViewResultActivity extends AppCompatActivity {
 
     private void callApiService() {
         ClientApi apiCAll = OnlineTestApiClient.getClient().create(ClientApi.class);
-        Call<ViewResult> call = apiCAll.viewResult("WB_005", OnlineTestData.paperID,UserID);
+        Call<ViewResult> call = apiCAll.viewResult(LocalData.org_code, OnlineTestData.paperID,UserID);
         call.enqueue(new Callback<ViewResult>() {
             @Override
             public void onResponse(Call<ViewResult> call, Response<ViewResult> response) {

@@ -47,7 +47,7 @@ public class AdsSemesterAdapter extends RecyclerView.Adapter<AdsSemesterAdapter.
         holder.total_document.setText(String.valueOf(list.get(position).getTotal_Document()));
         Picasso.get().load(list.get(position).getBucket_Image()).into(holder.live_image);
         if (String.valueOf(list.get(position).getTotal_Document()).equalsIgnoreCase("0")&& String.valueOf(list.get(position).getTotal_Video()).equalsIgnoreCase("0")) {
-            holder.branch_sem.setOnClickListener(new View.OnClickListener() {
+            holder.branch_name1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
@@ -57,7 +57,7 @@ public class AdsSemesterAdapter extends RecyclerView.Adapter<AdsSemesterAdapter.
             });
         } else {
 
-            holder.branch_sem.setOnClickListener(new View.OnClickListener() {
+            holder.branch_name1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     LocalData.Topic_Bucket_ID=list.get(position).getBucket_ID();
@@ -80,7 +80,7 @@ public class AdsSemesterAdapter extends RecyclerView.Adapter<AdsSemesterAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView branchname,total_video,total_document;
-        private RelativeLayout branch_sem;
+        private RelativeLayout branch_sem,branch_name1;
         private ImageView live_image;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +88,7 @@ public class AdsSemesterAdapter extends RecyclerView.Adapter<AdsSemesterAdapter.
             total_video = itemView.findViewById(R.id.total_video);
             total_document = itemView.findViewById(R.id.total_document);
             branch_sem = itemView.findViewById(R.id.branch_sem);
+            branch_name1 = itemView.findViewById(R.id.branch_name1);
             live_image = itemView.findViewById(R.id.live_image);
         }
     }

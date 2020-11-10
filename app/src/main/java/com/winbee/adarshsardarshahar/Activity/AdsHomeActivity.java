@@ -58,6 +58,7 @@ import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
 import com.winbee.adarshsardarshahar.Utils.AssignmentData;
 import com.winbee.adarshsardarshahar.Utils.LinePagerIndicatorDecoration;
+import com.winbee.adarshsardarshahar.Utils.LocalData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
@@ -99,10 +100,10 @@ public class AdsHomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads_home);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
+      //  getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
         //firebase push notification
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("Notifications","Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel("adarshschool","adarshschool", NotificationManager.IMPORTANCE_DEFAULT);
 
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
@@ -248,10 +249,11 @@ public class AdsHomeActivity extends AppCompatActivity
 
     }
 
+    // for geting all live class
     private void callLiveApiService() {
         progressBarUtil.showProgress();
         ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-        Call<LiveClassContent> call = apiCAll.getLive(3,"WB_005",Userid,android_id);
+        Call<LiveClassContent> call = apiCAll.getLive(3, LocalData.org_code,Userid,android_id);
         call.enqueue(new Callback<LiveClassContent>() {
             @Override
             public void onResponse(Call<LiveClassContent> call, Response<LiveClassContent> response) {
@@ -351,10 +353,11 @@ public class AdsHomeActivity extends AppCompatActivity
     }
 
 
+    // getting all course assign to one user
     private void callApiService(String Userid) {
         progressBarUtil.showProgress();
         ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-        Call<PurchasedMainModel> call = apiCAll.getCourseById(1,Userid,"WB_005",android_id);
+        Call<PurchasedMainModel> call = apiCAll.getCourseById(1,Userid,LocalData.org_code,android_id);
         call.enqueue(new Callback<PurchasedMainModel>() {
             @Override
             public void onResponse(Call<PurchasedMainModel> call, Response<PurchasedMainModel> response) {
@@ -400,7 +403,7 @@ public class AdsHomeActivity extends AppCompatActivity
     private void callBannerService() {
         progressBarUtil.showProgress();
         ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-        Call<ArrayList<BannerModel>> call = apiCAll.getBanner("WB_005");
+        Call<ArrayList<BannerModel>> call = apiCAll.getBanner(LocalData.org_code);
         call.enqueue(new Callback<ArrayList<BannerModel>>() {
             @Override
             public void onResponse(Call<ArrayList<BannerModel>> call, Response<ArrayList<BannerModel>> response) {
@@ -498,12 +501,7 @@ public class AdsHomeActivity extends AppCompatActivity
         return true;
     }
 
-//    private void logout() {
-//        SharedPrefManager.getInstance(this).logout();
-//        startActivity(new Intent(this, LoginActivity.class));
-//        Objects.requireNonNull(this).finish();
-//    }
-//
+    //for logout the application
 private void logout() {
 
     progressBarUtil.showProgress();

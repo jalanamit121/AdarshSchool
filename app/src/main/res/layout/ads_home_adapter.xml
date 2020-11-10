@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="167dp"
-    android:layout_height="200dp"
+    android:layout_height="275dp"
     android:layout_marginTop="10dp"
     android:id="@+id/branch_sem"
     android:elevation="3dp"
     android:background="@drawable/shadow"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginStart="5dp"
+    android:padding="5dp"
+    android:layout_marginEnd="5dp"
     android:layout_marginBottom="10dp">
     <RelativeLayout
        android:id="@+id/branch_name1"
         android:layout_width="165dp"
-        android:layout_height="200dp"
+        android:layout_height="275dp"
         android:clickable="true"
         android:clipToPadding="false"
         android:orientation="horizontal">
@@ -20,27 +21,16 @@
         <!--title and desc-->
         <LinearLayout
             android:layout_width="165dp"
-            android:layout_height="200dp"
+            android:layout_height="325dp"
             android:layout_alignParentTop="true"
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/branch_image"
                 android:layout_width="165dp"
-                android:layout_height="100dp"
+                android:layout_height="220dp"
                 android:elevation="3dp"
-                android:layout_marginTop="5dp"
                 android:src="@drawable/dummy"/>
 
-<!--            <TextView-->
-<!--                android:id="@+id/branch_image"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:text=""-->
-<!--                android:textColor="#111"-->
-<!--                android:textSize="12sp" />-->
 
             <TextView
                 android:id="@+id/gec_branchname"
@@ -50,6 +40,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:text=""
+                android:visibility="gone"
                 android:textColor="#111"
                 android:textSize="16sp" />
 
@@ -57,7 +48,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,11 +57,11 @@
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
-                <TextView
+                <ImageView
                     android:id="@+id/text_video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Video"
+                    android:src="@drawable/ic_baseline_videocam_24"
                     android:textColor="@color/edit_text"
                     android:textSize="14sp" />
                 <TextView
@@ -77,19 +69,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text=""
+                    android:layout_marginTop="2dp"
+                    android:text="750"
+                    android:textStyle="bold"
                     android:textColor="@color/edit_text"
                     android:textSize="14sp" /></LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-
+                    android:layout_marginTop="6dp"
                     android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Document"
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_baseline_picture_as_pdf_24"
                     android:textColor="@color/edit_text"
                     android:textSize="14sp" />
                 <TextView
@@ -97,7 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text=""
+                    android:text="999"
+                    android:textStyle="bold"
                     android:textColor="@color/edit_text"
                     android:textSize="14sp" /></LinearLayout>
 
@@ -120,90 +115,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
-        <!--Date and location-->
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginStart="15dp"-->
-        <!--android:layout_marginEnd="15dp"-->
-        <!--android:layout_marginBottom="20dp"-->
-        <!--android:orientation="vertical">-->
-
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="10dp"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:gravity="center_vertical">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Data"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="15sp" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="25dp"-->
-        <!--android:text="23.09.19 7PM"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="15sp"-->
-        <!--android:textStyle="bold" />-->
-
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="10dp"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:gravity="center_vertical">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Location"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="15sp" />-->
-
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="25dp"-->
-        <!--android:text="PALACE stadium"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="15sp"-->
-        <!--android:textStyle="bold" />-->
-
-        <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
-
-        <!--Price-->
-        <!--<RelativeLayout-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:background="@drawable/arc_dark_blue_fill2">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginEnd="20dp"-->
-        <!--android:layout_marginBottom="20dp"-->
-        <!--android:text="$ 90"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="17sp"-->
-        <!--android:textStyle="bold" />-->
-        <!--</RelativeLayout>-->
     </RelativeLayout>
 
 </RelativeLayout>

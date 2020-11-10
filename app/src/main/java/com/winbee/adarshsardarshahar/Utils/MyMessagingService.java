@@ -29,7 +29,7 @@ public class MyMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
         Uri soundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"Notifications")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"adarshschool")
                 .setContentTitle(title)
                 .setSmallIcon(R.drawable.logo)
                 .setAutoCancel(true)

@@ -26,6 +26,7 @@ import com.winbee.adarshsardarshahar.Models.SubmitAssignment;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
 import com.winbee.adarshsardarshahar.Utils.AssignmentData;
+import com.winbee.adarshsardarshahar.Utils.LocalData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
@@ -115,7 +116,7 @@ public class SubmitAssignmentActivity extends AppCompatActivity {
 
         progressBarUtil.showProgress();
         ClientApi mService = ApiClient.getClient().create(ClientApi.class);
-        Call<SubmitAssignment> call = mService.getSubmitAssignment("WB_005",UserId, AssignmentData.BucketId,AssignmentData.AssignmentId,Image,Description);
+        Call<SubmitAssignment> call = mService.getSubmitAssignment(LocalData.org_code,UserId, AssignmentData.BucketId,AssignmentData.AssignmentId,Image,Description);
         call.enqueue(new Callback<SubmitAssignment>() {
             @Override
             public void onResponse(Call<SubmitAssignment> call, Response<SubmitAssignment> response) {

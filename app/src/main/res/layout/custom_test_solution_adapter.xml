@@ -25,7 +25,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/tv_question_num"
                 android:fontFamily="@font/proximanovaregular"
-                android:text=""
+                android:text="Question loading"
+                android:textColor="@color/edit_text"
                 android:textSize="16sp" />
         <TextView
             android:id="@+id/tv_question_num"
@@ -79,10 +80,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/proximanovaregular"
-            android:text=""
+            android:text="@string/option_loading"
             android:textColor="@color/edit_text"
-            android:textColorHint="@color/edit_text"
-            android:layout_toRightOf="@id/image_a"
+            android:layout_toEndOf="@id/image_a"
             android:visibility="visible"
             android:padding="18dp"
             android:layout_marginStart="5dp"
@@ -107,6 +107,15 @@
                 android:layout_marginRight="5dp"
                 android:visibility="gone"
                 android:src="@drawable/failed_image"/>
+            <ImageView
+                android:id="@+id/unanswer_image_a"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:visibility="gone"
+                android:src="@drawable/unanswer"/>
         </RelativeLayout>
         <View
             android:id="@+id/view_correct_a"
@@ -160,7 +169,6 @@
             android:layout_height="55dp"
             android:gravity="center"
             android:visibility="visible"
-            android:clickable="true"
             android:layout_below="@id/layout_img1"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
@@ -180,10 +188,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/proximanovaregular"
-                android:text=""
+                android:text="@string/option_loading"
                 android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-               android:layout_toRightOf="@id/image_b"
+               android:layout_toEndOf="@id/image_b"
                 android:visibility="visible"
                 android:padding="18dp"
                 android:layout_marginStart="5dp"
@@ -206,6 +213,15 @@
                 android:layout_marginRight="5dp"
                 android:visibility="gone"
                 android:src="@drawable/failed_image"/>
+            <ImageView
+                android:id="@+id/unanswer_image_b"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:visibility="gone"
+                android:src="@drawable/unanswer"/>
         </RelativeLayout>
         <View
             android:id="@+id/view_correct_b"
@@ -257,7 +273,6 @@
             android:layout_height="55dp"
             android:gravity="center"
             android:visibility="visible"
-            android:clickable="true"
             android:layout_below="@id/layout_img2"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
@@ -278,10 +293,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/proximanovaregular"
-                android:text=""
+                android:text="@string/option_loading"
                 android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-               android:layout_toRightOf="@id/image_c"
+                android:layout_toEndOf="@id/image_c"
                 android:visibility="visible"
                 android:padding="18dp"
                 android:layout_marginStart="5dp"
@@ -305,6 +319,15 @@
                 android:layout_marginRight="5dp"
                 android:visibility="gone"
                 android:src="@drawable/failed_image"/>
+            <ImageView
+                android:id="@+id/unanswer_image_c"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:visibility="gone"
+                android:src="@drawable/unanswer"/>
         </RelativeLayout>
         <View
             android:id="@+id/view_correct_c"
@@ -356,7 +379,6 @@
             android:layout_height="55dp"
             android:gravity="center"
             android:visibility="visible"
-            android:clickable="true"
             android:layout_marginBottom="7dp"
             android:layout_below="@id/layout_img3"
             android:layout_marginTop="15dp"
@@ -378,10 +400,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/proximanovaregular"
-                android:text=""
+                android:text="@string/option_loading"
                 android:textColor="@color/edit_text"
-                android:textColorHint="@color/edit_text"
-               android:layout_toRightOf="@id/image_d"
+               android:layout_toEndOf="@id/image_d"
                 android:visibility="visible"
                 android:padding="18dp"
                 android:layout_marginStart="5dp"
@@ -407,6 +428,16 @@
                 android:layout_marginRight="5dp"
                 android:visibility="gone"
                 android:src="@drawable/failed_image"/>
+
+            <ImageView
+                android:id="@+id/unanswer_image_d"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:visibility="gone"
+                android:src="@drawable/unanswer"/>
         </RelativeLayout>
         <View
             android:id="@+id/view_correct_d"
@@ -463,8 +494,9 @@
                 android:id="@+id/txt_discription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Discription"
+                android:text="@string/discription"
                 android:textSize="18sp"
+                android:textColor="@color/edit_text"
                 android:fontFamily="@font/proximanovaregular"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"/>
@@ -476,6 +508,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginStart="10dp"
                 android:textSize="15sp"
+                android:textColor="@color/edit_text"
                 android:fontFamily="@font/hindmedium"
                 android:text=""/>
 

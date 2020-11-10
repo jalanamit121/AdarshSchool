@@ -20,6 +20,7 @@ import com.winbee.adarshsardarshahar.NewModels.LiveClassContent;
 import com.winbee.adarshsardarshahar.NewModels.LiveClassContentaArray;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
+import com.winbee.adarshsardarshahar.Utils.LocalData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
@@ -91,7 +92,7 @@ public class AllLiveClassActivity extends AppCompatActivity {
     private void callLiveApiService() {
         progressBarUtil.showProgress();
         ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-        Call<LiveClassContent> call = apiCAll.getLive(3,"WB_005",UserId,android_id);
+        Call<LiveClassContent> call = apiCAll.getLive(3, LocalData.org_code,UserId,android_id);
         call.enqueue(new Callback<LiveClassContent>() {
             @Override
             public void onResponse(Call<LiveClassContent> call, Response<LiveClassContent> response) {

@@ -11,6 +11,7 @@ import com.winbee.adarshsardarshahar.Adapter.NotificationAdapter;
 import com.winbee.adarshsardarshahar.Models.NotificationModel;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.ApiClient;
+import com.winbee.adarshsardarshahar.Utils.LocalData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
 import com.winbee.adarshsardarshahar.WebApi.ClientApi;
@@ -42,7 +43,7 @@ public class AdsNotificationActivity extends AppCompatActivity {
     private void callNotificationApiService() {
         progressBarUtil.showProgress();
         ClientApi apiCAll = ApiClient.getClient().create(ClientApi.class);
-        Call<ArrayList<NotificationModel>> call = apiCAll.getNotification(1,"WB_005",UserId);
+        Call<ArrayList<NotificationModel>> call = apiCAll.getNotification(1, LocalData.org_code,UserId);
         call.enqueue(new Callback<ArrayList<NotificationModel>>() {
             @Override
             public void onResponse(Call<ArrayList<NotificationModel>> call, Response<ArrayList<NotificationModel>> response) {

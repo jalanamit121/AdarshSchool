@@ -42,6 +42,7 @@ import com.winbee.adarshsardarshahar.NewModels.AskDoubtContent;
 import com.winbee.adarshsardarshahar.NewModels.Attendence;
 import com.winbee.adarshsardarshahar.NewModels.LiveClassContent;
 import com.winbee.adarshsardarshahar.NewModels.SubjectContent;
+import com.winbee.adarshsardarshahar.NewModels.TestTopRanker;
 import com.winbee.adarshsardarshahar.NewModels.TopicContent;
 
 import org.json.JSONArray;
@@ -88,6 +89,7 @@ public interface ClientApi {
             @Query("refcode") String refcode,
             @Query("IMEI") String IMEI
     );
+    //send otp
     @POST("send-otp.php")
     Call<ResendOtp> getResendOtp(
             @Query("username") String username,
@@ -96,6 +98,7 @@ public interface ClientApi {
 
 
 
+    //user registration
     @POST("user_registration_information.php")
     Call<RefUser> refUserSignIn(
             @Query("SubURL") int SubURL,
@@ -109,13 +112,14 @@ public interface ClientApi {
             @Query("district") String district,
             @Query("password") String password
     );
+    //send otp for forget password
     @POST("send-otp.php")
     Call<ForgetMobile> getForgetMobile(
             @Query("SubURL") int SubURL,
             @Query("username") String username
     );
 
-
+    //for reseting the password
     @POST("reset-password.php")
     Call<ResetPassword> getResetPassword(
             @Query("SubURL") int SubURL,
@@ -124,6 +128,7 @@ public interface ClientApi {
             @Query("new_password") String new_password
     );
 
+    //for otp verfication
     @POST("verify-otp.php")
     Call<OtpVerify> getOtpVerify(
             @Query("SubURL") int SubURL,
@@ -132,6 +137,7 @@ public interface ClientApi {
     );
 
 
+    //get all live class details
     @POST("fetch_live_classes.php")
     Call<LiveClassContent> getLive(
             @Query("SubURL") int SubURL,
@@ -140,6 +146,7 @@ public interface ClientApi {
             @Query("DEVICE_ID") String DEVICE_ID
     );
 
+    // fetch course according to user
     @POST("fetch_purchased_bucket_information.php")
     Call<PurchasedMainModel> getCourseById(
             @Query("SubURL") int SubURL,
@@ -147,7 +154,7 @@ public interface ClientApi {
             @Query("ORG_ID") String ORG_ID,
             @Query("DEVICE_ID") String DEVICE_ID
     );
-
+    // fetch subject related to course
     @POST("fetch_bucket_cover_information.php")
     Call<SubjectContent> getCourseSubject(
             @Query("SubURL") int SubURL,
@@ -157,6 +164,7 @@ public interface ClientApi {
             @Query("DEVICE_ID") String DEVICE_ID
     );
 
+    // fetch topic related to subject
     @POST("fetch_bucket_cover_information.php")
     Call<TopicContent> getTopic(
             @Query("SubURL") int SubURL,
@@ -165,6 +173,8 @@ public interface ClientApi {
             @Query("USER_ID") String USER_ID,
             @Query("DEVICE_ID") String DEVICE_ID
     );
+
+    // submitting the doubt
     @FormUrlEncoded
     @POST("submit-doubt.php")
     Call<UrlNewQuestion> getNewQuestion(
@@ -175,17 +185,20 @@ public interface ClientApi {
     );
 
 
+    // fetch all doubt
     @POST("doubt-session.php")
     Call<ArrayList<UrlQuestion>> getQuestion(
             @Query("DocumentId") String DocumentId
     );
 
+    //fetch solution of one doubt
     @POST("doubt-session.php")
     Call<ArrayList<UrlSolution>> getSolution(
             @Query("DocumentId") String DocumentId,
             @Query("filename") String filename
     );
 
+    //submitting the solution of any doubt
     @FormUrlEncoded
     @POST("submit-doubt.php")
     Call<UrlQuestionSolution> getQuestionSolution(
@@ -195,6 +208,7 @@ public interface ClientApi {
             @Field("userid") String userid
     );
 
+    //fetch all assignment data
     @POST("fetch_assignment_data.php")
     Call<AssignmentToSubmit> getAllAssignment(
             @Query("org_id") String org_id,
@@ -202,6 +216,7 @@ public interface ClientApi {
             @Query("device_id") String device_id
     );
 
+    //fetch all submitted assignment by user
     @POST("fetch_assignment_submitted_student.php")
     Call<SubmittedAssignment> getSubmitedAssignment(
             @Query("org_id") String org_id,
@@ -211,6 +226,7 @@ public interface ClientApi {
 
 
 
+    //submit assignment
     @POST("insert_assignment_data.php")
     @FormUrlEncoded
     Call<SubmitAssignment> getSubmitAssignment(
@@ -225,6 +241,7 @@ public interface ClientApi {
 
 
 
+    //fetch all class test series
     @POST("fetch-section-details.php")
     Call<SectionDetailsMainModel> fetchSectionDetails(
             @Query("org_code") String org_code,
@@ -232,6 +249,7 @@ public interface ClientApi {
             @Query("user_id") String user_id
     );
 
+    // fetch all test seires related to class
     @POST("fetch-section-individual-assessment-cover-details.php")
     @FormUrlEncoded
     Call<SIACDetailsMainModel> fetchSIACDetails(
@@ -241,6 +259,7 @@ public interface ClientApi {
             @Field("user_code") String user_code
     );
 
+    //fetch all question of any test
     @POST("fetch-section-individual-assessment-data.php")
     @FormUrlEncoded
     Call<SIADMainModel> fetchSIADDATA(
@@ -250,6 +269,7 @@ public interface ClientApi {
             @Field("paper_code") String paper_code
     );
 
+    // submitting the test
     @POST("Submit-Exam-Paper.php")
     @FormUrlEncoded
     Call<ResultModel> submitResponse(
@@ -260,6 +280,8 @@ public interface ClientApi {
             @Field("Staticstics") String Staticstics,
             @Field("Submit_Exam_Paper") boolean Submit_Exam_Paper
     );
+
+    // for starting the test
     @POST("Start-Exam-Paper.php")
     @FormUrlEncoded
     Call<StartTestModel> getStartTest(
@@ -270,6 +292,7 @@ public interface ClientApi {
             @Field("Read_Instruction") String Read_Instruction
     );
 
+    // for showing the result
     @POST("view-result.php")
     @FormUrlEncoded
     Call<ViewResult> viewResult(
@@ -279,6 +302,7 @@ public interface ClientApi {
     );
 
 
+    // for updateing the whatapp number
     @FormUrlEncoded
     @POST("whatsapp-update.php")
     Call<WhatsAppData> getWhatsApp(
@@ -288,18 +312,21 @@ public interface ClientApi {
             @Field("Enable_WhatsApp") String Enable_WhatsApp
     );
 
+    // sending the attendence of user
     @POST("record-attendence.php")
     Call<Attendence> fetchAttendence(
             @Query("user_id") String user_id,
             @Query("DEVICE_ID") String DEVICE_ID
     );
 
+    // fetch all image for banner
     @POST("fetch-cover-banner.php")
     Call<ArrayList<BannerModel>> getBanner(
             @Query("org_id") String org_id
     );
 
 
+    // fetch user notification for in-app
     @POST("fetch-user-notification.php")
     Call<ArrayList<NotificationModel>> getNotification(
             @Query("SubURL") int SubURL,
@@ -307,6 +334,7 @@ public interface ClientApi {
             @Query("USER_ID") String USER_ID
     );
 
+    // fetch instruction for test
     @POST("fetch-exam-instruction.php")
     @FormUrlEncoded
     Call<InstructionsModel> getInstruction(
@@ -328,6 +356,7 @@ public interface ClientApi {
     @POST("beta-doubt-storage.php")
     Call<ArrayList<AskDoubtQuestion>> getQuestion();
 
+    //
     @FormUrlEncoded
     @POST("ask-doubt.php")
     Call<SolutionDoubtQuestion> getNewSolution(
@@ -354,6 +383,8 @@ public interface ClientApi {
             @Query("SolutionFlag") int SolutionFlag,
             @Query("Solution") String Solution
     );
+
+
     @POST("insert_mcq.php")
     Call<McqQuestionModel> mcqQuestionNo(
             @Query("UserId") String UserId,
@@ -368,6 +399,7 @@ public interface ClientApi {
             @Query("Solution") String Solution
     );
 
+    //submit the mcq question
     @POST("insert_mcq.php")
     Call<McqAskedQuestionModel> mcqAskedQuestion(
             @Query("UserId") String UserId,
@@ -375,6 +407,7 @@ public interface ClientApi {
     );
 
 
+    //fetch all the solution
     @POST("insert_mcq.php")
     Call<McqQuestionSolutionModel> getMcqSolution(
             @Query("UserId") String UserId,
@@ -383,6 +416,7 @@ public interface ClientApi {
             @Query("QuestionId") String QuestionId
     );
 
+    // solution for mcq question
     @POST("view-MCQ-data.php")
     Call<ArrayList<McqSolutionModel>> getMcqQuestionSolution(
             @Query("question_id") String question_id,
@@ -391,6 +425,8 @@ public interface ClientApi {
 
             //user_id,user_name
     );
+
+    //fetch solution for given solution
     @POST("view-solutions.php")
     @FormUrlEncoded
     Call<SIADSolutionMainModel> getTestSolution(
@@ -398,4 +434,13 @@ public interface ClientApi {
             @Field("paper_code") String paper_code,
             @Field("UserID") String UserID
     );
+
+    // fetch top ranker for test
+    @POST("fetch-top-scorers.php")
+    @FormUrlEncoded
+    Call<TestTopRanker> fetchTopRanker(
+            @Field("PaperID") String PaperID,
+            @Field("UserID") String UserID
+    );
+
 }

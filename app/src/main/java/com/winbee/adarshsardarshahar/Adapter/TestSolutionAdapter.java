@@ -180,24 +180,28 @@ public class TestSolutionAdapter extends RecyclerView.Adapter<TestSolutionAdapte
             if (list.get(position).getOption1().equals(list.get(position).getCorrectAnswer())){
                 holder.editTextOtion1.setVisibility(View.VISIBLE);
                 holder.view_unselected_a.setVisibility(View.VISIBLE);
+                holder.unanswer_image_a.setVisibility(View.VISIBLE);
                 holder.view_b.setVisibility(View.VISIBLE);
                 holder.view_c.setVisibility(View.VISIBLE);
                 holder.view_d.setVisibility(View.VISIBLE);
             }else if (list.get(position).getOption2().equals(list.get(position).getCorrectAnswer())){
                 holder.editTextOtion2.setVisibility(View.VISIBLE);
                 holder.view_unselected_b.setVisibility(View.VISIBLE);
+                holder.unanswer_image_b.setVisibility(View.VISIBLE);
                 holder.view_a.setVisibility(View.VISIBLE);
                 holder.view_c.setVisibility(View.VISIBLE);
                 holder.view_d.setVisibility(View.VISIBLE);
             }else if (list.get(position).getOption3().equals(list.get(position).getCorrectAnswer())){
                 holder.editTextOtion3.setVisibility(View.VISIBLE);
                 holder.view_unselected_c.setVisibility(View.VISIBLE);
+                holder.unanswer_image_c.setVisibility(View.VISIBLE);
                 holder.view_b.setVisibility(View.VISIBLE);
                 holder.view_a.setVisibility(View.VISIBLE);
                 holder.view_d.setVisibility(View.VISIBLE);
             }else if (list.get(position).getOption4().equals(list.get(position).getCorrectAnswer())){
                 holder.editTextOtion4.setVisibility(View.VISIBLE);
                 holder.view_unselected_d.setVisibility(View.VISIBLE);
+                holder.unanswer_image_d.setVisibility(View.VISIBLE);
                 holder.view_b.setVisibility(View.VISIBLE);
                 holder.view_c.setVisibility(View.VISIBLE);
                 holder.view_a.setVisibility(View.VISIBLE);
@@ -260,7 +264,7 @@ public class TestSolutionAdapter extends RecyclerView.Adapter<TestSolutionAdapte
                 view_unselected_a,view_unselected_b,view_unselected_c,view_unselected_d,view_a,view_b,view_c,view_d;
         private ImageView img_solution_title,img_solution_option1,img_solution_option2,img_solution_option3,
                 img_solution_option4,img_solution_discription,correct_image_a,correct_image_b,correct_image_c,correct_image_d,
-                worng_image_a,worng_image_b,worng_image_c,worng_image_d;
+                worng_image_a,worng_image_b,worng_image_c,worng_image_d,unanswer_image_a,unanswer_image_b,unanswer_image_c,unanswer_image_d;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             text_title = itemView.findViewById(R.id.text_title);
@@ -297,6 +301,10 @@ public class TestSolutionAdapter extends RecyclerView.Adapter<TestSolutionAdapte
             worng_image_b = itemView.findViewById(R.id.worng_image_b);
             worng_image_c = itemView.findViewById(R.id.worng_image_c);
             worng_image_d = itemView.findViewById(R.id.worng_image_d);
+            unanswer_image_a = itemView.findViewById(R.id.unanswer_image_a);
+            unanswer_image_b = itemView.findViewById(R.id.unanswer_image_b);
+            unanswer_image_c = itemView.findViewById(R.id.unanswer_image_c);
+            unanswer_image_d = itemView.findViewById(R.id.unanswer_image_d);
             view_a = itemView.findViewById(R.id.view_a);
             view_b = itemView.findViewById(R.id.view_b);
             view_c = itemView.findViewById(R.id.view_c);

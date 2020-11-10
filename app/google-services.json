@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "190585615001",
-    "firebase_url": "https://adarshschool-b717d.firebaseio.com",
-    "project_id": "adarshschool-b717d",
-    "storage_bucket": "adarshschool-b717d.appspot.com"
+    "project_number": "279528345699",
+    "firebase_url": "https://adarsh-sardarshahar.firebaseio.com",
+    "project_id": "adarsh-sardarshahar",
+    "storage_bucket": "adarsh-sardarshahar.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:190585615001:android:d37246a0fdd171c4e6fe08",
+        "mobilesdk_app_id": "1:279528345699:android:5cd9e04cec9de122f9a856",
         "android_client_info": {
           "package_name": "com.winbee.adarshschool"
         }
       },
       "oauth_client": [
         {
-          "client_id": "190585615001-s9q5p94kekiaeodcgbheprrksd6lgq9v.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.winbee.adarshschool",
-            "certificate_hash": "b3e15f9d1fd46c1a761a965e43ee6762aee521b8"
-          }
-        },
-        {
-          "client_id": "190585615001-ndufjgg3etl9rrs59b1jjirnqno2auuq.apps.googleusercontent.com",
+          "client_id": "279528345699-fo09a7u88ll92t642skb7o0dd3nnd5e7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCDIL559cnv8_M3TSPDXPMAaFfcP3HaMrM"
+          "current_key": "AIzaSyAFY_U3HSADDlumUQXhd7I4598svyiN4a4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "190585615001-ndufjgg3etl9rrs59b1jjirnqno2auuq.apps.googleusercontent.com",
+              "client_id": "279528345699-fo09a7u88ll92t642skb7o0dd3nnd5e7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

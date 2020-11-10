@@ -18,6 +18,7 @@ import com.winbee.adarshsardarshahar.Models.SIADSolutionMainModel;
 import com.winbee.adarshsardarshahar.Models.ViewResult;
 import com.winbee.adarshsardarshahar.R;
 import com.winbee.adarshsardarshahar.RetrofitApiCall.OnlineTestApiClient;
+import com.winbee.adarshsardarshahar.Utils.LocalData;
 import com.winbee.adarshsardarshahar.Utils.OnlineTestData;
 import com.winbee.adarshsardarshahar.Utils.ProgressBarUtil;
 import com.winbee.adarshsardarshahar.Utils.SharedPrefManager;
@@ -69,7 +70,7 @@ public class TestSolutionActivity extends AppCompatActivity {
 
     private void callResultService() {
         ClientApi apiCAll = OnlineTestApiClient.getClient().create(ClientApi.class);
-        Call<ViewResult> call = apiCAll.viewResult("WB_007", OnlineTestData.paperID,UserID);
+        Call<ViewResult> call = apiCAll.viewResult(OnlineTestData.org_code, OnlineTestData.paperID,UserID);
         call.enqueue(new Callback<ViewResult>() {
             @Override
             public void onResponse(Call<ViewResult> call, Response<ViewResult> response) {
@@ -137,7 +138,7 @@ public class TestSolutionActivity extends AppCompatActivity {
     private void callApiService() {
         progressBarUtil.showProgress();
         ClientApi apiCAll = OnlineTestApiClient.getClient().create(ClientApi.class);
-        Call<SIADSolutionMainModel> call = apiCAll.getTestSolution("WB_005",OnlineTestData.paperID, UserID);
+        Call<SIADSolutionMainModel> call = apiCAll.getTestSolution(LocalData.org_code,OnlineTestData.paperID, UserID);
         call.enqueue(new Callback<SIADSolutionMainModel>() {
             @Override
             public void onResponse(Call<SIADSolutionMainModel> call, Response<SIADSolutionMainModel> response) {

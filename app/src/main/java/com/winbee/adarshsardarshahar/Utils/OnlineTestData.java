@@ -33,6 +33,8 @@ public class OnlineTestData {
     public static String isPremium_encode="";
     public static String isPremium_decode="";
     public static String description="";
+    public static String resultMessage="";
+    public static Boolean resultPublish;
     //fetch-section-individual-assessment-data.php data
 
     public static String sectionCode="";

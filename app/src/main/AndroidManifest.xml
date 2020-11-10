@@ -19,7 +19,9 @@
         android:allowBackup="true">
 
     <activity android:name=".Activity.TestSolutionActivity"/>
-        <activity android:name=".Activity.TestOnlineActivity"/>
+        <activity android:name=".Activity.TestRankActivity"/>
+        <activity android:name=".Activity.TestOnlineActivity"
+           />
 
     <activity android:name=".Activity.DriveVideoPlayerActivity"/>
 
@@ -53,7 +55,9 @@
 
     <activity android:name="com.winbee.adarshsardarshahar.Activity.AllLiveClassActivity" android:label="Live Classes" android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
 
-    <activity android:name="com.winbee.adarshsardarshahar.Activity.AdsYouTubeLiveActivity" android:label="YouTube Live" android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
+    <activity android:name="com.winbee.adarshsardarshahar.Activity.AdsYouTubeLiveActivity"
+        android:label="YouTube Live"
+        android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
 
     <activity android:name="com.winbee.adarshsardarshahar.Activity.MyCourseSubjectActivity" android:label="Subject" android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
 
@@ -82,7 +86,9 @@
 
     <activity android:name="com.winbee.adarshsardarshahar.Activity.OnlineQuestionActivity"/>
 
-    <activity android:name="com.winbee.adarshsardarshahar.Activity.OnlineTestActivity"/>
+    <activity android:name="com.winbee.adarshsardarshahar.Activity.OnlineTestActivity"
+        android:label="Subject"
+        android:parentActivityName="com.winbee.adarshsardarshahar.Activity.AdsHomeActivity"/>
 
     <activity android:name="com.winbee.adarshsardarshahar.Activity.InstructionsActivity" android:label="Instructions" android:parentActivityName="com.winbee.adarshsardarshahar.Activity.SubjectActivity"/>
 
